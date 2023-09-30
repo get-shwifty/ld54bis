@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ic2idqu4av4"]
+[gd_scene load_steps=8 format=3 uid="uid://b8ic2idqu4av4"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_6yde8"]
 [ext_resource type="PackedScene" uid="uid://cyfin13myr6y7" path="res://logic/game/character.tscn" id="1_aaugj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_vc8xg"]
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="7_n1ntf"]
+[ext_resource type="PackedScene" uid="uid://c80j56khijrsj" path="res://logic/game/coin.tscn" id="7_xj51s"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_6yde8")
@@ -55,7 +56,7 @@ script = ExtResource("6_aqe0t")
 [node name="EnemySpawner" parent="." instance=ExtResource("7_n1ntf")]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 1.001
+wait_time = 10.0
 autostart = true
 
 [node name="Entities" type="Node2D" parent="."]
@@ -63,5 +64,9 @@ autostart = true
 [node name="Enemies" type="Node2D" parent="Entities"]
 
 [node name="Posts" type="Node2D" parent="Entities"]
+
+[node name="Coins" type="Node2D" parent="Entities"]
+
+[node name="coin" parent="Entities/Coins" instance=ExtResource("7_xj51s")]
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

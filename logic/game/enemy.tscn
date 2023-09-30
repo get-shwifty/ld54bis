@@ -23,3 +23,8 @@ shape = SubResource("CircleShape2D_5wxan")
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 0)
 default_color = Color(1, 0.356863, 0.568627, 1)
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
