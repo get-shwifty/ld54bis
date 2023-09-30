@@ -5,6 +5,7 @@ class_name Elastic
 @onready var line = $Line2D
 
 var object_inside = []
+var size = 0
 
 func add(obj):
 	object_inside.append(obj)
@@ -35,6 +36,10 @@ func _process(delta):
 		object_inside.erase(del)
 		
 	var convex = Geometry2D.convex_hull(positions)
+	size = 0
+	for i in range(len(convex)-1):
+		size += (convex[i+1] - convex[i]).length()
+	
 #	print(len(convex))
 #	print(convex[-2])
 	line.clear_points()

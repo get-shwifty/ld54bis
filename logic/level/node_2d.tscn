@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8ic2idqu4av4"]
+[gd_scene load_steps=7 format=3 uid="uid://b8ic2idqu4av4"]
 
-[ext_resource type="PackedScene" path="res://logic/game/character.tscn" id="1_aaugj"]
+[ext_resource type="PackedScene" uid="uid://cyfin13myr6y7" path="res://logic/game/character.tscn" id="1_aaugj"]
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_v2a6i"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
 [ext_resource type="Script" path="res://logic/game/Post.gd" id="3_okbo1"]
 [ext_resource type="PackedScene" path="res://logic/game/enemy.tscn" id="5_d32oc"]
+[ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -51,3 +52,20 @@ move_max_speed = 30.0
 [node name="enemy" parent="." instance=ExtResource("5_d32oc")]
 position = Vector2(681, 338)
 gravity_scale = 0.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 21.0
+offset_right = 61.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 30
+autowrap_mode = 0
+script = ExtResource("6_aqe0t")
