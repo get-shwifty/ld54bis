@@ -61,7 +61,7 @@ func _process(delta):
 			p1 = convex[index-1]
 			p2 = convex[index+1]
 			
-		var direction = (p1-obj_pos) + (p2 - obj_pos)
+		var direction = (p1-obj_pos).normalized() + (p2 - obj_pos).normalized()
 		obj.elastic_vector = direction
 		
 		

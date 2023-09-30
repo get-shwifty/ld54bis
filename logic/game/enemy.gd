@@ -38,9 +38,18 @@ func _physics_process(delta):
 		motion_intention = motion_intention.normalized();
 		linear_velocity = motion_intention * speed_base_coef * speed;
 	
-	return
 	if is_stun and elastic_vector != Vector2.ZERO:
-		if first_elastic_vector == Vector2.ZERO:
-			first_elastic_vector = elastic_vector
-		linear_velocity += first_elastic_vector.normalized() * 20
+		var line = $Line2D
+#		if first_elastic_vector == Vector2.ZERO:
+#			first_elastic_vector = elastic_vector
+#			line.set_point_position(1, elastic_vector.normalized() * 100)
+
+#		linear_velocity += elastic_vector.normalized() * 20
+		var speed = linear_velocity.length()
+		speed = max(0, speed - 10)
+		if speed > 0:
+#			print(abs(elastic_vector.angle_to(-linear_velocity)))
+			linear_velocity = linear_velocity.normalized() * speed
+		else:
+			linear_velocity += elastic_vector.normalized() * 100
 	
