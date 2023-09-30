@@ -8,6 +8,11 @@ var last_orientation : Vector2;
 const kick_force_base_coef = 50;
 @export var kick_force : float = 2;
 
+var elastic_vector = Vector2.ZERO
+
+func _ready():
+	pass
+
 func _physics_process(delta):
 	process_orientation(delta);
 	process_movement(delta)

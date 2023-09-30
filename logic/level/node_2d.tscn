@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ic2idqu4av4"]
+[gd_scene load_steps=6 format=3 uid="uid://b8ic2idqu4av4"]
 
 [ext_resource type="PackedScene" path="res://logic/game/character.tscn" id="1_aaugj"]
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_v2a6i"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
 [ext_resource type="Script" path="res://logic/game/Post.gd" id="3_okbo1"]
-[ext_resource type="Script" path="res://logic/game/Line2D.gd" id="4_xd7ek"]
 [ext_resource type="PackedScene" path="res://logic/game/enemy.tscn" id="5_d32oc"]
 
 [node name="Node2D" type="Node2D"]
@@ -13,11 +12,9 @@
 position = Vector2(617, 320)
 zoom = Vector2(0.5, 0.5)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_aaugj")]
-move_max_speed = 30.0
-
-[node name="Elastic" type="Node2D" parent="."]
+[node name="Elastic" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_ln5d4")
+player = NodePath("../CharacterBody2D")
 
 [node name="Post" type="Node2D" parent="Elastic"]
 
@@ -45,10 +42,11 @@ position = Vector2(636, 172)
 texture = ExtResource("2_v2a6i")
 script = ExtResource("3_okbo1")
 
-[node name="Line2D" type="Line2D" parent="Elastic" node_paths=PackedStringArray("player")]
+[node name="Line2D" type="Line2D" parent="Elastic"]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
-script = ExtResource("4_xd7ek")
-player = NodePath("../../CharacterBody2D")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_aaugj")]
+move_max_speed = 30.0
 
 [node name="enemy" parent="." instance=ExtResource("5_d32oc")]
 position = Vector2(681, 338)

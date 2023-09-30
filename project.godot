@@ -15,6 +15,10 @@ run/main_scene="res://logic/level/david.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://art/icon.svg"
 
+[autoload]
+
+GameManager="*res://logic/manager/GameManager.gd"
+
 [input]
 
 game_up={
