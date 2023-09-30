@@ -19,5 +19,6 @@ func _process(delta):
 	
 	var convex = Geometry2D.convex_hull(positions)
 	
+	
 	for p in convex:
 		add_point(p)
