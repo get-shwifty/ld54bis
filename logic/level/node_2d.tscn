@@ -62,4 +62,6 @@ autostart = true
 
 [node name="Enemies" type="Node2D" parent="Entities"]
 
+[node name="Posts" type="Node2D" parent="Entities"]
+
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
