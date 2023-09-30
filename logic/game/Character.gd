@@ -8,14 +8,15 @@ var last_orientation : Vector2;
 const kick_force_base_coef = 50;
 @export var kick_force : float = 2;
 
+func _ready():
+	print(get_node("KickArea"))
+
 func _physics_process(delta):
 	process_orientation(delta);
 	process_movement(delta)
 
 	if Input.is_action_just_pressed("game_kick"):
 		try_kick()
-
-
 
 
 func process_orientation(delta):

@@ -25,7 +25,6 @@ shape = SubResource("CircleShape2D_qt81g")
 
 [node name="KickArea" type="Area2D" parent="."]
 rotation = 1.5708
-collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickArea"]

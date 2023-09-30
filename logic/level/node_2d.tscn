@@ -1,20 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ic2idqu4av4"]
+[gd_scene load_steps=10 format=3 uid="uid://b8ic2idqu4av4"]
 
-[ext_resource type="PackedScene" path="res://logic/game/character.tscn" id="1_aaugj"]
+[ext_resource type="PackedScene" uid="uid://vln44ev7tm21" path="res://logic/game/character.tscn" id="1_aaugj"]
+[ext_resource type="Script" path="res://logic/level/LevelManager.gd" id="1_tpnje"]
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_v2a6i"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
 [ext_resource type="Script" path="res://logic/game/Post.gd" id="3_okbo1"]
 [ext_resource type="Script" path="res://logic/game/Line2D.gd" id="4_xd7ek"]
-[ext_resource type="PackedScene" path="res://logic/game/enemy.tscn" id="5_d32oc"]
+[ext_resource type="PackedScene" uid="uid://67ljrm4vy5fv" path="res://logic/game/enemy.tscn" id="5_d32oc"]
+[ext_resource type="Script" path="res://logic/level/enemy_spawner.gd" id="7_eb7cg"]
+
+[sub_resource type="Curve2D" id="Curve2D_jqma6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -564, -372, 0, 0, 0, 0, 1805, -364, 0, 0, 0, 0, 1803, 995, 0, 0, 0, 0, -576, 990, 0, 0, 0, 0, -564, -372)
+}
+point_count = 5
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_tpnje")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(617, 320)
 zoom = Vector2(0.5, 0.5)
-
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_aaugj")]
-move_max_speed = 30.0
 
 [node name="Elastic" type="Node2D" parent="."]
 script = ExtResource("3_ln5d4")
@@ -53,3 +59,22 @@ player = NodePath("../../CharacterBody2D")
 [node name="enemy" parent="." instance=ExtResource("5_d32oc")]
 position = Vector2(681, 338)
 gravity_scale = 0.0
+
+[node name="EnemySpawner" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jqma6")
+script = ExtResource("7_eb7cg")
+
+[node name="spawnPos" type="PathFollow2D" parent="EnemySpawner"]
+position = Vector2(-564, -372)
+rotation = 0.00337694
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="Entities"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_aaugj")]
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
