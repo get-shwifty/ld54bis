@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_v2a6i"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
 [ext_resource type="Script" path="res://logic/game/Post.gd" id="3_okbo1"]
-[ext_resource type="PackedScene" path="res://logic/game/enemy.tscn" id="5_d32oc"]
+[ext_resource type="PackedScene" uid="uid://67ljrm4vy5fv" path="res://logic/game/enemy.tscn" id="5_d32oc"]
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
 
 [node name="Node2D" type="Node2D"]
