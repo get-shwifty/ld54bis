@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyfin13myr6y7"]
+[gd_scene load_steps=6 format=3 uid="uid://cyfin13myr6y7"]
 
 [ext_resource type="Script" path="res://logic/game/Character.gd" id="1_y638b"]
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_uqf1e"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5fqmh"]
 size = Vector2(126.158, 180.098)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sm64m"]
+radius = 81.0555
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(577, 327)
@@ -31,3 +34,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KickArea"]
 position = Vector2(0, -90.4869)
 shape = SubResource("RectangleShape2D_5fqmh")
+
+[node name="CoinHitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinHitbox"]
+shape = SubResource("CircleShape2D_sm64m")

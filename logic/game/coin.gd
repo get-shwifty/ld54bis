@@ -14,5 +14,6 @@ func get_collected():
 	GameManager.collect_coin();
 	queue_free();
 
-func _on_body_entered(body):
+
+func _on_collect_zone_area_exited(_area):
 	get_collected()
