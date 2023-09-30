@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d133kr4e66l4"]
+[gd_scene load_steps=6 format=3 uid="uid://d133kr4e66l4"]
 
-[ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://icon.svg" id="1_bblrn"]
-[ext_resource type="Script" path="res://Character.gd" id="1_hkprq"]
-[ext_resource type="Script" path="res://Line2D.gd" id="4_ampio"]
+[ext_resource type="Script" path="res://logic/game/Character.gd" id="1_agxlt"]
+[ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_v2a6i"]
+[ext_resource type="Script" path="res://logic/game/Post.gd" id="3_okbo1"]
+[ext_resource type="Script" path="res://logic/game/Line2D.gd" id="4_xd7ek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qt81g"]
 
@@ -15,10 +16,10 @@ position = Vector2(577, 327)
 position = Vector2(577, 327)
 scale = Vector2(0.459742, 0.459742)
 motion_mode = 1
-script = ExtResource("1_hkprq")
+script = ExtResource("1_agxlt")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("1_bblrn")
+texture = ExtResource("2_v2a6i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(6.22032, 6.22032)
@@ -32,27 +33,28 @@ shape = SubResource("CircleShape2D_qt81g")
 modulate = Color(0.596078, 0, 0.172549, 1)
 position = Vector2(405, 206)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_bblrn")
+texture = ExtResource("2_v2a6i")
+script = ExtResource("3_okbo1")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Elastic/Post"]
 modulate = Color(0.596078, 0, 0.172549, 1)
 position = Vector2(879, 193)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_bblrn")
+texture = ExtResource("2_v2a6i")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Elastic/Post"]
 modulate = Color(0.596078, 0, 0.172549, 1)
 position = Vector2(614, 559)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_bblrn")
+texture = ExtResource("2_v2a6i")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Elastic/Post"]
 modulate = Color(0.596078, 0, 0.172549, 1)
 position = Vector2(676, 259)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_bblrn")
+texture = ExtResource("2_v2a6i")
 
 [node name="Line2D" type="Line2D" parent="Elastic" node_paths=PackedStringArray("player")]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
-script = ExtResource("4_ampio")
+script = ExtResource("4_xd7ek")
 player = NodePath("../../CharacterBody2D")
