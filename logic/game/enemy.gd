@@ -9,6 +9,9 @@ var elastic_vector = Vector2.ZERO
 var first_elastic_vector = Vector2.ZERO
 var is_stun = false
 
+var going_in = false
+var going_out = false
+
 var target;
 
 # Called when the node enters the scene tree for the first time.
@@ -38,18 +41,28 @@ func _physics_process(delta):
 		motion_intention = motion_intention.normalized();
 		linear_velocity = motion_intention * speed_base_coef * speed;
 	
-	if is_stun and elastic_vector != Vector2.ZERO:
-		var line = $Line2D
-#		if first_elastic_vector == Vector2.ZERO:
-#			first_elastic_vector = elastic_vector
-#			line.set_point_position(1, elastic_vector.normalized() * 100)
-
-#		linear_velocity += elastic_vector.normalized() * 20
-		var speed = linear_velocity.length()
-		speed = max(0, speed - 10)
-		if speed > 0:
-#			print(abs(elastic_vector.angle_to(-linear_velocity)))
-			linear_velocity = linear_velocity.normalized() * speed
-		else:
-			linear_velocity += elastic_vector.normalized() * 100
+	if is_stun and elastic_vector != Vector2.ZERO and not going_out:
+		going_in = true
+		going_out = false
+	
+	var vspeed = linear_velocity.length()
+	
+	if is_stun and elastic_vector != Vector2.ZERO and vspeed == 0:
+		going_out = true
+		going_in = false
+	
+	if elastic_vector == Vector2.ZERO:
+		going_out = false
+		going_in = false
+	
+	var line = $Line2D
+	line.set_point_position(1, elastic_vector.normalized()*100)
+	
+	if going_in:
+		vspeed = max(0, vspeed - 10)
+		linear_velocity = linear_velocity.normalized() * vspeed
+	elif going_out:
+		linear_velocity += elastic_vector.normalized() * 10
+	
+#	print(going_in, ' ', going_out)
 	
