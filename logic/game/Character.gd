@@ -11,7 +11,7 @@ const kick_force_base_coef = 50;
 var elastic_vector = Vector2.ZERO
 
 func _ready():
-	pass
+	GameManager.player = self;
 
 func _physics_process(delta):
 	process_orientation(delta);
