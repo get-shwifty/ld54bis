@@ -17,9 +17,16 @@ func _ready():
 	pass # Replace with function body.
 
 func receive_kick(kick_force):
-	apply_impulse(kick_force)
-	is_stun = true
-	GameManager.elastic.add(self)
+	if is_stun:
+		die();
+	else:
+		$Sprite2D.self_modulate = Color.WEB_GREEN
+		apply_impulse(kick_force)
+		is_stun = true
+		GameManager.elastic.add(self)
+
+func die():
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
