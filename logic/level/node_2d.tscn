@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8ic2idqu4av4"]
+[gd_scene load_steps=9 format=3 uid="uid://b8ic2idqu4av4"]
 
+[ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_6yde8"]
 [ext_resource type="PackedScene" uid="uid://cyfin13myr6y7" path="res://logic/game/character.tscn" id="1_aaugj"]
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_v2a6i"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
 [ext_resource type="Script" path="res://logic/game/Post.gd" id="3_okbo1"]
-[ext_resource type="PackedScene" path="res://logic/game/enemy.tscn" id="5_d32oc"]
+[ext_resource type="PackedScene" uid="uid://67ljrm4vy5fv" path="res://logic/game/enemy.tscn" id="5_d32oc"]
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
+[ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="7_n1ntf"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_6yde8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(617, 320)
@@ -69,3 +72,15 @@ offset_bottom = 40.0
 theme_override_font_sizes/normal_font_size = 30
 autowrap_mode = 0
 script = ExtResource("6_aqe0t")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("7_n1ntf")]
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 1.001
+autostart = true
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="Entities"]
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
