@@ -10,7 +10,6 @@ height = 94.0
 [node name="coin" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 0
-contact_monitor = true
 lock_rotation = true
 linear_damp = 1.0
 script = ExtResource("1_fadlc")
@@ -32,4 +31,4 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectZone"]
 shape = SubResource("CapsuleShape2D_ue15c")
 
-[connection signal="area_exited" from="CollectZone" to="." method="_on_collect_zone_area_exited"]
+[connection signal="area_entered" from="CollectZone" to="." method="_on_collect_zone_area_entered"]

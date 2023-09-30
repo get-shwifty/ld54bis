@@ -15,5 +15,5 @@ func get_collected():
 	queue_free();
 
 
-func _on_collect_zone_area_exited(_area):
+func _on_collect_zone_area_entered(area):
 	get_collected()
