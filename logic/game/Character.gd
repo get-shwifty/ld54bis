@@ -8,6 +8,8 @@ var last_orientation : Vector2;
 const kick_force_base_coef = 50;
 @export var kick_force : float = 2;
 
+@export var drop_post_offset: float = 1;
+
 var elastic_vector = Vector2.ZERO
 
 func _ready():
@@ -17,8 +19,12 @@ func _physics_process(delta):
 	process_orientation(delta);
 	process_movement(delta)
 
+	#this should probably be in an update func
 	if Input.is_action_just_pressed("game_kick"):
 		try_kick()
+		
+	if Input.is_action_just_pressed("game_drop_post"):
+		GameManager.try_drop_post(position + last_orientation * drop_post_offset)
 
 
 

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8ic2idqu4av4"]
+[gd_scene load_steps=7 format=3 uid="uid://b8ic2idqu4av4"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_6yde8"]
 [ext_resource type="PackedScene" uid="uid://cyfin13myr6y7" path="res://logic/game/character.tscn" id="1_aaugj"]
-[ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="2_v2a6i"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
-[ext_resource type="Script" path="res://logic/game/Post.gd" id="3_okbo1"]
+[ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_vc8xg"]
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="7_n1ntf"]
 
@@ -21,29 +20,14 @@ player = NodePath("../CharacterBody2D")
 
 [node name="Post" type="Node2D" parent="Elastic"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Elastic/Post"]
-modulate = Color(0.596078, 0, 0.172549, 1)
-position = Vector2(132, 128)
-texture = ExtResource("2_v2a6i")
-script = ExtResource("3_okbo1")
+[node name="Post" parent="Elastic/Post" instance=ExtResource("3_vc8xg")]
+position = Vector2(130, 69)
 
-[node name="Sprite2D2" type="Sprite2D" parent="Elastic/Post"]
-modulate = Color(0.596078, 0, 0.172549, 1)
-position = Vector2(968, 140)
-texture = ExtResource("2_v2a6i")
-script = ExtResource("3_okbo1")
+[node name="Post2" parent="Elastic/Post" instance=ExtResource("3_vc8xg")]
+position = Vector2(602, 678)
 
-[node name="Sprite2D3" type="Sprite2D" parent="Elastic/Post"]
-modulate = Color(0.596078, 0, 0.172549, 1)
-position = Vector2(614, 559)
-texture = ExtResource("2_v2a6i")
-script = ExtResource("3_okbo1")
-
-[node name="Sprite2D4" type="Sprite2D" parent="Elastic/Post"]
-modulate = Color(0.596078, 0, 0.172549, 1)
-position = Vector2(636, 172)
-texture = ExtResource("2_v2a6i")
-script = ExtResource("3_okbo1")
+[node name="Post3" parent="Elastic/Post" instance=ExtResource("3_vc8xg")]
+position = Vector2(1069, 24)
 
 [node name="Line2D" type="Line2D" parent="Elastic"]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
@@ -77,5 +61,7 @@ autostart = true
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="Entities"]
+
+[node name="Posts" type="Node2D" parent="Entities"]
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
