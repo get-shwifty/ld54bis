@@ -11,13 +11,14 @@ uniform sampler2D gradient_outside;
 const int ELASTIC_MAX_POINTS = 30;
 uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
+uniform float elastic_thickness = 10;
 
 
 void vertex(){
     world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
 }
 
-//This functions is adapted from Inigo Quilez work that can be found here https://iquilezles.org/articles/distfunctions/
+//The following two functions are adapted from Inigo Quilez work that can be found here https://iquilezles.org/articles/distfunctions/
 float sdPolygon( in vec2[ELASTIC_MAX_POINTS] v, in int current_max_points, in vec2 p )
 {
 	int array_size = min(current_max_points,ELASTIC_MAX_POINTS);
@@ -36,21 +37,33 @@ float sdPolygon( in vec2[ELASTIC_MAX_POINTS] v, in int current_max_points, in ve
     return s*sqrt(d);
 }
 
+float opRound(in float d, in float r)
+{
+  return d - r;
+}
 
 void fragment() {
     vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 	
-	float d = sdPolygon(elastic_points, elastic_current_points_number, world_position);
+	float d = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), 50.0);
 	
-	
+	vec3 col = vec3(1.0);
+	if (d < - elastic_thickness)
+	{
+		col = vec3(1.0,0.0,0.0);
+	}
+	else if (d > elastic_thickness)
+	{
+		col = vec3(0.0,0.0,1.0);
+	}
 	
 	//Inigo's pretty colors:
-    vec3 col = vec3(1.0) - sign(d)*vec3(0.1,0.4,0.7);
-    col *= 1.0 - exp(-3.0*abs(d));
-    col *= 0.8 + 0.2*cos(120.0*d);
-    col = mix( col, vec3(1.0), 1.0-smoothstep(0.0,0.015,abs(d)) );
+//    vec3 col = vec3(1.0) - sign(d)*vec3(0.1,0.4,0.7);
+//    col *= 1.0 - exp(-3.0*abs(d));
+//    col *= 0.8 + 0.2*cos(120.0*d);
+//    col = mix( col, vec3(1.0), 1.0-smoothstep(0.0,0.015,abs(d)) );
 	
-    COLOR.rgb = col;
+    COLOR.rgb = mix(col, c, 0.7);
 }
 
    
