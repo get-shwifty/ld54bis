@@ -16,7 +16,7 @@ position = Vector2(577, 327)
 motion_mode = 1
 script = ExtResource("1_y638b")
 move_max_speed = 15.0
-kick_force = 20.0
+kick_force = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
