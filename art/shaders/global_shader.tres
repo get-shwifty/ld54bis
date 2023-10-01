@@ -4,3 +4,5 @@
 
 [resource]
 shader = ExtResource("1_mu2gq")
+shader_parameter/elastic_points = PackedVector2Array(1, 1, 2, 1, -1, -2)
+shader_parameter/elastic_current_points_number = 3

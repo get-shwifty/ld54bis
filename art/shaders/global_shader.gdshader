@@ -9,6 +9,9 @@ uniform sampler2D gradient_inside;
 uniform sampler2D gradient_outside;
 
 const int ELASTIC_MAX_POINTS = 10;
+uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
+uniform int elastic_current_points_number;
+
 
 void vertex(){
     world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
@@ -37,17 +40,7 @@ float sdPolygon( in vec2[ELASTIC_MAX_POINTS] v, in int current_max_points, in ve
 void fragment() {
     vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 	
-	vec2 pA = vec2(-0.8,  0.7);
-    vec2 pB = vec2( 4.0, 4.0);
-    vec2 pC = vec2( 1.0, -0.4);
-    vec2 pD = vec2( 0.0, -1.2);
-    vec2 pE = vec2(-1.0, -0.6);
-	
-	vec2 edges[ELASTIC_MAX_POINTS];
-	edges[0] = pA;
-	edges[1] = pB;
-	edges[2] = pC;
-	float d = sdPolygon(edges,3,world_position);
+	float d = sdPolygon(elastic_points, elastic_current_points_number, world_position);
 	
 	
 	
