@@ -33,6 +33,7 @@ var elastic_vector = Vector2.ZERO
 var elastic_velocity = Vector2.ZERO
 var elastic_drag = 200
 var elastic_power = 300
+var is_pulling = false
 
 const move_base_coef = 50
 @export var move_max_speed : float = 4
@@ -41,6 +42,10 @@ const kick_force_base_coef = 50
 @export var kick_force : float = 2
 
 @export var drop_post_offset: float = 1
+
+#hp
+@export var max_hp = 100
+@onready var hp = max_hp
 
 func _ready():
 	GameManager.player = self;
@@ -70,6 +75,11 @@ func _physics_process(delta):
 	
 	elastic_movement()
 	move_and_slide()
+	
+func hit(dmg):
+	hp -= dmg
+	if hp <= 0:
+		GameManager.game_over()
 
 func check_next_state():
 	if Input.is_action_just_pressed("game_kick"):
@@ -146,9 +156,15 @@ func dash():
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
 
+func end_pull():
+	if is_pulling:
+		print('end pull')
+	is_pulling = false
+
+var old_vel = Vector2.ZERO
 func elastic_movement():
 	var m_speed = move_max_speed * move_base_coef
-	
+	var mark_as_out = false
 	if velocity != Vector2.ZERO:
 		elastic_velocity = Vector2.ZERO
 	
@@ -158,16 +174,34 @@ func elastic_movement():
 		var dot = velocity.dot(elastic_vector)
 
 		if velocity != Vector2.ZERO && dot < 0:
+#			print('manual pull')
+			is_pulling = true
 			var velocity_counter = -velocity * resistance
 			var elastic_counter = elastic_vector.normalized() * m_speed
 			elastic_velocity = (1-q_res)*velocity_counter + q_res*elastic_counter
 		else:
+#			print('go out')
+			mark_as_out = true
 			var min_speedup = max(resistance, 0.5)
+			var old_elastic_vel = elastic_velocity
 			elastic_velocity += elastic_vector * elastic_power * (min_speedup)
+			var n_dot = (velocity+elastic_velocity).dot(old_vel)
+#			print(n_dot)
+#				end_pull()
 		
-		if velocity == Vector2.ZERO && elastic_velocity.dot(elastic_vector) < 0:
+#		if elastic_velocity.dot(elastic_vector) > 0:
+#			end_pull()
+		if velocity == Vector2.ZERO and elastic_velocity.dot(elastic_vector) < 0:
+#			print('rebounce drag')
+			mark_as_out = false
+			is_pulling = true
 			elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length()-elastic_drag, 0))
 	else:
+#		print('empty drag')
 		elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length()-elastic_drag, 0))
+	
+	if mark_as_out:
+		end_pull()
 
 	velocity += elastic_velocity
+	old_vel = velocity

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://vaqtiy23j8nt"]
+
+[node name="game_over" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 212.0
+offset_right = 565.0
+offset_bottom = 267.0
+theme_override_font_sizes/normal_font_size = 40
+text = "YOU LOST HAHA"
+fit_content = true
+autowrap_mode = 0
