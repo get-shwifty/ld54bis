@@ -4,8 +4,12 @@ class_name Elastic
 @export var player: CharacterBody2D = null
 @onready var line = $Line2D
 
+var max_tension = 6000
+var start_tension = 1000
+
 var object_inside = []
 var size = 0
+var resistance = 0
 
 func add(obj):
 	object_inside.append(obj)
@@ -39,6 +43,14 @@ func _process(delta):
 	size = 0
 	for i in range(len(convex)-1):
 		size += (convex[i+1] - convex[i]).length()
+		
+	if size < start_tension:
+		resistance = 0
+	elif size >= max_tension:
+		resistance = 1
+	else:
+		resistance = 1 - (max_tension - size) / (max_tension - start_tension)
+		resistance = resistance ** 2
 	
 #	print(len(convex))
 #	print(convex[-2])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm55udhorgugp"]
+[gd_scene load_steps=5 format=3 uid="uid://vperkf507vv0"]
 
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="1_7hiev"]
 [ext_resource type="Script" path="res://logic/game/character2.gd" id="1_nk1li"]
