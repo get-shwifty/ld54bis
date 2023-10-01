@@ -37,8 +37,6 @@ var elastic_power = 300
 const move_base_coef = 50
 @export var move_max_speed : float = 4
 
-
-var last_orientation : Vector2
 const kick_force_base_coef = 50
 @export var kick_force : float = 2
 
@@ -64,7 +62,7 @@ func _physics_process(delta):
 			next_state = STATE.MOVE # reset next_state
 
 			if Input.is_action_just_pressed("game_drop_post"):
-				GameManager.try_drop_post(position + last_orientation * drop_post_offset)
+				GameManager.try_drop_post(position + orientation * drop_post_offset)
 		STATE.KICK:
 			kick_state(delta)
 		STATE.DASH:
@@ -126,7 +124,7 @@ func kick():
 		var enemies_to_kick = $kick/KickArea.get_overlapping_bodies()
 		for enemy in enemies_to_kick:
 			enemy = enemy as Enemy
-			enemy.receive_kick(last_orientation * kick_force_base_coef * kick_force)
+			enemy.receive_kick(orientation * kick_force_base_coef * kick_force)
 
 func dash_state(delta):
 	var delta_time_dash = Time.get_ticks_msec() - dash_start_time
