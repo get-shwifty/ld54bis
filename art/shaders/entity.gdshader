@@ -3,8 +3,6 @@ render_mode blend_mix;
 
 varying vec2 world_position;
 
-uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
-
 uniform sampler2D gradient_inside;
 uniform sampler2D gradient_outside;
 
@@ -43,24 +41,24 @@ float opRound(in float d, in float r)
 }
 
 void fragment() {
-    vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
+	float elastic_distance = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), 50.0);
 	
 	vec3 base_inside_color = texture(gradient_inside, vec2(0.25)).rgb;
 	vec3 base_outside_color = texture(gradient_outside, vec2(0.25)).rgb;
+	vec3 base_elastic_color = vec3(1.0);
 	
-	float d = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), 50.0);
+	vec3 final_color = COLOR.rgb;
 	
-	vec3 col = vec3(1.0);
-	if (d < - elastic_thickness)
+	float waistline = 0.5;
+	if (UV.y > waistline)
 	{
-		col = base_inside_color;
-	}
-	else if (d > elastic_thickness)
-	{
-		col = base_outside_color;
+		if (elastic_distance > - elastic_thickness && elastic_distance < elastic_thickness)
+		{
+			final_color = base_elastic_color;
+		}
 	}
 	
-    COLOR.rgb = mix(col, c, 0.1);
+    COLOR.rgb = final_color;
 }
 
    
