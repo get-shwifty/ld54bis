@@ -4,14 +4,15 @@
 
 [sub_resource type="Curve2D" id="Curve2D_nchk2"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -565, -353, 0, 0, 0, 0, 1798, -355, 0, 0, 0, 0, 1812, 986, 0, 0, 0, 0, -552, 985, 0, 0, 0, 0, -566, -352)
+"points": PackedVector2Array(0, 0, 0, 0, 389, 170, 0, 0, 0, 0, 763, 246, 0, 0, 0, 0, 589, 469, 0, 0, 0, 0, 308, 465, 0, 0, 0, 0, 355, 292)
 }
 point_count = 5
 
 [node name="EnemySpawner" type="Path2D"]
+position = Vector2(-127, -78)
 curve = SubResource("Curve2D_nchk2")
 script = ExtResource("1_h7ws4")
 
 [node name="SpawnPostion" type="PathFollow2D" parent="."]
-position = Vector2(-565, -353)
-rotation = -0.000846382
+position = Vector2(389, 170)
+rotation = 0.200479
