@@ -39,6 +39,9 @@ const kick_force_base_coef = 50;
 @export var drop_post_offset: float = 1;
 
 var elastic_vector = Vector2.ZERO
+var elastic_velocity = Vector2.ZERO
+var elastic_drag = 200
+var elastic_power = 300
 
 func _ready():
 	GameManager.player = self;
@@ -65,6 +68,9 @@ func _physics_process(delta):
 			kick_state(delta)
 		STATE.DASH:
 			dash_state(delta)
+	
+	elastic_movement()
+	move_and_slide()
 
 func check_next_state():
 	if Input.is_action_just_pressed("game_kick"):
@@ -86,7 +92,7 @@ func get_move_velocity():
 
 func process_movement(delta, direction):
 	velocity = get_move_velocity()
-	move_and_slide()
+	#move_and_slide()
 
 func update_move_intention():
 	move_intention = Vector2.ZERO
@@ -114,7 +120,7 @@ func kick_state(delta):
 	coeff = -pow(coeff, KICK_COEFF) # TODO params
 	velocity = get_move_velocity()
 	velocity += kick_direction * coeff * KICK_FORCE * 1000
-	move_and_slide()
+	#move_and_slide()
 
 func kick():
 	if state == STATE.MOVE:
@@ -139,10 +145,37 @@ func dash_state(delta):
 	velocity = dash_direction * coeff * DASH_FORCE * 1000
 	if velocity.length() > (DASH_MAX_SPEED / delta):
 		velocity = velocity.normalized() * (DASH_MAX_SPEED / delta)
-	move_and_slide()
+	#move_and_slide()
 
 func dash():
 	if state == STATE.MOVE:
 		state = STATE.DASH
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
+		
+		
+func elastic_movement():
+	var m_speed = move_max_speed * move_base_coef
+	
+	if velocity != Vector2.ZERO:
+		elastic_velocity = Vector2.ZERO
+	
+	if elastic_vector != Vector2.ZERO:
+		var resistance = GameManager.elastic.resistance
+		var q_res = min(1, resistance) ** 8
+		var dot = velocity.dot(elastic_vector)
+
+		if velocity != Vector2.ZERO && dot < 0:
+			var velocity_counter = -velocity * resistance
+			var elastic_counter = elastic_vector.normalized() * m_speed
+			elastic_velocity = (1-q_res)*velocity_counter + q_res*elastic_counter
+		else:
+			var min_speedup = max(resistance, 0.5)
+			elastic_velocity += elastic_vector * elastic_power * (min_speedup)
+		
+		if velocity == Vector2.ZERO && elastic_velocity.dot(elastic_vector) < 0:
+			elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length()-elastic_drag, 0))
+	else:
+		elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length()-elastic_drag, 0))
+
+	velocity += elastic_velocity
