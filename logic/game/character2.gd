@@ -173,3 +173,6 @@ func elastic_movement():
 		elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length()-elastic_drag, 0))
 
 	velocity += elastic_velocity
+
+func get_shader_material():
+	return $Sprite2D.get_material();

@@ -1,7 +1,6 @@
 extends Node
 class_name Elastic
 
-@export var player: CharacterBody2D = null
 @onready var line = $Line2D
 
 var max_tension = 6000
@@ -11,17 +10,14 @@ var object_inside = []
 var size = 0
 var resistance = 0
 
+var last_know_convex_hull = [];
+
 func add(obj):
 	object_inside.append(obj)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.elastic = self
-	object_inside.append(player)
-	for c in get_node("Post").get_children():
-		object_inside.append(c)
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -40,6 +36,7 @@ func _process(delta):
 		object_inside.erase(del)
 		
 	var convex = Geometry2D.convex_hull(positions)
+	last_know_convex_hull = convex;
 	size = 0
 	for i in range(len(convex)-1):
 		size += (convex[i+1] - convex[i]).length()

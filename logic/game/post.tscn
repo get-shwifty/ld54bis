@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3idupd13qhq4"]
+[gd_scene load_steps=4 format=3 uid="uid://b3idupd13qhq4"]
 
+[ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="2_4vfla"]
 [ext_resource type="Texture2D" uid="uid://dbr31c30d2sr2" path="res://art/game/pilone.png" id="2_20fsh"]
 [ext_resource type="Script" path="res://logic/game/Post.gd" id="2_pcatx"]
 
@@ -12,7 +13,7 @@ one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, 10)
+material = ExtResource("2_4vfla")
 texture = ExtResource("2_20fsh")
 
 [connection signal="timeout" from="LifetimeTimer" to="." method="_on_lifetime_timer_timeout"]
