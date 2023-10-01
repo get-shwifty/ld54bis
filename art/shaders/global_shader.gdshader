@@ -43,24 +43,21 @@ float opRound(in float d, in float r)
   return d - r;
 }
 
-////code adapted from https://gist.github.com/uheartbeast/312a7ea761b8712c448b31c30c0d8f1f
-//float chroma_distortion(vec3 color)
-//{
-//	float adjusted_amount = amount * texture(offset_texture, UV).r / 100.0;
-//	color.r = texture(TEXTURE, vec2(UV.x + adjusted_amount, UV.y)).r;
-//	color.g = texture(TEXTURE, UV).g;
-//	color.b = texture(TEXTURE, vec2(UV.x - adjusted_amount, UV.y)).b;
-//}
 
-void fragment() {
-    vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
-	
+
+
+float get_distance_from_position(vec2 position)
+{
+	return opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
+}
+
+vec3 get_base_color_from_distance(float d)
+{
 	vec3 base_inside_color = texture(gradient_inside, vec2(0.50)).rgb;
 	vec3 base_outside_color = texture(gradient_outside, vec2(0.25)).rgb;
+	vec3 base_elastic_color = vec3(1.0);
 	
-	float d = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
-	
-	vec3 col = vec3(1.0);
+	vec3 col = base_elastic_color;
 	if (d < - elastic_thickness)
 	{
 		col = base_inside_color;
@@ -69,6 +66,34 @@ void fragment() {
 	{
 		col = base_outside_color;
 	}
+	return col;
+}
+
+vec3 get_base_color_from_position(vec2 position)
+{
+	return get_base_color_from_distance(get_distance_from_position(position));
+}
+
+//code inspired by https://gist.github.com/uheartbeast/312a7ea761b8712c448b31c30c0d8f1f
+vec3 chroma_distortion(float distance_to_elastic, float distort_potency)
+{
+	float distortion_ratio = 1.0;
+	float adjusted_amount = distortion_ratio * distort_potency * sin(TIME * 5.0)* 2.0 * sin(TIME * sin(TIME * 4.0) * 15.0);
+	vec3 color = vec3(1.0);
+	
+	color.r = get_base_color_from_distance(distance_to_elastic - adjusted_amount).r;
+	color.g = get_base_color_from_distance(distance_to_elastic).g;
+	color.b = get_base_color_from_distance(distance_to_elastic + adjusted_amount).b;
+
+	return color;
+}
+
+
+void fragment() {
+    vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
+	
+	float distance_elastic = get_distance_from_position(world_position);
+	vec3 col = chroma_distortion(distance_elastic, 5.0);
 	
     COLOR.rgb = mix(col, c, 0.1);
 }
