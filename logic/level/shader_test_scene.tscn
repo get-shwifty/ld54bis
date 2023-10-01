@@ -1,30 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://d4ba4s4c7rj85"]
+[gd_scene load_steps=7 format=3 uid="uid://d4ba4s4c7rj85"]
 
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="1_8oqq4"]
 [ext_resource type="Script" path="res://logic/level/shader_test_scene.gd" id="1_i4w0n"]
-[ext_resource type="PackedScene" uid="uid://cyfin13myr6y7" path="res://logic/game/character.tscn" id="1_qm4b3"]
+[ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="3_dgee0"]
 [ext_resource type="Texture2D" uid="uid://b5qyli4c0oq30" path="res://art/game/hero.png" id="4_5rg36"]
-[ext_resource type="Shader" path="res://art/shaders/entity.gdshader" id="4_c535f"]
-[ext_resource type="Texture2D" uid="uid://bdyfblo1dcpr7" path="res://art/shaders/inside_gradient.tres" id="5_w84so"]
-[ext_resource type="Texture2D" uid="uid://17xykwklgsb" path="res://art/shaders/outside_gradient.tres" id="6_swy2b"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nvbwg"]
 noise = SubResource("FastNoiseLite_08r7k")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dn5wq"]
-shader = ExtResource("4_c535f")
-shader_parameter/elastic_points = [Vector2(-57, 649), Vector2(818, 448), Vector2(604, 138), Vector2(262, 0), Vector2(-218, 245)]
-shader_parameter/elastic_current_points_number = 5
-shader_parameter/elastic_thickness = 10.0
-shader_parameter/gradient_inside = ExtResource("5_w84so")
-shader_parameter/gradient_outside = ExtResource("6_swy2b")
-
 [node name="shader_test_scene" type="Node2D"]
 script = ExtResource("1_i4w0n")
-
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_qm4b3")]
 
 [node name="ShaderRenderer" type="Sprite2D" parent="."]
 material = ExtResource("1_8oqq4")
@@ -38,8 +25,8 @@ texture = SubResource("NoiseTexture2D_nvbwg")
 position = Vector2(-57, 649)
 
 [node name="Sprite2D" type="Sprite2D" parent="points"]
-material = SubResource("ShaderMaterial_dn5wq")
-position = Vector2(818, 448)
+material = ExtResource("3_dgee0")
+position = Vector2(998, 245)
 scale = Vector2(4, 4)
 texture = ExtResource("4_5rg36")
 
