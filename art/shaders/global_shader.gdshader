@@ -1,9 +1,16 @@
 shader_type canvas_item;
+render_mode blend_mix;
+
+varying vec2 world_position;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
 uniform sampler2D gradient_inside;
 uniform sampler2D gradient_outside;
+
+void vertex(){
+    world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
+}
 
 //most part of the following code for SDF computation is based on work from Anders Riggelsen available here https://www.shadertoy.com/view/wdffWH
 struct Result{
@@ -29,7 +36,7 @@ float computeSDF(vec2 pixel_pos)
 	vec2 p = pixel_pos;
 	
 	vec2 pA = vec2(-0.8,  0.7);
-    vec2 pB = vec2( 1.0,  0.8);
+    vec2 pB = vec2( 4.0, 4.0);
     vec2 pC = vec2( 1.0, -0.4);
     vec2 pD = vec2( 0.0, -1.2);
     vec2 pE = vec2(-1.0, -0.6);
@@ -64,7 +71,7 @@ float computeSDF(vec2 pixel_pos)
 void fragment() {
     vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 	
-	float d = computeSDF((SCREEN_UV-vec2(0.5))*5.0);
+	float d = computeSDF(world_position);
 	    //Inigo's pretty colors:
     vec3 col = vec3(1.0) - sign(d)*vec3(0.1,0.4,0.7);
     col *= 1.0 - exp(-3.0*abs(d));
