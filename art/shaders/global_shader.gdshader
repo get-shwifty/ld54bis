@@ -8,7 +8,7 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 uniform sampler2D gradient_inside;
 uniform sampler2D gradient_outside;
 
-const int ELASTIC_MAX_POINTS = 10;
+const int ELASTIC_MAX_POINTS = 30;
 uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
 
@@ -44,7 +44,7 @@ void fragment() {
 	
 	
 	
-	    //Inigo's pretty colors:
+	//Inigo's pretty colors:
     vec3 col = vec3(1.0) - sign(d)*vec3(0.1,0.4,0.7);
     col *= 1.0 - exp(-3.0*abs(d));
     col *= 0.8 + 0.2*cos(120.0*d);
