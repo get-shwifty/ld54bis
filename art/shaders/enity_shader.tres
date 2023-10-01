@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://byy3chjt7uksd"]
+
+[ext_resource type="Shader" path="res://art/shaders/entity.gdshader" id="1_0fwyv"]
+[ext_resource type="Texture2D" uid="uid://bdyfblo1dcpr7" path="res://art/shaders/inside_gradient.tres" id="2_foutd"]
+[ext_resource type="Texture2D" uid="uid://17xykwklgsb" path="res://art/shaders/outside_gradient.tres" id="3_i7k5k"]
+
+[resource]
+shader = ExtResource("1_0fwyv")
+shader_parameter/elastic_points = [Vector2(-57, 649), Vector2(998, 245), Vector2(604, 138), Vector2(262, 0), Vector2(-218, 245)]
+shader_parameter/elastic_current_points_number = 5
+shader_parameter/elastic_thickness = 10.0
+shader_parameter/common_elastic_sdf_offset = 45.0
+shader_parameter/gradient_inside = ExtResource("2_foutd")
+shader_parameter/gradient_outside = ExtResource("3_i7k5k")
