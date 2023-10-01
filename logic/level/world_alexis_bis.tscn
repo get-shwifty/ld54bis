@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkeq28t1c88bu"]
+[gd_scene load_steps=12 format=3 uid="uid://bkeq28t1c88bu"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_4km63"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="2_duhde"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_70g86"]
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="6_kym3s"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_undaf"]
+[ext_resource type="PackedScene" uid="uid://c80j56khijrsj" path="res://logic/game/coin.tscn" id="9_7qrob"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
@@ -65,5 +66,11 @@ position = Vector2(284, 350)
 position = Vector2(455, 182)
 
 [node name="Coins" type="Node2D" parent="Entities"]
+
+[node name="coin" parent="Entities/Coins" instance=ExtResource("9_7qrob")]
+position = Vector2(285, 294)
+
+[node name="coin2" parent="Entities/Coins" instance=ExtResource("9_7qrob")]
+position = Vector2(367, 205)
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

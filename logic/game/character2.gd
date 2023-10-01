@@ -158,7 +158,8 @@ func dash():
 
 func end_pull():
 	if is_pulling:
-		print('end pull')
+		pass
+#		print('end pull')
 	is_pulling = false
 
 var old_vel = Vector2.ZERO
