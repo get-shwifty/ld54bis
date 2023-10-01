@@ -21,5 +21,6 @@ texture = ExtResource("1_hhkuk")
 shape = SubResource("CircleShape2D_5wxan")
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 default_color = Color(1, 0.356863, 0.568627, 1)

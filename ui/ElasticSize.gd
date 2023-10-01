@@ -9,4 +9,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if GameManager.elastic:
-		text = str(GameManager.elastic.size)
+		text = str(floor(GameManager.elastic.size))

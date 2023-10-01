@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="7_n1ntf"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 script = ExtResource("1_6yde8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -49,6 +49,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_font_sizes/normal_font_size = 30
+fit_content = true
 autowrap_mode = 0
 script = ExtResource("6_aqe0t")
 

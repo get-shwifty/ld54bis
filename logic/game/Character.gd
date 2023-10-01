@@ -11,6 +11,8 @@ const kick_force_base_coef = 50;
 @export var drop_post_offset: float = 1;
 
 var elastic_vector = Vector2.ZERO
+var elastic_start_tension = 3000
+var elastic_max_tension = 5000
 
 func _ready():
 	GameManager.player = self;
@@ -25,6 +27,10 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("game_drop_post"):
 		GameManager.try_drop_post(position + last_orientation * drop_post_offset)
+		
+	if elastic_vector != Vector2.ZERO:
+		$Line2D.set_point_position(1, elastic_vector*100)
+		$Line2D.rotation = -rotation
 
 
 
@@ -39,6 +45,11 @@ func process_orientation(delta):
 
 func process_movement(delta):
 	velocity = get_move_intention() * move_max_speed * move_base_coef
+	
+	if elastic_vector != Vector2.ZERO && GameManager.elastic.size > elastic_start_tension:
+		var coef = (GameManager.elastic.size - elastic_start_tension) / 1000
+		var resistance = 2000 * coef
+		velocity += elastic_vector * resistance
 	move_and_slide()
 
 func get_move_intention() -> Vector2:
