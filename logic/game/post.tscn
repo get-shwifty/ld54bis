@@ -9,7 +9,7 @@ position = Vector2(132, 128)
 script = ExtResource("2_pcatx")
 
 [node name="LifetimeTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 30.0
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

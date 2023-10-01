@@ -1,4 +1,4 @@
-extends RichTextLabel
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -8,5 +8,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if GameManager.elastic:
-		text = str(floor(GameManager.elastic.size)) + '    resistance:  ' + str(GameManager.elastic.resistance)
+	pass
