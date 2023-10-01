@@ -29,7 +29,8 @@ func _process(delta):
 		global_position = Vector2(global_position.x + dir.x, global_position.y + dir.y)
 
 
-
+func get_shader_material():
+	return $Sprite2D.get_material();
 
 func _on_lifetime_timer_timeout():
 	mobile = true;

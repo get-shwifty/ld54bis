@@ -204,4 +204,10 @@ func elastic_movement():
 		end_pull()
 
 	velocity += elastic_velocity
-	old_vel = velocity
+
+func get_shader_material():
+	return $Sprite2D.get_material();
+
+
+func _on_hit_box_area_entered(area):
+	hit(100)
