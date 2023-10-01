@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4ba4s4c7rj85"]
+
+[ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="1_8oqq4"]
+[ext_resource type="Script" path="res://logic/level/shader_test_scene.gd" id="1_i4w0n"]
+[ext_resource type="PackedScene" uid="uid://cyfin13myr6y7" path="res://logic/game/character.tscn" id="1_qm4b3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nvbwg"]
+noise = SubResource("FastNoiseLite_08r7k")
+
+[node name="shader_test_scene" type="Node2D"]
+script = ExtResource("1_i4w0n")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_qm4b3")]
+
+[node name="ShaderRenderer" type="Sprite2D" parent="."]
+material = ExtResource("1_8oqq4")
+position = Vector2(1189, -149)
+scale = Vector2(22.0742, 9.14258)
+texture = SubResource("NoiseTexture2D_nvbwg")
+
+[node name="points" type="Node2D" parent="."]
+
+[node name="point1" type="Node2D" parent="points"]
+position = Vector2(141, 588)
+
+[node name="point2" type="Node2D" parent="points"]
+position = Vector2(477, 539)
+
+[node name="point3" type="Node2D" parent="points"]
+position = Vector2(577, 327)
+
+[node name="point4" type="Node2D" parent="points"]
+position = Vector2(376, 188)
+
+[node name="point5" type="Node2D" parent="points"]
+position = Vector2(311, 373)

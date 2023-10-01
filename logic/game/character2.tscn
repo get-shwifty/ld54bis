@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://vperkf507vv0"]
+
+[ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="1_7hiev"]
+[ext_resource type="Script" path="res://logic/game/character2.gd" id="1_nk1li"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qr6jb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_encfy"]
+size = Vector2(126.158, 180.098)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_nk1li")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7hiev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qr6jb")
+
+[node name="kick" type="Node2D" parent="."]
+position = Vector2(60, 2.08165e-12)
+
+[node name="Sprite2D" type="Sprite2D" parent="kick"]
+modulate = Color(1, 1, 0, 1)
+rotation = -4.71238
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_7hiev")
+
+[node name="KickArea" type="Area2D" parent="kick"]
+position = Vector2(-60, -2.08165e-12)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kick/KickArea"]
+position = Vector2(0, -90.4869)
+shape = SubResource("RectangleShape2D_encfy")

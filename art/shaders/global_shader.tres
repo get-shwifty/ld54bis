@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://csfsrsihpx01h"]
+
+[ext_resource type="Shader" path="res://art/shaders/global_shader.gdshader" id="1_mu2gq"]
+
+[resource]
+shader = ExtResource("1_mu2gq")
+shader_parameter/elastic_points = [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+shader_parameter/elastic_current_points_number = 3

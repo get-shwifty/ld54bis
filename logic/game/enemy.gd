@@ -4,10 +4,13 @@ class_name Enemy
 var speed_base_coef = 50;
 @export var speed : float = 10;
 
+@onready var death_timer : Timer = $DeathTimer;
+
 var was_kicked : bool = false;
 var elastic_vector = Vector2.ZERO
 var first_elastic_vector = Vector2.ZERO
 var is_stun = false
+var is_dead = false
 
 var going_in = false
 var going_out = false
@@ -22,14 +25,15 @@ func _ready():
 func receive_kick(kick_force):
 	if is_stun:
 		die();
-	else:
-		$Sprite2D.self_modulate = Color.WEB_GREEN
-		apply_impulse(kick_force)
-		is_stun = true
-		GameManager.elastic.add(self)
+
+	$Sprite2D.self_modulate = Color.WEB_GREEN
+	apply_impulse(kick_force)
+	is_stun = true
+	GameManager.elastic.add(self)
 
 func die():
-	queue_free()
+	is_dead = true;
+	death_timer.start();
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -65,4 +69,8 @@ func _physics_process(delta):
 		linear_velocity += elastic_vector.normalized() * 10
 	
 #	print(going_in, ' ', going_out)
-	
+
+func _on_death_timer_timeout():
+	GameManager.level_manager.spawn_coin(position, linear_velocity)
+	GameManager.level_manager.drop_mobile_post(position)
+	queue_free()
