@@ -15,6 +15,9 @@ var is_dead = false
 var going_in = false
 var going_out = false
 
+var elastic_decel = 50
+var elastic_accel = 100
+
 var target;
 
 # Called when the node enters the scene tree for the first time.
@@ -27,6 +30,7 @@ func receive_kick(kick_force):
 		die();
 
 	$Sprite2D.self_modulate = Color.WEB_GREEN
+	linear_velocity = Vector2.ZERO
 	apply_impulse(kick_force)
 	is_stun = true
 	GameManager.elastic.add(self)
@@ -63,13 +67,11 @@ func _physics_process(delta):
 	line.set_point_position(1, elastic_vector.normalized()*100)
 	
 	if going_in:
-		vspeed = max(0, vspeed - 10)
+		vspeed = max(0, vspeed - elastic_decel * (1+GameManager.elastic.resistance*8))
 		linear_velocity = linear_velocity.normalized() * vspeed
 	elif going_out:
-		linear_velocity += elastic_vector.normalized() * 10
+		linear_velocity += elastic_vector.normalized() * elastic_accel * (1+GameManager.elastic.resistance*8)
 	
-#	print(going_in, ' ', going_out)
-
 func _on_death_timer_timeout():
 	GameManager.level_manager.spawn_coin(position, linear_velocity)
 	GameManager.level_manager.drop_mobile_post(position)

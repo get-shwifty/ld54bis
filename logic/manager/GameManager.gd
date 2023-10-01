@@ -21,7 +21,7 @@ func try_drop_post(drop_position :Vector2):
 
 func collect_coin():
 	coins = coins + 1;
-	print("coin amount : " + str(coins));
+#	print("coin amount : " + str(coins));
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

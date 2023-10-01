@@ -28,13 +28,14 @@ position = Vector2(130, 69)
 position = Vector2(602, 678)
 
 [node name="Post3" parent="Elastic/Post" instance=ExtResource("3_vc8xg")]
-position = Vector2(1069, 24)
+position = Vector2(1423, 329)
 
 [node name="Line2D" type="Line2D" parent="Elastic"]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_aaugj")]
 move_max_speed = 30.0
+kick_force = 100.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
