@@ -11,6 +11,8 @@ uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
 uniform float elastic_thickness = 10;
 
+uniform float common_elastic_sdf_offset = 45.0;
+
 
 void vertex(){
     world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
@@ -41,9 +43,9 @@ float opRound(in float d, in float r)
 }
 
 void fragment() {
-	float elastic_distance = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), 50.0);
+	float elastic_distance = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
 	
-	vec3 base_inside_color = texture(gradient_inside, vec2(0.25)).rgb;
+	vec3 base_inside_color = texture(gradient_inside, vec2(0.50)).rgb;
 	vec3 base_outside_color = texture(gradient_outside, vec2(0.25)).rgb;
 	vec3 base_elastic_color = vec3(1.0);
 	
