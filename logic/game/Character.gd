@@ -71,7 +71,6 @@ func process_movement(delta):
 	
 	
 	
-	
 #	if elastic_vector != Vector2.ZERO:
 #		var resistance = GameManager.elastic.resistance
 #		elastic_speed += resistance * 100 * -sign(elastic_vector.dot(velocity))

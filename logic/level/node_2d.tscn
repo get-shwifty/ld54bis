@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8ic2idqu4av4"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_6yde8"]
-[ext_resource type="PackedScene" uid="uid://cyfin13myr6y7" path="res://logic/game/character.tscn" id="1_aaugj"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_vc8xg"]
+[ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_ng1sg"]
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="7_n1ntf"]
 [ext_resource type="PackedScene" uid="uid://c80j56khijrsj" path="res://logic/game/coin.tscn" id="7_xj51s"]
@@ -33,9 +33,7 @@ position = Vector2(1423, 329)
 [node name="Line2D" type="Line2D" parent="Elastic"]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_aaugj")]
-move_max_speed = 30.0
-kick_force = 100.0
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_ng1sg")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -59,7 +57,6 @@ script = ExtResource("6_aqe0t")
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
 [node name="Entities" type="Node2D" parent="."]
 

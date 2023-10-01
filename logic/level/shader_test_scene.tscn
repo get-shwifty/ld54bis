@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4ba4s4c7rj85"]
+[gd_scene load_steps=12 format=3 uid="uid://d4ba4s4c7rj85"]
 
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="1_8oqq4"]
 [ext_resource type="Script" path="res://logic/level/shader_test_scene.gd" id="1_i4w0n"]
 [ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="3_dgee0"]
 [ext_resource type="Texture2D" uid="uid://b5qyli4c0oq30" path="res://art/game/hero.png" id="4_5rg36"]
+[ext_resource type="Texture2D" uid="uid://cyy5gqgbp76nj" path="res://art/game/pièce.png" id="4_eh1wv"]
+[ext_resource type="Texture2D" uid="uid://dbr31c30d2sr2" path="res://art/game/pilone.png" id="5_mihfp"]
+[ext_resource type="Texture2D" uid="uid://b2jab8dxmfrrw" path="res://art/game/ennemi2.png" id="6_l5o2a"]
+[ext_resource type="Texture2D" uid="uid://c8i7kuuyam76v" path="res://art/game/ennemi1.png" id="8_mt232"]
+[ext_resource type="Texture2D" uid="uid://tohuotc36xpq" path="res://art/game/ennemi3.png" id="9_agxo1"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
@@ -15,20 +20,63 @@ script = ExtResource("1_i4w0n")
 
 [node name="ShaderRenderer" type="Sprite2D" parent="."]
 material = ExtResource("1_8oqq4")
-position = Vector2(1189, -149)
+position = Vector2(1285, -248)
 scale = Vector2(22.0742, 9.14258)
 texture = SubResource("NoiseTexture2D_nvbwg")
 
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+texture_filter = 1
+material = ExtResource("3_dgee0")
+position = Vector2(71, 243)
+scale = Vector2(4, 4)
+texture = ExtResource("4_eh1wv")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+texture_filter = 1
+material = ExtResource("3_dgee0")
+position = Vector2(725, 545)
+scale = Vector2(4, 4)
+texture = ExtResource("4_eh1wv")
+
 [node name="points" type="Node2D" parent="."]
+
+[node name="Sprite2D8" type="Sprite2D" parent="points"]
+texture_filter = 1
+material = ExtResource("3_dgee0")
+position = Vector2(-549, 547)
+scale = Vector2(4, 4)
+texture = ExtResource("5_mihfp")
 
 [node name="point1" type="Node2D" parent="points"]
 position = Vector2(-57, 649)
 
+[node name="Sprite2D3" type="Sprite2D" parent="points"]
+texture_filter = 1
+material = ExtResource("3_dgee0")
+position = Vector2(703, 847)
+scale = Vector2(4, 4)
+texture = ExtResource("6_l5o2a")
+
 [node name="Sprite2D" type="Sprite2D" parent="points"]
+texture_filter = 1
 material = ExtResource("3_dgee0")
 position = Vector2(998, 245)
 scale = Vector2(4, 4)
 texture = ExtResource("4_5rg36")
+
+[node name="Sprite2D2" type="Sprite2D" parent="points"]
+texture_filter = 1
+material = ExtResource("3_dgee0")
+position = Vector2(712, 161)
+scale = Vector2(4, 4)
+texture = ExtResource("8_mt232")
+
+[node name="Sprite2D7" type="Sprite2D" parent="points"]
+texture_filter = 1
+material = ExtResource("3_dgee0")
+position = Vector2(734, -1)
+scale = Vector2(4, 4)
+texture = ExtResource("5_mihfp")
 
 [node name="point3" type="Node2D" parent="points"]
 position = Vector2(604, 138)
@@ -37,4 +85,11 @@ position = Vector2(604, 138)
 position = Vector2(262, 0)
 
 [node name="point5" type="Node2D" parent="points"]
-position = Vector2(-218, 245)
+position = Vector2(-227, 256)
+
+[node name="Sprite2D4" type="Sprite2D" parent="points"]
+texture_filter = 1
+material = ExtResource("3_dgee0")
+position = Vector2(-204, 590)
+scale = Vector2(4, 4)
+texture = ExtResource("9_agxo1")
