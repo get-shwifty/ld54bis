@@ -21,8 +21,9 @@ GameManager="*res://logic/manager/GameManager.gd"
 
 [display]
 
-window/size/viewport_width=1500
-window/size/viewport_height=800
+window/size/viewport_width=768
+window/size/viewport_height=512
+window/stretch/mode="viewport"
 
 [input]
 

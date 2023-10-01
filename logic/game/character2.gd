@@ -16,32 +16,33 @@ var orientation: Vector2 = Vector2.ZERO
 var kick_direction: Vector2 = Vector2.ZERO
 var kick_start_time = 0
 @export var KICK_TIME_MS = 100
-@export var KICK_FORCE = 1
+@export var KICK_FORCE = 300
 @export var KICK_COEFF = 0.3
 
 # dash
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_start_time = -1e6
 @export var DASH_TIME_MS = 200
-@export var DASH_FORCE = 10
-@export var DASH_MAX_SPEED = 30
-@export var DASH_COEFF = 0.3
-@export var DASH_COOLDOWN_MS = 2000
+@export var DASH_FORCE = 1000
+@export var DASH_MAX_SPEED = 10
+@export var DASH_COEFF = 0.2
+@export var DASH_COOLDOWN_MS = 1500
 
-const move_base_coef = 50
-@export var move_max_speed : float = 15
-
-
-var last_orientation : Vector2;
-const kick_force_base_coef = 50;
-@export var kick_force : float = 2;
-
-@export var drop_post_offset: float = 1;
-
+# elastic
 var elastic_vector = Vector2.ZERO
 var elastic_velocity = Vector2.ZERO
 var elastic_drag = 200
 var elastic_power = 300
+
+const move_base_coef = 50
+@export var move_max_speed : float = 4
+
+
+var last_orientation : Vector2
+const kick_force_base_coef = 50
+@export var kick_force : float = 2
+
+@export var drop_post_offset: float = 1
 
 func _ready():
 	GameManager.player = self;
@@ -52,7 +53,7 @@ func _physics_process(delta):
 	
 	match state:
 		STATE.MOVE:
-			process_movement(delta, move_intention)
+			velocity = get_move_velocity()
 
 			check_next_state()
 			match next_state:
@@ -90,10 +91,6 @@ func process_orientation(delta):
 func get_move_velocity():
 	return move_intention * move_max_speed * move_base_coef
 
-func process_movement(delta, direction):
-	velocity = get_move_velocity()
-	#move_and_slide()
-
 func update_move_intention():
 	move_intention = Vector2.ZERO
 
@@ -119,8 +116,7 @@ func kick_state(delta):
 	var coeff = float(delta_time_kick) / KICK_TIME_MS
 	coeff = -pow(coeff, KICK_COEFF) # TODO params
 	velocity = get_move_velocity()
-	velocity += kick_direction * coeff * KICK_FORCE * 1000
-	#move_and_slide()
+	velocity += kick_direction * coeff * KICK_FORCE
 
 func kick():
 	if state == STATE.MOVE:
@@ -142,18 +138,16 @@ func dash_state(delta):
 
 	var coeff = float(delta_time_dash) / DASH_TIME_MS
 	coeff = pow(coeff, DASH_COEFF) # TODO params
-	velocity = dash_direction * coeff * DASH_FORCE * 1000
+	velocity = dash_direction * coeff * DASH_FORCE
 	if velocity.length() > (DASH_MAX_SPEED / delta):
 		velocity = velocity.normalized() * (DASH_MAX_SPEED / delta)
-	#move_and_slide()
 
 func dash():
 	if state == STATE.MOVE:
 		state = STATE.DASH
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
-		
-		
+
 func elastic_movement():
 	var m_speed = move_max_speed * move_base_coef
 	
