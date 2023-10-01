@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Elastic"
-run/main_scene="res://logic/level/node_2d.tscn"
+config/name="Elasticot"
+run/main_scene="res://logic/level/world_alexis.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://art/icon.svg"
 
@@ -21,8 +21,8 @@ GameManager="*res://logic/manager/GameManager.gd"
 
 [display]
 
-window/size/viewport_width=768
-window/size/viewport_height=512
+window/size/viewport_width=960
+window/size/viewport_height=640
 window/stretch/mode="viewport"
 
 [input]
