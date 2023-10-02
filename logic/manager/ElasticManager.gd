@@ -21,6 +21,12 @@ func add(obj):
 
 func remove(obj):
 	object_inside.remove_at(object_inside.find(obj))
+	
+func is_inside(pos) -> bool:
+	var inflated = Geometry2D.offset_polygon(last_know_convex_hull, 20)
+	if len(inflated) > 0:
+		inflated = inflated[0]
+	return Geometry2D.is_point_in_polygon(pos, inflated)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
