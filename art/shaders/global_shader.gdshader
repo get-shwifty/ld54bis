@@ -68,7 +68,9 @@ float get_distance_from_position(vec2 position)
 float get_current_elastic_thickness()
 {
 	float tension = clamp(current_elastic_tension, 0.0, 1.0);
-	return mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+	float thickness =  mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+	float thickness_max_delta = common_max_elastic_thickness - common_min_elastic_thickness;
+	return thickness + sin(TIME*3.5) * thickness_max_delta * 0.1;
 }
 
 float get_core_varying_distance()
