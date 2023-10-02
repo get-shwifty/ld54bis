@@ -94,7 +94,7 @@ func hit(dmg):
 	hp -= dmg
 	$HitSoundPlayer.play(0.0);
 	if hp <= 0:
-		GameManager.game_over()
+		GameManager.no_hp_game_over()
 
 func check_next_state():
 	if Input.is_action_just_pressed("game_kick"):

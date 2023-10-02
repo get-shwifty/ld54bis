@@ -36,6 +36,7 @@ var cur_action_index = -1
 
 func _ready():
 	target = GameManager.player
+	$Animation.play("default")
 
 func receive_kick(action_idx, kick_force):
 	if cur_action_index == action_idx:
@@ -51,7 +52,7 @@ func receive_kick(action_idx, kick_force):
 	state = STATE.STUN
 	stun_timer.start()
 	
-	$Sprite2D.self_modulate = Color.WEB_GREEN
+	$Animation.self_modulate = Color.WEB_GREEN
 	GameManager.elastic.add(self)
 	
 	linear_velocity = Vector2.ZERO
@@ -99,7 +100,7 @@ func _on_death_timer_timeout():
 
 func _on_stun_timer_timeout():
 	state = STATE.MOVE
-	$Sprite2D.self_modulate = Color.WHITE
+	$Animation.self_modulate = Color.WHITE
 	GameManager.elastic.remove(self)
 
 func get_reference_velocity():
