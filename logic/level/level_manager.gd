@@ -38,8 +38,7 @@ func spawn_coin(spawn_position: Vector2, spawn_linear_velocity: Vector2):
 	coin.position = spawn_position
 	coin.linear_velocity = spawn_linear_velocity
 
-func _on_enemy_spawn_timer_timeout():
-	var enemy = enemy_spawner.spawn_enemy()
+func spawn(enemy):
 	$Entities/Enemies.add_child(enemy)
 	enemy.global_position = enemy.position;
 

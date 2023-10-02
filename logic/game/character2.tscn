@@ -132,6 +132,8 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 17
+collision_mask = 17
 motion_mode = 1
 script = ExtResource("1_nk1li")
 
