@@ -31,7 +31,6 @@ func _process(delta):
 		return
 
 	if mobile:
-		print(elastic_vector)
 		visible = false
 		var dir = elastic_vector.normalized() * 5
 		global_position = Vector2(global_position.x + dir.x, global_position.y + dir.y)

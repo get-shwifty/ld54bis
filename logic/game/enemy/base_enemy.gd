@@ -51,6 +51,7 @@ func receive_kick(action_idx, kick_force):
 		return
 
 	state = STATE.STUN
+	GameManager.add_score(self, 100)
 	$DamageBox.monitoring = false
 	stun_timer.start()
 	
@@ -61,6 +62,7 @@ func receive_kick(action_idx, kick_force):
 	apply_impulse(kick_force)
 
 func die():
+	GameManager.add_score(self, 500)
 	is_dead = true
 	death_timer.start()
 	
@@ -101,7 +103,9 @@ func _physics_process(delta):
 				linear_velocity += elastic_vector.normalized() * elastic_accel * (1+GameManager.elastic.resistance*8)
 	
 func _on_death_timer_timeout():
-	GameManager.level_manager.spawn_coin(global_position, linear_velocity)
+	var prob = randf()
+	if prob > 0.9:
+		GameManager.level_manager.spawn_coin(global_position, linear_velocity)
 	GameManager.level_manager.drop_mobile_post(position)
 	queue_free()
 
