@@ -66,6 +66,9 @@ func die():
 func _physics_process(delta):
 	var vspeed = linear_velocity.length()
 	
+	var is_inside = GameManager.elastic.is_inside(global_position)
+	$Ombre.visible = is_inside
+	
 	match state:
 		STATE.MOVE:
 			var motion_intention = target.global_position - global_position
@@ -114,3 +117,9 @@ func get_shader_material():
 func _on_damage_box_area_entered(area):
 	var player = area.get_parent()
 	player.hit(damage)
+	$DamageBox.monitoring = false
+	$DamageTimer.start()
+
+func _on_damage_timer_timeout():
+	if state == STATE.MOVE:
+		$DamageBox.monitoring = true
