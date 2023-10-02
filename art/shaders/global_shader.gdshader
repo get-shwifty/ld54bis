@@ -71,6 +71,11 @@ float get_current_elastic_thickness()
 	return mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
 }
 
+float get_core_varying_distance()
+{
+	return distance(world_position,core_position) + sin(TIME*2.0) *30.0;
+}
+
 vec3 get_base_color_from_distance(float d)
 {
 	vec3 base_elastic_color = vec3(1.0);
@@ -78,7 +83,7 @@ vec3 get_base_color_from_distance(float d)
 	vec3 col = base_elastic_color;
 	if (d < 0.0)
 	{
-		float distance_to_core = distance(world_position,core_position);
+		float distance_to_core = get_core_varying_distance();
 		float distance_to_hit = distance(world_position, hit_position);
 		float distance_to_consider = distance_to_core;
 		
