@@ -1,10 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr5dttaeduat"]
+[gd_scene load_steps=6 format=3 uid="uid://cr5dttaeduat"]
 
 [ext_resource type="PackedScene" uid="uid://b6yw267l65fnk" path="res://logic/game/enemy/base_enemy.tscn" id="1_rvm1n"]
 [ext_resource type="Script" path="res://logic/game/enemy/dumb.gd" id="2_57r0j"]
+[ext_resource type="Texture2D" uid="uid://ccobrsv7re5kj" path="res://art/game/ennemi2_shadow.png" id="3_6kkco"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7on6"]
+atlas = ExtResource("3_6kkco")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ijft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7on6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Dumb" instance=ExtResource("1_rvm1n")]
 script = ExtResource("2_57r0j")
 
 [node name="Animation" parent="." index="1"]
 speed_scale = 1.0
+
+[node name="InShadowAnimation" parent="." index="8"]
+sprite_frames = SubResource("SpriteFrames_1ijft")

@@ -37,8 +37,8 @@ func _process(delta):
 		global_position = Vector2(global_position.x + dir.x, global_position.y + dir.y)
 
 
-func get_shader_material():
-	return $Sprite2D.get_material()
+func get_shader_materials():
+	return [$Sprite2D.get_material()]
 
 func get_reference_velocity():
 	return Vector2.ZERO

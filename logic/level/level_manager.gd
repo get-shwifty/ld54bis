@@ -60,7 +60,8 @@ func update_shaders():
 	entities.append($Character2);
 	
 	for c in entities:
-		var entity_mat = c.get_shader_material();
-		entity_mat.set_shader_parameter("elastic_current_points_number", elastic_points_count);
-		entity_mat.set_shader_parameter("elastic_points", elastic_points);
-		entity_mat.set_shader_parameter("elastic_thickness", elastic_thickness);
+		var entity_mats = c.get_shader_materials();
+		for entity_mat in entity_mats:
+			entity_mat.set_shader_parameter("elastic_current_points_number", elastic_points_count);
+			entity_mat.set_shader_parameter("elastic_points", elastic_points);
+			entity_mat.set_shader_parameter("elastic_thickness", elastic_thickness);
