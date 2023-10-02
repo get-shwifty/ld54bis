@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dd5ke42dstfm6" path="res://art/game/explosion.png" id="5_21bu8"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="5_o61uw"]
 [ext_resource type="Texture2D" uid="uid://bav14l4wrhv1s" path="res://art/game/perso2.png" id="5_sgjgt"]
-[ext_resource type="AudioStream" uid="uid://b652220be3kw4" path="res://audio/player_hit.ogg" id="8_tqgq4"]
-[ext_resource type="AudioStream" uid="uid://c8isg5yquuw8u" path="res://audio/kick_player.ogg" id="9_dktxm"]
+[ext_resource type="AudioStream" uid="uid://mwg2ads5i0n0" path="res://audio/player_hit.ogg" id="8_tqgq4"]
+[ext_resource type="AudioStream" uid="uid://djqkij26yj5px" path="res://audio/kick_player.ogg" id="9_dktxm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qr6jb"]
 
