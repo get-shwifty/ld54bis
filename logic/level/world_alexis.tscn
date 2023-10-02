@@ -60,6 +60,7 @@ script = ExtResource("6_fdeo5")
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
 wait_time = 2.0
+autostart = true
 
 [node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
 position = Vector2(303, 92)
