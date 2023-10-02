@@ -59,7 +59,7 @@ ennemy1_weight = 9
 ennemy2_weight = 3
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
-wait_time = 2.0
+wait_time = 4.0
 autostart = true
 
 [node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
@@ -153,14 +153,14 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Post" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(153, 151)
+position = Vector2(256, 220)
 
 [node name="Post2" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(284, 350)
+position = Vector2(476, 545)
 LIFETIME_DURATION = 35
 
 [node name="Post3" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(455, 182)
+position = Vector2(736, 225)
 LIFETIME_DURATION = 25
 
 [node name="Coins" type="Node2D" parent="Entities"]

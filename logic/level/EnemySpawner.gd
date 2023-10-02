@@ -47,7 +47,7 @@ func get_random_diff(time):
 	if time > 600:
 		time = 600
 	time += randf() - 0.5
-	var diff = (cos(time) * 160 + time) / 60
+	var diff = (cos(time/10) * 160 + time) / 60
 	diff = maxf(1, diff)
 	diff = minf(10, diff)
 	return ceil(diff)
