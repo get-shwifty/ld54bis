@@ -54,6 +54,7 @@ const move_base_coef = 50
 #hp
 @export var max_hp = 100
 @onready var hp = max_hp
+var hit_ratio = 0
 
 func _ready():
 	GameManager.player = self;
@@ -62,6 +63,8 @@ func _ready():
 func _physics_process(delta):
 	update_move_intention()
 	process_orientation(delta)
+	
+	hit_ratio -= max(0, 2 * delta)
 	
 	match state:
 		STATE.MOVE:
@@ -98,6 +101,7 @@ func _physics_process(delta):
 
 func hit(dmg):
 	if state != STATE.DASH:
+		hit_ratio = 1
 		hp -= dmg
 		$HitSoundPlayer.play(0.0);
 		if hp <= 0:

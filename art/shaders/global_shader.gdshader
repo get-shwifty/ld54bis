@@ -87,9 +87,9 @@ vec3 get_base_color_from_distance(float d)
 	{
 		float distance_to_core = get_core_varying_distance();
 		float distance_to_hit = distance(world_position, hit_position);
-		float distance_to_consider = distance_to_core;
+		distance_to_hit = min(distance_to_hit, distance_to_core);
 		
-		float core_distance_ratio = distance_to_consider/MAX_CORE_DISTANCE;
+		float core_distance_ratio = distance_to_core/MAX_CORE_DISTANCE;
 		
 		float gradient_sample_ratio = steper(mix(1.0, 0.5, core_distance_ratio), 20);
 		col = texture(gradient_inside, vec2(gradient_sample_ratio)).rgb;
@@ -99,7 +99,7 @@ vec3 get_base_color_from_distance(float d)
 		if (hit_ratio > 0.0 && distance_to_hit  > (1.0- hit_ratio) * MAX_CORE_DISTANCE)
 		{
 			vec3 hit_color = texture(gradient_outside, vec2(0.25)).rgb;
-			vec3 premix = mix(col, hit_color, 0.5);
+			vec3 premix = mix(col, hit_color, 0.75);
 			col = mix(col, premix, hit_ratio > 1.0 ? 0.0 : hit_ratio);
 		}
 		
