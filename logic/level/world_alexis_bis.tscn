@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkeq28t1c88bu"]
+[gd_scene load_steps=13 format=3 uid="uid://bkeq28t1c88bu"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_4km63"]
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_u8uj0"]
@@ -9,17 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="6_kym3s"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_undaf"]
 [ext_resource type="PackedScene" uid="uid://c80j56khijrsj" path="res://logic/game/coin.tscn" id="9_7qrob"]
+[ext_resource type="PackedScene" uid="uid://dv2rasry2pocb" path="res://logic/game/borders.tscn" id="10_gm0rg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k8rqp"]
 noise = SubResource("FastNoiseLite_08r7k")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m07kj"]
-size = Vector2(20, 647)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_44ipn"]
-size = Vector2(981, 19)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_4km63")
@@ -76,45 +71,6 @@ position = Vector2(285, 294)
 [node name="coin2" parent="Entities/Coins" instance=ExtResource("9_7qrob")]
 position = Vector2(367, 205)
 
-[node name="Borders" type="Node2D" parent="."]
-
-[node name="RigidBody2D" type="RigidBody2D" parent="Borders"]
-collision_mask = 0
-lock_rotation = true
-freeze = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D"]
-position = Vector2(0, 313.5)
-shape = SubResource("RectangleShape2D_m07kj")
-
-[node name="RigidBody2D2" type="RigidBody2D" parent="Borders"]
-position = Vector2(972, 4)
-collision_mask = 0
-lock_rotation = true
-freeze = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D2"]
-position = Vector2(0, 313.5)
-shape = SubResource("RectangleShape2D_m07kj")
-
-[node name="RigidBody2D3" type="RigidBody2D" parent="Borders"]
-position = Vector2(500, 324)
-collision_mask = 0
-lock_rotation = true
-freeze = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D3"]
-position = Vector2(-11.5, 313.5)
-shape = SubResource("RectangleShape2D_44ipn")
-
-[node name="RigidBody2D4" type="RigidBody2D" parent="Borders"]
-position = Vector2(503, -313)
-collision_mask = 0
-lock_rotation = true
-freeze = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D4"]
-position = Vector2(-11.5, 313.5)
-shape = SubResource("RectangleShape2D_44ipn")
+[node name="Borders" parent="." instance=ExtResource("10_gm0rg")]
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
