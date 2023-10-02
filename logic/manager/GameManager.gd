@@ -25,7 +25,7 @@ func _process(delta):
 		
 	if is_game_over and not is_loading and is_instance_valid(elastic):
 		is_loading = true
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.4).timeout
 		get_tree().change_scene_to_file("res://logic/game/game_over.tscn")
 
 func try_drop_post(drop_position :Vector2):

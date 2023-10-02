@@ -7,8 +7,8 @@ class_name Elastic
 @onready var line = $Line2D
 
 
-var max_tension = 6000
-var start_tension = 1000
+var max_tension = 2000
+var start_tension = 500
 
 var object_inside = []
 var size = 0
