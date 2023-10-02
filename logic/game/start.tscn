@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://u86ldha2152u"]
+
+[ext_resource type="Script" path="res://logic/game/start.gd" id="1_8fasr"]
+[ext_resource type="Texture2D" uid="uid://ukjp5sa3gvak" path="res://art/white.png" id="1_8rsaf"]
+
+[node name="start" type="Node2D"]
+script = ExtResource("1_8fasr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0705882, 0.176471, 0.266667, 1)
+scale = Vector2(60.7188, 40.5)
+texture = ExtResource("1_8rsaf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Title" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
+layout_mode = 0
+offset_left = -500.0
+offset_top = -569.0
+offset_right = 500.0
+offset_bottom = -514.0
+theme_override_font_sizes/normal_font_size = 200
+bbcode_enabled = true
+text = "[center]ELASTRO[/center]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="start" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
+layout_mode = 0
+offset_left = -497.0
+offset_top = 468.0
+offset_right = 503.0
+offset_bottom = 523.0
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]Press Enter to Start[/center]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Reason2" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
+offset_left = -491.0
+offset_top = -360.0
+offset_right = 564.0
+offset_bottom = -280.0
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]This game is better played with a game controller[/center]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Reason3" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
+offset_left = -773.0
+offset_top = -1.0
+offset_right = 227.0
+offset_bottom = 319.0
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Keyboard
+Movement: Z,Q,S,D
+Hit: Space / U
+Dash: Shift / I
+Securise Elastic: O
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Reason4" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
+offset_left = 213.0
+offset_top = 7.0
+offset_right = 1213.0
+offset_bottom = 327.0
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "Gamecontroller
+Movement: Left Joystick
+Hit: X
+Dash: RT
+Securise Elastic: LT / B"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2, 2)

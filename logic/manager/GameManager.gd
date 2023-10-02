@@ -30,7 +30,7 @@ func _process(delta):
 	if not is_game_over and not is_loading:
 		time += delta
 	
-	if is_game_over and can_restart and Input.is_action_just_pressed("ui_accept"):
+	if is_game_over and can_restart and Input.is_anything_pressed():
 		restart()
 	
 	if is_game_over and not is_loading and is_instance_valid(elastic):
