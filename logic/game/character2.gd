@@ -97,10 +97,11 @@ func _physics_process(delta):
 		child.self_modulate.a *= 0.8
 
 func hit(dmg):
-	hp -= dmg
-	$HitSoundPlayer.play(0.0);
-	if hp <= 0:
-		GameManager.no_hp_game_over()
+	if state != STATE.DASH:
+		hp -= dmg
+		$HitSoundPlayer.play(0.0);
+		if hp <= 0:
+			GameManager.no_hp_game_over()
 
 func set_state(new_state):
 	state = new_state
@@ -163,7 +164,7 @@ func kick_state(delta):
 		check_next_state()
 
 	var coeff = float(delta_time_kick) / KICK_TIME_MS
-	coeff = -pow(coeff, KICK_COEFF) # TODO params
+	coeff = -pow(coeff, KICK_COEFF)
 	velocity = get_move_velocity()
 	velocity += kick_direction * coeff * KICK_FORCE
 
@@ -184,12 +185,9 @@ func dash_state(delta):
 		check_next_state()
 
 	var coeff = float(delta_time_dash) / DASH_TIME_MS
-	coeff = pow(coeff, DASH_COEFF) # TODO params
+	coeff = pow(coeff, DASH_COEFF)
 	velocity = dash_direction * coeff * DASH_FORCE
-	if velocity.length() > (DASH_MAX_SPEED / delta):
-		velocity = velocity.normalized() * (DASH_MAX_SPEED / delta)
-	check_kick()
-
+	velocity = velocity.limit_length(DASH_MAX_SPEED / delta)
 
 func dash():
 	if state == STATE.MOVE:
