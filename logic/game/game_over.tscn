@@ -32,3 +32,21 @@ theme_override_font_sizes/normal_font_size = 40
 text = "YOU LOST HAHA"
 fit_content = true
 autowrap_mode = 0
+
+[node name="Restart" type="RichTextLabel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 847.0
+offset_top = 887.0
+offset_right = 1162.0
+offset_bottom = 942.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Press Enter to restart"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="Control" method="_on_timer_timeout"]

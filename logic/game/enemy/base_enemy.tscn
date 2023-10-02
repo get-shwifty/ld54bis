@@ -41,7 +41,7 @@ animations = [{
 radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7k1j"]
-radius = 11.0
+radius = 8.24621
 
 [node name="BaseEnemy" type="RigidBody2D"]
 collision_layer = 6
@@ -63,6 +63,7 @@ frame_progress = 0.659873
 speed_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 2)
 shape = SubResource("CircleShape2D_5wxan")
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -88,7 +89,11 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
+position = Vector2(-5, 2)
 shape = SubResource("CircleShape2D_a7k1j")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="."]
+material = ExtResource("3_aeard")
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]

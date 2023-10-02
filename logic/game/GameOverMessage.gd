@@ -10,3 +10,8 @@ func _ready():
 func _process(delta):
 	$Reason.text = GameManager.game_over_message
 	$Score.text = 'Score: ' + str(GameManager.score)
+	$Restart.visible = GameManager.can_restart
+
+
+func _on_timer_timeout():
+	GameManager.can_restart = true

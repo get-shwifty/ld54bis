@@ -65,6 +65,7 @@ func _physics_process(delta):
 	
 	match state:
 		STATE.MOVE:
+			$HitBox.monitorable = true
 			velocity = get_move_velocity()
 			if velocity == Vector2.ZERO:
 				$SpritePersonnage.play("iddle")
@@ -81,8 +82,10 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("game_drop_post"):
 				drop_post(position + orientation * drop_post_offset)
 		STATE.KICK:
+			$HitBox.monitorable = false
 			kick_state(delta)
 		STATE.DASH:
+			$HitBox.monitorable = false
 			dash_state(delta)
 
 	elastic_movement()
@@ -279,8 +282,8 @@ func drop_post(drop_position):
 		if $PostTimer.is_stopped():
 			$PostTimer.start()
 
-func get_shader_material():
-	return $Sprite2D.get_material();
+func get_shader_materials():
+	return [$Sprite2D.get_material()];
 
 func get_reference_velocity():
 	return velocity;
