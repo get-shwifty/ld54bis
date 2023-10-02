@@ -14,8 +14,11 @@ uniform vec2 core_position = vec2(400.0);
 const int ELASTIC_MAX_POINTS = 30;
 uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
-uniform float elastic_thickness = 10;
+uniform float current_elastic_tension = 1.0;
+uniform float current_elastic_tension_boost = 0.0;
 
+uniform float common_max_elastic_thickness = 20;
+uniform float common_min_elastic_thickness = 1.0;
 uniform float common_elastic_sdf_offset = 45.0;
 
 void vertex(){
@@ -59,6 +62,12 @@ float get_distance_from_position(vec2 position)
 	return opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
 }
 
+float get_current_elastic_thickness()
+{
+	float tension = clamp(current_elastic_tension, 0.0, 1.0);
+	return mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+}
+
 vec3 get_base_color_from_distance(float d)
 {
 	float distance_to_core = distance(world_position,core_position);
@@ -70,11 +79,11 @@ vec3 get_base_color_from_distance(float d)
 	vec3 base_elastic_color = vec3(1.0);
 	
 	vec3 col = base_elastic_color;
-	if (d < - elastic_thickness)
+	if (d < 0.0)
 	{
 		col = texture(gradient_inside, vec2(gradient_sample_ratio)).rgb;
 	}
-	else if (d > elastic_thickness)
+	else if (d > get_current_elastic_thickness())
 	{
 		col = texture(gradient_outside, vec2(0.0)).rgb;
 	}
