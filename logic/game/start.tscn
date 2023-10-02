@@ -38,7 +38,7 @@ offset_right = 503.0
 offset_bottom = 523.0
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
-text = "[center]Press Enter to Start[/center]"
+text = "[center]Press Any Key To Start[/center]"
 fit_content = true
 autowrap_mode = 0
 

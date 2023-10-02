@@ -37,6 +37,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if GameManager.is_game_over:
+		return
+	
 	if len(object_inside) < 2:
 		return
 	
