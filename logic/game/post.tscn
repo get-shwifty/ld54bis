@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3idupd13qhq4"]
+[gd_scene load_steps=15 format=3 uid="uid://b3idupd13qhq4"]
 
+[ext_resource type="Material" uid="uid://qnuosh47sabh" path="res://art/shaders/shadow_shader.tres" id="2_1uw2v"]
 [ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="2_4vfla"]
 [ext_resource type="Script" path="res://logic/game/Post.gd" id="2_pcatx"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="2_sud86"]
@@ -79,6 +80,7 @@ one_shot = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.337255)
+material = ExtResource("2_1uw2v")
 position = Vector2(-0.499999, 11.4375)
 scale = Vector2(0.673913, 1.31731)
 texture = ExtResource("2_sud86")
