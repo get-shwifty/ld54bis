@@ -29,7 +29,7 @@ var after_images_pos = []
 @export var DASH_FORCE = 1000
 @export var DASH_MAX_SPEED = 10
 @export var DASH_COEFF = 0.2
-@export var DASH_COOLDOWN_MS = 100
+@export var DASH_COOLDOWN_MS = 300
 
 # elastic
 @export var max_total_speed = 2000
@@ -85,7 +85,7 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("game_drop_post"):
 				drop_post(position + orientation * drop_post_offset)
 		STATE.KICK:
-			$HitBox.monitorable = false
+#			$HitBox.monitorable = false
 			kick_state(delta)
 		STATE.DASH:
 			$HitBox.monitorable = false
@@ -185,8 +185,8 @@ func dash_state(delta):
 	if delta_time_dash > DASH_TIME_MS:
 		set_state(STATE.MOVE)
 		return
-	elif delta_time_dash > (DASH_TIME_MS - NEXT_STATE_TIMING_MS):
-		check_next_state()
+#	elif delta_time_dash > (DASH_TIME_MS - NEXT_STATE_TIMING_MS):
+#		check_next_state()
 
 	var coeff = float(delta_time_dash) / DASH_TIME_MS
 	coeff = pow(coeff, DASH_COEFF)
