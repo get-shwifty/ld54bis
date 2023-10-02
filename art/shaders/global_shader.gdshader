@@ -63,7 +63,7 @@ vec3 get_base_color_from_distance(float d)
 {
 	float distance_to_core = distance(world_position,core_position);
 	float core_distance_ratio = distance_to_core/MAX_CORE_DISTANCE;
-	float gradient_sample_ratio = steper(mix(0.5, 0.0, core_distance_ratio), 20);
+	float gradient_sample_ratio = steper(mix(1.0, 0.5, core_distance_ratio), 20);
 	
 	vec3 base_inside_color = texture(gradient_inside, vec2(0.50)).rgb;
 	vec3 base_outside_color = texture(gradient_outside, vec2(0.25)).rgb;
@@ -76,7 +76,7 @@ vec3 get_base_color_from_distance(float d)
 	}
 	else if (d > elastic_thickness)
 	{
-		col = texture(gradient_outside, vec2(gradient_sample_ratio)).rgb;
+		col = texture(gradient_outside, vec2(0.25)).rgb;
 	}
 	return col;
 }

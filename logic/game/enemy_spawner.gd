@@ -1,5 +1,4 @@
 extends Path2D
-class_name EnemySpawner
 
 const SCENE_ENEMY = preload('res://logic/game/enemy.tscn');
 

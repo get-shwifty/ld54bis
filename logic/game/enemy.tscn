@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://67ljrm4vy5fv"]
+[gd_scene load_steps=6 format=3 uid="uid://67ljrm4vy5fv"]
 
 [ext_resource type="Texture2D" uid="uid://cdnd7g1hoq3cj" path="res://art/icon.svg" id="1_hhkuk"]
 [ext_resource type="Script" path="res://logic/game/enemy.gd" id="1_np3ut"]
+[ext_resource type="AudioStream" uid="uid://by5sqs5pj0iyf" path="res://audio/death_enemy.ogg" id="3_sj2at"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wxan"]
 radius = 67.0
@@ -37,5 +38,8 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_g3nta")
+
+[node name="DeathSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sj2at")
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

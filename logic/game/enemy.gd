@@ -38,6 +38,7 @@ func receive_kick(kick_force):
 func die():
 	is_dead = true;
 	death_timer.start();
+	$DeathSoundPlayer.play(0.0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -76,3 +77,6 @@ func _on_death_timer_timeout():
 	GameManager.level_manager.spawn_coin(position, linear_velocity)
 	GameManager.level_manager.drop_mobile_post(position)
 	queue_free()
+
+func get_reference_velocity():
+	return linear_velocity;
