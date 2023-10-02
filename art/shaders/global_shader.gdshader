@@ -11,6 +11,9 @@ uniform sampler2D gradient_outside;
 const float MAX_CORE_DISTANCE = 600.0;
 uniform vec2 core_position = vec2(400.0);
 
+uniform vec2 hit_position = vec2(0.0);
+uniform float hit_ratio = 0.0; 
+
 const int ELASTIC_MAX_POINTS = 30;
 uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
@@ -65,23 +68,42 @@ float get_distance_from_position(vec2 position)
 float get_current_elastic_thickness()
 {
 	float tension = clamp(current_elastic_tension, 0.0, 1.0);
-	return mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+	float thickness =  mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+	float thickness_max_delta = common_max_elastic_thickness - common_min_elastic_thickness;
+	return thickness + sin(TIME*3.5) * thickness_max_delta * 0.1;
+}
+
+float get_core_varying_distance()
+{
+	return distance(world_position,core_position) + sin(TIME*2.0) *30.0;
 }
 
 vec3 get_base_color_from_distance(float d)
 {
-	float distance_to_core = distance(world_position,core_position);
-	float core_distance_ratio = distance_to_core/MAX_CORE_DISTANCE;
-	float gradient_sample_ratio = steper(mix(1.0, 0.5, core_distance_ratio), 20);
-	
-	vec3 base_inside_color = texture(gradient_inside, vec2(0.50)).rgb;
-	vec3 base_outside_color = texture(gradient_outside, vec2(0.25)).rgb;
 	vec3 base_elastic_color = vec3(1.0);
 	
 	vec3 col = base_elastic_color;
 	if (d < 0.0)
 	{
+		float distance_to_core = get_core_varying_distance();
+		float distance_to_hit = distance(world_position, hit_position);
+		float distance_to_consider = distance_to_core;
+		
+		float core_distance_ratio = distance_to_consider/MAX_CORE_DISTANCE;
+		
+		float gradient_sample_ratio = steper(mix(1.0, 0.5, core_distance_ratio), 20);
 		col = texture(gradient_inside, vec2(gradient_sample_ratio)).rgb;
+	
+		
+		//float kick_ratio_debug = (2.0-mod(TIME*6.0, 2.0));
+		if (hit_ratio > 0.0 && distance_to_hit  > (1.0- hit_ratio) * MAX_CORE_DISTANCE)
+		{
+			vec3 hit_color = texture(gradient_outside, vec2(0.25)).rgb;
+			vec3 premix = mix(col, hit_color, 0.5);
+			col = mix(col, premix, hit_ratio > 1.0 ? 0.0 : hit_ratio);
+		}
+		
+		
 	}
 	else if (d > get_current_elastic_thickness())
 	{
@@ -116,6 +138,7 @@ vec3 chroma_distortion(float distance_to_elastic)
 
 
 void fragment() {
+	
     vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 	
 	float distance_elastic = get_distance_from_position(world_position);
