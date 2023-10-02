@@ -1,52 +1,466 @@
-[gd_scene load_steps=2 format=3 uid="uid://vaqtiy23j8nt"]
+[gd_scene load_steps=33 format=3 uid="uid://vaqtiy23j8nt"]
 
 [ext_resource type="Script" path="res://logic/game/GameOverMessage.gd" id="1_ieno2"]
+[ext_resource type="Texture2D" uid="uid://ukjp5sa3gvak" path="res://art/white.png" id="1_lf4y8"]
+[ext_resource type="Script" path="res://logic/game/EndGamePath.gd" id="3_465wb"]
+[ext_resource type="Material" uid="uid://b1e7bs6nc5dy0" path="res://art/shaders/monster_shader.tres" id="3_o08wd"]
+[ext_resource type="Texture2D" uid="uid://ccobrsv7re5kj" path="res://art/game/ennemi2_shadow.png" id="4_s7ybe"]
+[ext_resource type="Texture2D" uid="uid://cjniofxu5s23d" path="res://art/game/soul.png" id="6_5erb3"]
+
+[sub_resource type="Curve2D" id="Curve2D_43i2a"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -90.5, -124, 0, 0, 0, 0, 86.5, 184, 0, 0, 0, 0, 283, 217.5, 0, 0, 0, 0, 486, 177, 0, 0, 0, 0, 600, -80, 0, 0, 0, 0, 793.5, -161.5, 0, 0, 0, 0, 861.5, -176)
+}
+point_count = 7
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7on6"]
+atlas = ExtResource("4_s7ybe")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2h61u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7on6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve2D" id="Curve2D_lng2p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -485, 182, 0, 0, 0, 0, -109.5, -59.5, 0, 0, 0, 0, 242.5, -108, 0, 0, 0, 0, 490.5, -73, 0, 0, 0, 0, 650.5, 45.5, 0, 0, 0, 0, 1002.5, 63.5)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_3ggg8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -65.5, 37.5, 0, 0, 0, 0, 213, -94.5, 0, 0, 0, 0, 528.5, -58.5, 0, 0, 0, 0, 726, 113, 0, 0, 0, 0, 866, 247.5, 0, 0, 0, 0, 1305.5, 341)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_ydvts"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -473.5, 133, 0, 0, 0, 0, 72, 91.5, 0, 0, 0, 0, 255, -11.5, 0, 0, 0, 0, 504, 38.5, 0, 0, 0, 0, 709.5, -20.5, 0, 0, 0, 0, 826.5, -120.5)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_jyqwl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -482, -135, 0, 0, 0, 0, 92.5, 24.5, 0, 0, 0, 0, 274, -29, 0, 0, 0, 0, 495, -70.5, 0, 0, 0, 0, 789.5, -21, 0, 0, 0, 0, 1002.5, -93)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_wd65q"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -531, 466.5, 0, 0, 0, 0, 92.5, 24.5, 0, 0, 0, 0, 369, -3, 0, 0, 0, 0, 447, -308.5, 0, 0, 0, 0, 589, -356, 0, 0, 0, 0, 749, -391)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_d1ldn"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -290.5, -368.5, 0, 0, 0, 0, 321.5, -134, 0, 0, 0, 0, 649, -28, 0, 0, 0, 0, 760.5, 234.5, 0, 0, 0, 0, 907, 384.5, 0, 0, 0, 0, 1159.5, 475)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_qslu1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -108, -359, 0, 0, 0, 0, 293.5, -189.5, 0, 0, 0, 0, 567.5, -258.5, 0, 0, 0, 0, 729, -35, 0, 0, 0, 0, 954.5, -80.5, 0, 0, 0, 0, 1191.5, 32.5)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_nwf4h"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -128.5, -14, 0, 0, 0, 0, 159, 32.5, 0, 0, 0, 0, 335, 19, 0, 0, 0, 0, 433.5, 3, 0, 0, 0, 0, 608, 21, 0, 0, 0, 0, 718.5, 201.5, 0, 0, 0, 0, 1019.5, 244.5)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_iembn"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -522, 235, 0, 0, 0, 0, 56.5, 45.5, 0, 0, 0, 0, 359, 31, 0, 0, 0, 0, 557.5, 152.5, 0, 0, 0, 0, 717.5, 218, 0, 0, 0, 0, 848.5, 177.5, 0, 0, 0, 0, 1006, -12)
+}
+point_count = 7
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwu44"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(0, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub772"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(14, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qagjv"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(28, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euvgw"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(126, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxup7"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(140, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4biy"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(154, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njyfc"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(168, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b257q"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(112, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gil1a"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(98, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewg2s"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(84, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxk8u"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(70, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yspsl"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(56, 0, 14, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt7lh"]
+atlas = ExtResource("6_5erb3")
+region = Rect2(42, 0, 14, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aatqk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwu44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub772")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qagjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euvgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxup7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4biy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njyfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b257q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gil1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewg2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxk8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yspsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt7lh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 13.0
+}]
 
 [node name="game_over" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0705882, 0.176471, 0.266667, 1)
+scale = Vector2(60.7188, 40.5)
+texture = ExtResource("1_lf4y8")
+
+[node name="Ennemies" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Ennemies"]
+position = Vector2(-725, -125)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_43i2a")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D"]
+position = Vector2(-90.5, -124)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D2" type="Path2D" parent="Ennemies"]
+position = Vector2(-493, -153)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_lng2p")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D2"]
+position = Vector2(-485, 182)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D2/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D2/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D3" type="Path2D" parent="Ennemies"]
+position = Vector2(-964, 39)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_3ggg8")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D3"]
+position = Vector2(-65.5, 37.5)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D3/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D3/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D4" type="Path2D" parent="Ennemies"]
+position = Vector2(-608, 360)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_ydvts")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D4"]
+position = Vector2(-473.5, 133)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D4/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D4/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D5" type="Path2D" parent="Ennemies"]
+position = Vector2(-998, 262)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_jyqwl")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D5"]
+position = Vector2(-482, -135)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D5/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D5/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D6" type="Path2D" parent="Ennemies"]
+position = Vector2(-500, 127)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_wd65q")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D6"]
+position = Vector2(-531, 466.5)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D6/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D6/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D7" type="Path2D" parent="Ennemies"]
+position = Vector2(-1082, -163)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_d1ldn")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D7"]
+position = Vector2(-290.5, -368.5)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D7/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D7/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D8" type="Path2D" parent="Ennemies"]
+position = Vector2(-1143, 397)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_qslu1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D8"]
+position = Vector2(-108, -359)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D8/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D8/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D9" type="Path2D" parent="Ennemies"]
+position = Vector2(-872, -435)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_nwf4h")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D9"]
+position = Vector2(-128.5, -14)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D9/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D9/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Path2D10" type="Path2D" parent="Ennemies"]
+position = Vector2(-890, 28)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_iembn")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ennemies/Path2D10"]
+position = Vector2(-522, 235)
+rotation = 0.517287
+rotates = false
+script = ExtResource("3_465wb")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="Ennemies/Path2D10/PathFollow2D"]
+material = ExtResource("3_o08wd")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="Ennemies/Path2D10/PathFollow2D"]
+wait_time = 0.2
+one_shot = true
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("1_ieno2")
 
 [node name="Reason" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
 layout_mode = 0
-offset_left = 800.0
-offset_top = 468.0
-offset_right = 1115.0
-offset_bottom = 523.0
+offset_left = -500.0
+offset_top = -569.0
+offset_right = 500.0
+offset_bottom = -514.0
 theme_override_font_sizes/normal_font_size = 40
-text = "YOU LOST HAHA"
+bbcode_enabled = true
+text = "[center]YOU LOST REASON[/center]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="ScoreLabel" type="RichTextLabel" parent="Control"]
+visible = false
+custom_minimum_size = Vector2(1000, 2.08165e-12)
+layout_mode = 0
+offset_left = -500.0
+offset_top = -269.0
+offset_right = 500.0
+offset_bottom = -214.0
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]SCORE[/center]
+"
 fit_content = true
 autowrap_mode = 0
 
 [node name="Score" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
 layout_mode = 0
-offset_left = 865.0
-offset_top = 145.0
-offset_right = 1180.0
-offset_bottom = 200.0
-theme_override_font_sizes/normal_font_size = 40
-text = "YOU LOST HAHA"
+offset_left = -499.0
+offset_top = -86.0
+offset_right = 501.0
+offset_bottom = 79.0
+theme_override_font_sizes/normal_font_size = 120
+bbcode_enabled = true
+text = "[center]0[/center]"
 fit_content = true
 autowrap_mode = 0
 
 [node name="Restart" type="RichTextLabel" parent="Control"]
-visible = false
 layout_mode = 0
-offset_left = 847.0
-offset_top = 887.0
-offset_right = 1162.0
-offset_bottom = 942.0
+offset_left = -203.0
+offset_top = 495.0
+offset_right = 204.0
+offset_bottom = 550.0
 theme_override_font_sizes/normal_font_size = 40
-text = "Press Enter to restart"
+bbcode_enabled = true
+text = "[center]Press Enter to restart[/center]"
 fit_content = true
 autowrap_mode = 0
+
+[node name="Animation" type="AnimatedSprite2D" parent="Control"]
+visible = false
+position = Vector2(2.08165e-12, -150)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_aatqk")
+speed_scale = 0.4
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2, 2)
 
 [connection signal="timeout" from="Timer" to="Control" method="_on_timer_timeout"]
