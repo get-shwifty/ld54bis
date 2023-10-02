@@ -14,6 +14,8 @@ var state: STATE = STATE.MOVE
 # death
 @onready var death_timer : Timer = $DeathTimer
 
+@export var damage = 10
+
 # target
 var target
 
@@ -102,3 +104,8 @@ func _on_stun_timer_timeout():
 
 func get_reference_velocity():
 	return linear_velocity
+
+
+func _on_damage_box_area_entered(area):
+	var player = area.get_parent()
+	player.hit(damage)

@@ -53,4 +53,10 @@ func crush_game_over():
 		
 	game_over_message = 'Crushed by Darkness'
 	game_over()
-	
+
+func no_hp_game_over():
+	if is_game_over:
+		return
+		
+	game_over_message = 'Crushed by Ennemies'
+	game_over()
