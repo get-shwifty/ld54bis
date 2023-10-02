@@ -39,7 +39,7 @@ var elastic_drag = 200
 var elastic_power = 300
 var is_pulling = false
 var dash_bounce_vector = Vector2.ZERO
-var elastic_kick_speed = 300
+var elastic_kick_speed = 200
 
 const move_base_coef = 50
 @export var move_max_speed : float = 4
@@ -272,8 +272,10 @@ func elastic_movement():
 	if velocity.length() > elastic_kick_speed and elastic_velocity.length() != 0:
 		$SpritePersonnage.modulate = Color.BLUE_VIOLET
 		check_kick()
+		$HitBox.monitorable = false
 	else:
 		$SpritePersonnage.modulate = Color.WHITE
+		$HitBox.monitorable = true
 
 
 func drop_post(drop_position):
