@@ -122,6 +122,8 @@ func update_move_intention():
 
 func kick_state(delta):
 	var delta_time_kick = Time.get_ticks_msec() - kick_start_time
+	$kick/Explosion.visible = true
+	$kick/Explosion.play("default")
 	if delta_time_kick > KICK_TIME_MS:
 		state = STATE.MOVE
 		return

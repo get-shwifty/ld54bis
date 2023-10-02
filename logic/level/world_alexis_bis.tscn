@@ -21,7 +21,7 @@ script = ExtResource("1_4km63")
 [node name="BackgroundShaderRenderer" type="Sprite2D" parent="."]
 material = ExtResource("2_u8uj0")
 position = Vector2(1285, -248)
-scale = Vector2(22.0742, 9.14258)
+scale = Vector2(22.2299, 9.26957)
 texture = SubResource("NoiseTexture2D_k8rqp")
 script = ExtResource("3_xlog5")
 elastic_thickness = 3
@@ -40,7 +40,7 @@ points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 width = 2.0
 
 [node name="Character2" parent="." instance=ExtResource("4_70g86")]
-position = Vector2(284, 186)
+position = Vector2(300, 199)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
