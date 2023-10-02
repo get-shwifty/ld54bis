@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://vperkf507vv0"]
+[gd_scene load_steps=28 format=3 uid="uid://vperkf507vv0"]
 
 [ext_resource type="Script" path="res://logic/game/character2.gd" id="1_nk1li"]
 [ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="2_4m6gt"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dd5ke42dstfm6" path="res://art/game/explosion.png" id="5_21bu8"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="5_o61uw"]
 [ext_resource type="Texture2D" uid="uid://bav14l4wrhv1s" path="res://art/game/perso2.png" id="5_sgjgt"]
+[ext_resource type="AudioStream" uid="uid://mwg2ads5i0n0" path="res://audio/player_hit.ogg" id="8_tqgq4"]
+[ext_resource type="AudioStream" uid="uid://djqkij26yj5px" path="res://audio/kick_player.ogg" id="9_dktxm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qr6jb"]
 
@@ -190,5 +192,13 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_i1ruf")
 animation = &"walk"
 frame_progress = 0.899493
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="HitSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_tqgq4")
+
+[node name="KickSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_dktxm")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

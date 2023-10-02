@@ -4,7 +4,7 @@ class_name LevelManager
 const SCENE_POST = preload('res://logic/game/post.tscn');
 const SCENE_COIN = preload('res://logic/game/coin.tscn');
 
-@onready var enemy_spawner: EnemySpawner = $EnemySpawner
+@onready var enemy_spawner = $EnemySpawner
 @onready var elastic_node = $Elastic;
 
 # Called when the node enters the scene tree for the first time.
