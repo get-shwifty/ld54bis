@@ -63,4 +63,4 @@ func update_shaders():
 		for entity_mat in entity_mats:
 			entity_mat.set_shader_parameter("elastic_current_points_number", elastic_points_count);
 			entity_mat.set_shader_parameter("elastic_points", elastic_points);
-			entity_mat.set_shader_parameter("elastic_thickness", elastic_thickness);
+			entity_mat.set_shader_parameter("current_elastic_tension", elastic_tension);
