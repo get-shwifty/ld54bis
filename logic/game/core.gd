@@ -1,5 +1,6 @@
 extends Node2D
 
+var elastic_vector = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

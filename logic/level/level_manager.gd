@@ -12,6 +12,7 @@ func _ready():
 	GameManager.level_manager = self;
 	
 	GameManager.elastic.add($Character2)
+	GameManager.elastic.add($Entities/Core)
 	for c in $Entities/Posts.get_children():
 		GameManager.elastic.add(c)
 
