@@ -1,9 +1,10 @@
 extends Node2D
+class_name LevelManager
 
 const SCENE_POST = preload('res://logic/game/post.tscn');
 const SCENE_COIN = preload('res://logic/game/coin.tscn');
 
-@onready var enemy_spawner = $EnemySpawner as EnemySpawner;
+@onready var enemy_spawner: EnemySpawner = $EnemySpawner
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,4 +35,4 @@ func spawn_coin(spawn_position: Vector2, spawn_linear_velocity: Vector2):
 func _on_enemy_spawn_timer_timeout():
 	var enemy = enemy_spawner.spawn_enemy()
 	$Entities/Enemies.add_child(enemy)
-	enemy.global_position = enemy.position;
+	enemy.global_position = enemy.position

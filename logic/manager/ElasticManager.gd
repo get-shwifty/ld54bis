@@ -14,6 +14,9 @@ var resistance = 0
 func add(obj):
 	object_inside.append(obj)
 
+func remove(obj):
+	object_inside.remove_at(object_inside.find(obj))
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.elastic = self

@@ -4,8 +4,8 @@ const DEBUG_UNLIMITED_MONEY = true;
 
 
 var elastic: Elastic
-var player;
-var level_manager;
+var player
+var level_manager: LevelManager
 
 var coins : int = 0;
 const COST_POST = 5;

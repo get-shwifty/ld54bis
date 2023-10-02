@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0m0xh38p6b7f"]
+[gd_scene load_steps=8 format=3 uid="uid://c0m0xh38p6b7f"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_dfdfb"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="2_fd1xy"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="5_r2ufr"]
-[ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="6_35swr"]
+[ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
+[ext_resource type="PackedScene" uid="uid://cr5dttaeduat" path="res://logic/game/enemy/dumb.tscn" id="7_kwkrj"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_dfdfb")
@@ -53,10 +54,15 @@ fit_content = true
 autowrap_mode = 0
 script = ExtResource("5_r2ufr")
 
-[node name="EnemySpawner" parent="." instance=ExtResource("6_35swr")]
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("6_fdeo5")
 
-[node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+[node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
+wait_time = 2.0
+autostart = true
+
+[node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
+position = Vector2(303, 92)
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -66,4 +72,7 @@ wait_time = 5.0
 
 [node name="Coins" type="Node2D" parent="Entities"]
 
-[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[node name="Dumb" parent="." instance=ExtResource("7_kwkrj")]
+position = Vector2(340, 263)
+
+[connection signal="timeout" from="EnemySpawner/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
