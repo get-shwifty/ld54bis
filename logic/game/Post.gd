@@ -9,6 +9,9 @@ var elastic_vector = Vector2.ZERO
 var mobile = false
 var unload = false
 
+var last_pos = Vector2.INF
+var last_mov = Vector2.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	lifetime.start();
@@ -33,7 +36,15 @@ func _process(delta):
 	if mobile:
 		visible = false
 		var dir = elastic_vector.normalized() * 5
-		global_position = Vector2(global_position.x + dir.x, global_position.y + dir.y)
+		var new_pos = Vector2(global_position.x + dir.x, global_position.y + dir.y)
+		var new_mov = new_pos - global_position
+		
+		if last_mov != Vector2.ZERO and new_mov.dot(last_mov) < 0:
+			queue_free()
+			return
+		
+		global_position = new_pos
+		last_mov = new_mov
 
 
 func get_shader_materials():

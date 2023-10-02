@@ -6,6 +6,7 @@ const DEBUG_UNLIMITED_MONEY = true;
 var elastic: Elastic
 var player
 var level_manager
+var core
 var score_holder
 var score_bonus_scene = preload("res://ui/bonus_points.tscn")
 

@@ -275,7 +275,7 @@ func elastic_movement():
 
 
 func drop_post(drop_position):
-	if post_nb > 0:
+	if post_nb > 0 and not GameManager.core.is_off:
 		GameManager.level_manager.drop_post(drop_position)
 		post_nb -= 1
 		if $PostTimer.is_stopped():

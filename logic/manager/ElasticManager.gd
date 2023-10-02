@@ -13,6 +13,7 @@ var start_tension = 500
 var object_inside = []
 var size = 0
 var resistance = 0
+var post_count = 0
 
 var last_know_convex_hull = [];
 
@@ -41,10 +42,13 @@ func _process(delta):
 	
 	var positions = PackedVector2Array()
 	var to_del = []
+	post_count = 0
 	for obj in object_inside:
 		if not is_instance_valid(obj):
 			to_del.append(obj)
 			continue
+		if 'mobile' in obj:
+			post_count += 1
 		positions.append(obj.global_position)
 		
 	for del in to_del:
