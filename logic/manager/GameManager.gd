@@ -20,12 +20,15 @@ var coins : int = 0;
 const COST_POST = 5;
 
 var score = 0
+var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 	
 func _process(delta):
+	if not is_game_over and not is_loading:
+		time += delta
 	
 	if is_game_over and can_restart and Input.is_action_just_pressed("ui_accept"):
 		restart()
@@ -70,6 +73,7 @@ func restart():
 	is_game_over = false
 	is_loading = false
 	score = 0
+	time = 0
 	get_tree().change_scene_to_file("res://logic/level/world_alexis.tscn")
 	
 func add_score(source: Node2D, bonus_score):

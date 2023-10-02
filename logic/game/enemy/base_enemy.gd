@@ -5,8 +5,8 @@ enum STATE { MOVE, STUN }
 var state: STATE = STATE.MOVE
 
 # move
-@export var FORCE_SPEED = 200
-@export var MAX_SPEED = 50
+@export var force_speed = 10
+@export var max_speed = 100
 
 # stun
 @onready var stun_timer : Timer = $StunTimer
@@ -63,6 +63,10 @@ func receive_kick(action_idx, kick_force):
 	
 	linear_velocity = Vector2.ZERO
 	apply_impulse(kick_force)
+	hook_stun()
+
+func hook_stun():
+	pass
 
 func die():
 	GameManager.add_score(self, 500)
@@ -78,11 +82,7 @@ func _physics_process(delta):
 	$InShadowAnimation.visible = not is_inside
 	match state:
 		STATE.MOVE:
-			var motion_intention = target.global_position - global_position
-			motion_intention = motion_intention.normalized()
-			var err = max(0, MAX_SPEED - vspeed)
-			apply_force(motion_intention * err * FORCE_SPEED)
-			try_damage_player()
+			move_process(delta)
 		STATE.STUN:
 			# going in/out
 			if elastic_vector != Vector2.ZERO:
@@ -126,6 +126,9 @@ func get_shader_materials():
 	return [$Animation.get_material(), $InShadowAnimation.get_material()]
 	
 func try_damage_player():
+	if state == STATE.STUN:
+		return
+	
 	if not can_damage and $DamageTimer.is_stopped():
 		$DamageTimer.start()
 		
@@ -140,3 +143,14 @@ func try_damage_player():
 
 func _on_damage_timer_timeout():
 	can_damage = true
+
+func get_force_to(target_position):
+	var speed = linear_velocity.length()
+	var motion_intention = target_position - global_position
+	motion_intention = motion_intention.normalized()
+	var err = max(0, max_speed - speed)
+	return motion_intention * err * force_speed
+
+func move_process(delta):
+	apply_force(get_force_to(target.global_position))
+	try_damage_player()
