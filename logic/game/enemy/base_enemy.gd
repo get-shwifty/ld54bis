@@ -48,7 +48,7 @@ func receive_kick(kick_force):
 	apply_impulse(kick_force)
 
 func die():
-	is_dead = true;
+	is_dead = true
 	death_timer.start()
 	
 func _physics_process(delta):
@@ -91,3 +91,6 @@ func _on_stun_timer_timeout():
 	state = STATE.MOVE
 	$Sprite2D.self_modulate = Color.WHITE
 	GameManager.elastic.remove(self)
+
+func get_reference_velocity():
+	return linear_velocity
