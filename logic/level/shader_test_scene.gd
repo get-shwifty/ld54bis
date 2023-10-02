@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@export var elastic_thickness = 10;
+@export var elastic_tension = 0.5;
 
 func _process(delta):
 	send_info_to_shader()
@@ -15,11 +15,11 @@ func send_info_to_shader():
 
 	$ShaderRenderer.get_material().set_shader_parameter("elastic_current_points_number", count);
 	$ShaderRenderer.get_material().set_shader_parameter("elastic_points", elastic_points);
-	$ShaderRenderer.get_material().set_shader_parameter("elastic_thickness", elastic_thickness);
+	$ShaderRenderer.get_material().set_shader_parameter("current_elastic_tension", elastic_tension);
 	
 	for c in $points.get_children():
 		var entity_mat = c.get_material();
 		if entity_mat != null:
 			entity_mat.set_shader_parameter("elastic_current_points_number", count);
 			entity_mat.set_shader_parameter("elastic_points", elastic_points);
-			entity_mat.set_shader_parameter("elastic_thickness", elastic_thickness);
+			entity_mat.set_shader_parameter("current_elastic_tension", elastic_tension);

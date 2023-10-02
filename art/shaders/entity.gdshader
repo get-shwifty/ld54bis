@@ -6,8 +6,11 @@ varying vec2 world_position;
 const int ELASTIC_MAX_POINTS = 30;
 uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
-uniform float elastic_thickness = 10;
+uniform float current_elastic_tension = 1.0;
+uniform float current_elastic_tension_boost = 0.0;
 
+uniform float common_max_elastic_thickness = 20;
+uniform float common_min_elastic_thickness = 1;
 uniform float common_elastic_sdf_offset = 45.0;
 
 uniform bool enable_chromatic_distortion = false;
@@ -59,7 +62,11 @@ vec4 chromatic_distortion (sampler2D txture, vec2 uv)
 	return final_color;
 }
 
-
+float get_current_elastic_thickness()
+{
+	float tension = clamp(current_elastic_tension, 0.0, 1.0);
+	return mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+}
 
 void fragment() {
 	float elastic_distance = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
@@ -76,7 +83,7 @@ void fragment() {
 	float waistline = 0.5;
 	if (UV.y > waistline)
 	{
-		if (elastic_distance > - elastic_thickness && elastic_distance < elastic_thickness)
+		if (elastic_distance > 0.0 && elastic_distance < get_current_elastic_thickness())
 		{
 			final_color.rgb = base_elastic_color;
 		}
