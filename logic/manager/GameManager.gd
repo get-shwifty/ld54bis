@@ -4,8 +4,8 @@ const DEBUG_UNLIMITED_MONEY = true;
 
 
 var elastic: Elastic
-var player;
-var level_manager;
+var player
+var level_manager: LevelManager
 
 var is_game_over = false
 var is_loading = false

@@ -15,7 +15,7 @@ var orientation: Vector2 = Vector2.ZERO
 @onready var kick_node_pos = kick_node.position
 var kick_direction: Vector2 = Vector2.ZERO
 var kick_start_time = 0
-@export var KICK_TIME_MS = 100
+@export var KICK_TIME_MS = 60
 @export var KICK_FORCE = 300
 @export var KICK_COEFF = 0.3
 
@@ -38,8 +38,8 @@ var is_pulling = false
 const move_base_coef = 50
 @export var move_max_speed : float = 4
 
-const kick_force_base_coef = 50
-@export var kick_force : float = 2
+
+@export var kick_force : float = 1000
 
 @export var drop_post_offset: float = 1
 
@@ -143,8 +143,8 @@ func kick():
 		kick_start_time = Time.get_ticks_msec()
 		var enemies_to_kick = $kick/KickArea.get_overlapping_bodies()
 		for enemy in enemies_to_kick:
-			enemy = enemy as Enemy
-			enemy.receive_kick(orientation * kick_force_base_coef * kick_force)
+			enemy = enemy as BaseEnemy
+			enemy.receive_kick(orientation * kick_force)
 
 func dash_state(delta):
 	var delta_time_dash = Time.get_ticks_msec() - dash_start_time

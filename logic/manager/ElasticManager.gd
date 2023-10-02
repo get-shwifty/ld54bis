@@ -20,12 +20,14 @@ var last_know_convex_hull = [];
 func add(obj):
 	object_inside.append(obj)
 
+func remove(obj):
+	object_inside.remove_at(object_inside.find(obj))
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.elastic = self
 	add(player)
 #	add(light)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
