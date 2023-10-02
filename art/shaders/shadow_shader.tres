@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://qnuosh47sabh"]
+
+[ext_resource type="Shader" path="res://art/shaders/entity.gdshader" id="1_0axmk"]
+
+[resource]
+shader = ExtResource("1_0axmk")
+shader_parameter/elastic_points = null
+shader_parameter/elastic_current_points_number = null
+shader_parameter/current_elastic_tension = 1.0
+shader_parameter/current_elastic_tension_boost = 0.0
+shader_parameter/common_max_elastic_thickness = 20.0
+shader_parameter/common_min_elastic_thickness = 1.0
+shader_parameter/common_elastic_sdf_offset = 12.0
+shader_parameter/enable_chromatic_distortion = false
+shader_parameter/waistline = 0.0

@@ -12,6 +12,7 @@ func _ready():
 	GameManager.level_manager = self;
 	
 	GameManager.elastic.add($Character2)
+	GameManager.elastic.add($Entities/Core)
 	for c in $Entities/Posts.get_children():
 		GameManager.elastic.add(c)
 
@@ -51,12 +52,13 @@ func update_shaders():
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_current_points_number", elastic_points_count);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_points", elastic_points);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("current_elastic_tension", elastic_tension);
-	$BackgroundShaderRenderer.get_material().set_shader_parameter("core_position",$Camera2D.get_screen_center_position());
+	$BackgroundShaderRenderer.get_material().set_shader_parameter("core_position",$Entities/Core.get_core_position());
 	
 	var entities = []
 	entities.append_array($Entities/Posts.get_children());
 	entities.append_array($Entities/Enemies.get_children());
 	entities.append($Character2);
+	entities.append($Entities/Core);
 	
 	for c in entities:
 		var entity_mats = c.get_shader_materials();
