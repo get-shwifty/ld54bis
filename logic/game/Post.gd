@@ -32,5 +32,8 @@ func _process(delta):
 func get_shader_material():
 	return $Sprite2D.get_material();
 
+func get_reference_velocity():
+	return Vector2.ZERO;
+
 func _on_lifetime_timer_timeout():
 	mobile = true;

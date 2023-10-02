@@ -82,6 +82,7 @@ func _physics_process(delta):
 	
 func hit(dmg):
 	hp -= dmg
+	$HitSoundPlayer.play(0.0);
 	if hp <= 0:
 		GameManager.game_over()
 
@@ -135,6 +136,7 @@ func kick_state(delta):
 func kick():
 	if state == STATE.MOVE:
 		state = STATE.KICK
+		$KickSoundPlayer.play(0.0)
 		kick_direction = orientation
 		kick_start_time = Time.get_ticks_msec()
 		var enemies_to_kick = $kick/KickArea.get_overlapping_bodies()
@@ -215,6 +217,8 @@ func elastic_movement():
 func get_shader_material():
 	return $Sprite2D.get_material();
 
+func get_reference_velocity():
+	return velocity;
 
 func _on_hit_box_area_entered(area):
 	hit(100)
