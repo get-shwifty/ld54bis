@@ -69,7 +69,8 @@ func _physics_process(delta):
 	
 	var is_inside = GameManager.elastic.is_inside(global_position)
 	$Ombre.visible = is_inside
-	
+	$Animation.visible = is_inside
+	$InShadowAnimation.visible = not is_inside
 	match state:
 		STATE.MOVE:
 			var motion_intention = target.global_position - global_position
@@ -113,8 +114,8 @@ func _on_stun_timer_timeout():
 func get_reference_velocity():
 	return linear_velocity
 
-func get_shader_material():
-	return $Animation.get_material()
+func get_shader_materials():
+	return [$Animation.get_material(), $InShadowAnimation.get_material()]
 	
 func try_damage_player():
 	if not can_damage and $DamageTimer.is_stopped():

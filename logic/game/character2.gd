@@ -18,7 +18,7 @@ var orientation: Vector2 = Vector2.ZERO
 var kick_direction: Vector2 = Vector2.ZERO
 var kick_start_time = 0
 @export var KICK_TIME_MS = 60
-@export var KICK_FORCE = 300
+@export var KICK_FORCE = -200
 @export var KICK_COEFF = 0.3
 
 # dash
@@ -274,8 +274,8 @@ func drop_post(drop_position):
 		if $PostTimer.is_stopped():
 			$PostTimer.start()
 
-func get_shader_material():
-	return $Sprite2D.get_material();
+func get_shader_materials():
+	return [$Sprite2D.get_material()];
 
 func get_reference_velocity():
 	return velocity;
