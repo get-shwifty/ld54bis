@@ -27,7 +27,7 @@ var after_images_pos = []
 @export var DASH_FORCE = 1000
 @export var DASH_MAX_SPEED = 10
 @export var DASH_COEFF = 0.2
-@export var DASH_COOLDOWN_MS = 1500
+@export var DASH_COOLDOWN_MS = 100
 
 # elastic
 var elastic_vector = Vector2.ZERO
@@ -101,8 +101,8 @@ func check_next_state():
 			next_state = STATE.DASH
 
 func process_orientation(delta):
-	var mouse_pos : Vector2 = get_global_mouse_position()
-	orientation = (mouse_pos - position).normalized()
+#	var mouse_pos : Vector2 = get_global_mouse_position()
+	orientation = move_intention
 	var angle = orientation.angle()
 	kick_node.position = kick_node_pos.rotated(angle)
 	kick_node.rotation = angle
@@ -112,7 +112,7 @@ func get_move_velocity():
 
 func update_move_intention():
 	move_intention = Vector2.ZERO
-
+	
 	if Input.is_action_pressed("game_right"):
 		move_intention.x += 1
 		$SpritePersonnage.flip_h = true
@@ -123,8 +123,13 @@ func update_move_intention():
 		move_intention.y += 1
 	if Input.is_action_pressed("game_up"):
 		move_intention.y -= 1
-
-	move_intention = move_intention.normalized()
+	
+	move_intention = Input.get_vector("game_left", "game_right", "game_up", "game_down")
+	if move_intention.x < 0:
+		$SpritePersonnage.flip_h = false
+	else:
+		$SpritePersonnage.flip_h = true
+#	move_intention = move_intention.normalized()
 
 func kick_state(delta):
 	var delta_time_kick = Time.get_ticks_msec() - kick_start_time

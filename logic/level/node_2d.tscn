@@ -35,7 +35,6 @@ points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_ng1sg")]
 position = Vector2(399, 230)
-DASH_COOLDOWN_MS = 100
 move_max_speed = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
