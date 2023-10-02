@@ -43,15 +43,14 @@ func _on_enemy_spawn_timer_timeout():
 	enemy.global_position = enemy.position;
 
 func update_shaders():
-	#should be controlled by elastic tension
-	var elastic_thickness = 3;
+	var elastic_tension = GameManager.elastic.resistance;
 	
 	var elastic_points_count : int = elastic_node.last_know_convex_hull.size();
 	var elastic_points = elastic_node.last_know_convex_hull;
 
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_current_points_number", elastic_points_count);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_points", elastic_points);
-	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_thickness", elastic_thickness);
+	$BackgroundShaderRenderer.get_material().set_shader_parameter("current_elastic_tension", elastic_tension);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("core_position",$Camera2D.get_screen_center_position());
 	
 	var entities = []
@@ -63,4 +62,4 @@ func update_shaders():
 		var entity_mat = c.get_shader_material();
 		entity_mat.set_shader_parameter("elastic_current_points_number", elastic_points_count);
 		entity_mat.set_shader_parameter("elastic_points", elastic_points);
-		entity_mat.set_shader_parameter("elastic_thickness", elastic_thickness);
+		entity_mat.set_shader_parameter("current_elastic_tension", elastic_tension);
