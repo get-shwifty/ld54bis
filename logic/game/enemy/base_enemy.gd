@@ -40,7 +40,7 @@ func _ready():
 	$Animation.play("default")
 
 func receive_kick(action_idx, kick_force):
-	if cur_action_index == action_idx:
+	if is_dead or cur_action_index == action_idx:
 		return
 	else:
 		cur_action_index = action_idx
@@ -53,6 +53,7 @@ func receive_kick(action_idx, kick_force):
 	state = STATE.STUN
 	GameManager.add_score(self, 100)
 	$DamageBox.monitoring = false
+	collision_mask = 4
 	stun_timer.start()
 	
 	$Animation.self_modulate = Color.WEB_GREEN
@@ -112,6 +113,7 @@ func _on_death_timer_timeout():
 func _on_stun_timer_timeout():
 	state = STATE.MOVE
 	$DamageBox.monitoring = true
+	collision_mask = 7
 	$Animation.self_modulate = Color.WHITE
 	GameManager.elastic.remove(self)
 
