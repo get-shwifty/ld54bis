@@ -15,7 +15,7 @@ var orientation: Vector2 = Vector2.ZERO
 @onready var kick_node_pos = kick_node.position
 var kick_direction: Vector2 = Vector2.ZERO
 var kick_start_time = 0
-@export var KICK_TIME_MS = 100
+@export var KICK_TIME_MS = 60
 @export var KICK_FORCE = 300
 @export var KICK_COEFF = 0.3
 

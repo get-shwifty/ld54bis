@@ -28,8 +28,7 @@ func _ready():
 	add(player)
 #	add(light)
 	for c in posts.get_children():
-		object_inside.append(c)
-	pass # Replace with function body.
+		add(c)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
