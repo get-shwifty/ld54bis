@@ -1,15 +1,16 @@
 extends Node
 class_name EnemySpawner
 
+@export var max_difficulty_time = 600
 
-@export var max_concurent_spawns = 10
-@export var ennemy1_weight = 0
-@export var ennemy2_weight = 50
-@export var ennemy3_weight = 0
+@export var max_concurent_spawns = 4
+@export var ennemy1_weight = 9
+@export var ennemy2_weight = 6
+@export var ennemy3_weight = 3
 
 @onready var ennemy1 = preload("res://logic/game/enemy/dumb.tscn")
 @onready var ennemy2 = preload("res://logic/game/enemy/fantom.tscn")
-@onready var ennemy3 = preload("res://logic/game/enemy/dumb.tscn")
+@onready var ennemy3 = preload("res://logic/game/enemy/charger.tscn")
 
 
 
@@ -44,8 +45,8 @@ func _process(delta):
 	pass
 	
 func get_random_diff(time):
-	if time > 600:
-		time = 600
+	if time > max_difficulty_time:
+		time = max_difficulty_time
 	time += randf() - 0.5
 	var diff = (cos(time) * 160 + time) / 60
 	diff = maxf(1, diff)

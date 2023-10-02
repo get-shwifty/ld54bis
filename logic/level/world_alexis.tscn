@@ -56,7 +56,6 @@ script = ExtResource("7_qf5y7")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("6_fdeo5")
-ennemy1_weight = 9
 ennemy2_weight = 3
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
