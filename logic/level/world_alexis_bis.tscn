@@ -16,7 +16,7 @@
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k8rqp"]
 noise = SubResource("FastNoiseLite_08r7k")
 
-[node name="World" type="Node2D"]
+[node name="World2" type="Node2D"]
 script = ExtResource("1_4km63")
 
 [node name="BackgroundShaderRenderer" type="Sprite2D" parent="."]
