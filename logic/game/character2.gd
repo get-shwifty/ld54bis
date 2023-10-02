@@ -39,6 +39,7 @@ var elastic_drag = 200
 var elastic_power = 300
 var is_pulling = false
 var dash_bounce_vector = Vector2.ZERO
+var elastic_kick_speed = 300
 
 const move_base_coef = 50
 @export var move_max_speed : float = 4
@@ -96,6 +97,10 @@ func hit(dmg):
 	if hp <= 0:
 		GameManager.game_over()
 
+func set_state(new_state):
+	state = new_state
+	action_idx += 1
+
 func check_next_state():
 	if Input.is_action_just_pressed("game_kick"):
 		next_state = STATE.KICK
@@ -147,7 +152,7 @@ func kick_state(delta):
 	$kick/Explosion.visible = true
 	$kick/Explosion.play("default")
 	if delta_time_kick > KICK_TIME_MS:
-		state = STATE.MOVE
+		set_state(STATE.MOVE)
 		return
 	elif delta_time_kick > (KICK_TIME_MS - NEXT_STATE_TIMING_MS):
 		check_next_state()
@@ -159,8 +164,7 @@ func kick_state(delta):
 
 func kick():
 	if state == STATE.MOVE:
-		state = STATE.KICK
-		action_idx += 1
+		set_state(STATE.KICK)
 		$KickSoundPlayer.play(0.0)
 		kick_direction = orientation
 		kick_start_time = Time.get_ticks_msec()
@@ -169,7 +173,7 @@ func kick():
 func dash_state(delta):
 	var delta_time_dash = Time.get_ticks_msec() - dash_start_time
 	if delta_time_dash > DASH_TIME_MS:
-		state = STATE.MOVE
+		set_state(STATE.MOVE)
 		return
 	elif delta_time_dash > (DASH_TIME_MS - NEXT_STATE_TIMING_MS):
 		check_next_state()
@@ -184,8 +188,7 @@ func dash_state(delta):
 
 func dash():
 	if state == STATE.MOVE:
-		state = STATE.DASH
-		action_idx += 1
+		set_state(STATE.DASH)
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
 		after_images_pos.clear()
@@ -237,7 +240,7 @@ func elastic_movement():
 #				elastic_velocity *= 5
 				elastic_velocity += dash_bounce_vector * 3
 				dash_bounce_vector = Vector2.ZERO
-				state = STATE.MOVE
+				set_state(STATE.MOVE)
 			var n_dot = (velocity+elastic_velocity).dot(old_vel)
 #			print(n_dot)
 #				end_pull()
@@ -257,8 +260,12 @@ func elastic_movement():
 		end_pull()
 
 	velocity += elastic_velocity
-	if velocity.length() > max_total_speed:
-		velocity = velocity.normalized() * max_total_speed
+	velocity = velocity.limit_length(max_total_speed)
+	if velocity.length() > elastic_kick_speed and elastic_velocity.length() != 0:
+		$SpritePersonnage.modulate = Color.ORANGE_RED
+		check_kick()
+	else:
+		$SpritePersonnage.modulate = Color.WHITE
 
 func get_shader_material():
 	return $Sprite2D.get_material();
