@@ -56,6 +56,7 @@ func update_shaders():
 	
 	var entities = []
 	entities.append_array($Entities/Posts.get_children());
+	entities.append_array($Entities/Enemies.get_children());
 	entities.append($Character2);
 	
 	for c in entities:
