@@ -14,6 +14,8 @@ var state: STATE = STATE.MOVE
 # death
 @onready var death_timer : Timer = $DeathTimer
 
+@export var damage = 10
+
 # target
 var target
 
@@ -30,18 +32,27 @@ var going_out = false
 var elastic_decel = 50
 var elastic_accel = 100
 
+var cur_action_index = -1
+
 func _ready():
 	target = GameManager.player
+	$Animation.play("default")
 
-func receive_kick(kick_force):
+func receive_kick(action_idx, kick_force):
+	if cur_action_index == action_idx:
+		return
+	else:
+		cur_action_index = action_idx
+
 	if state == STATE.STUN:
+		apply_impulse(kick_force/2)
 		die()
 		return
 
 	state = STATE.STUN
 	stun_timer.start()
 	
-	$Sprite2D.self_modulate = Color.WEB_GREEN
+	$Animation.self_modulate = Color.WEB_GREEN
 	GameManager.elastic.add(self)
 	
 	linear_velocity = Vector2.ZERO
@@ -89,8 +100,13 @@ func _on_death_timer_timeout():
 
 func _on_stun_timer_timeout():
 	state = STATE.MOVE
-	$Sprite2D.self_modulate = Color.WHITE
+	$Animation.self_modulate = Color.WHITE
 	GameManager.elastic.remove(self)
 
 func get_reference_velocity():
 	return linear_velocity
+
+
+func _on_damage_box_area_entered(area):
+	var player = area.get_parent()
+	player.hit(damage)

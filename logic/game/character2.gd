@@ -6,6 +6,8 @@ var state: STATE = STATE.MOVE
 var next_state: STATE = STATE.MOVE
 @export var NEXT_STATE_TIMING_MS = 100
 
+var action_idx = 0
+
 # move
 var move_intention: Vector2 = Vector2.ZERO
 var orientation: Vector2 = Vector2.ZERO
@@ -30,11 +32,13 @@ var after_images_pos = []
 @export var DASH_COOLDOWN_MS = 100
 
 # elastic
+@export var max_total_speed = 2000
 var elastic_vector = Vector2.ZERO
 var elastic_velocity = Vector2.ZERO
 var elastic_drag = 200
 var elastic_power = 300
 var is_pulling = false
+var dash_bounce_vector = Vector2.ZERO
 
 const move_base_coef = 50
 @export var move_max_speed : float = 4
@@ -77,7 +81,7 @@ func _physics_process(delta):
 			kick_state(delta)
 		STATE.DASH:
 			dash_state(delta)
-	
+
 	elastic_movement()
 	move_and_slide()
 #	print(after_images_pos)
@@ -90,7 +94,7 @@ func hit(dmg):
 	hp -= dmg
 	$HitSoundPlayer.play(0.0);
 	if hp <= 0:
-		GameManager.game_over()
+		GameManager.no_hp_game_over()
 
 func check_next_state():
 	if Input.is_action_just_pressed("game_kick"):
@@ -131,6 +135,13 @@ func update_move_intention():
 		$SpritePersonnage.flip_h = true
 #	move_intention = move_intention.normalized()
 
+func check_kick():
+	var enemies_to_kick = $kick/KickArea.get_overlapping_bodies()
+	for enemy in enemies_to_kick:
+		enemy = enemy as BaseEnemy
+		enemy.receive_kick(action_idx, orientation * kick_force)
+	
+
 func kick_state(delta):
 	var delta_time_kick = Time.get_ticks_msec() - kick_start_time
 	$kick/Explosion.visible = true
@@ -149,13 +160,11 @@ func kick_state(delta):
 func kick():
 	if state == STATE.MOVE:
 		state = STATE.KICK
+		action_idx += 1
 		$KickSoundPlayer.play(0.0)
 		kick_direction = orientation
 		kick_start_time = Time.get_ticks_msec()
-		var enemies_to_kick = $kick/KickArea.get_overlapping_bodies()
-		for enemy in enemies_to_kick:
-			enemy = enemy as BaseEnemy
-			enemy.receive_kick(orientation * kick_force)
+		check_kick()
 
 func dash_state(delta):
 	var delta_time_dash = Time.get_ticks_msec() - dash_start_time
@@ -170,11 +179,13 @@ func dash_state(delta):
 	velocity = dash_direction * coeff * DASH_FORCE
 	if velocity.length() > (DASH_MAX_SPEED / delta):
 		velocity = velocity.normalized() * (DASH_MAX_SPEED / delta)
+	check_kick()
 
 
 func dash():
 	if state == STATE.MOVE:
 		state = STATE.DASH
+		action_idx += 1
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
 		after_images_pos.clear()
@@ -207,6 +218,10 @@ func elastic_movement():
 
 		if velocity != Vector2.ZERO && dot < 0:
 #			print('manual pull')
+			if state == STATE.DASH and dash_bounce_vector == Vector2.ZERO:
+				var delta_time_dash = Time.get_ticks_msec() - dash_start_time
+				var coeff = float(delta_time_dash) / DASH_TIME_MS
+				dash_bounce_vector = -velocity * (1-coeff)
 			is_pulling = true
 			var velocity_counter = -velocity * resistance
 			var elastic_counter = elastic_vector.normalized() * m_speed
@@ -217,7 +232,13 @@ func elastic_movement():
 			var min_speedup = max(resistance, 0.5)
 			var old_elastic_vel = elastic_velocity
 			elastic_velocity += elastic_vector * elastic_power * (min_speedup)
-			var n_dot = (velocity + elastic_velocity).dot(old_vel)
+			if dash_bounce_vector != Vector2.ZERO:
+				print('add force')
+#				elastic_velocity *= 5
+				elastic_velocity += dash_bounce_vector * 3
+				dash_bounce_vector = Vector2.ZERO
+				state = STATE.MOVE
+			var n_dot = (velocity+elastic_velocity).dot(old_vel)
 #			print(n_dot)
 #				end_pull()
 		
@@ -236,6 +257,8 @@ func elastic_movement():
 		end_pull()
 
 	velocity += elastic_velocity
+	if velocity.length() > max_total_speed:
+		velocity = velocity.normalized() * max_total_speed
 
 func get_shader_material():
 	return $Sprite2D.get_material();
