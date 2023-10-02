@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_cce3q"]
 [ext_resource type="Script" path="res://logic/level/shader_test_tool.gd" id="3_xlog5"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_70g86"]
-[ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_wjf0d"]
+[ext_resource type="PackedScene" path="res://logic/game/elastic.tscn" id="4_wjf0d"]
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="6_kym3s"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_undaf"]
 [ext_resource type="PackedScene" uid="uid://c80j56khijrsj" path="res://logic/game/coin.tscn" id="9_7qrob"]
-[ext_resource type="PackedScene" path="res://logic/game/borders.tscn" id="10_gm0rg"]
+[ext_resource type="PackedScene" uid="uid://dv2rasry2pocb" path="res://logic/game/borders.tscn" id="10_gm0rg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
