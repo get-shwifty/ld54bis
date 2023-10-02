@@ -54,6 +54,10 @@ animations = [{
 
 [node name="Dumb" instance=ExtResource("1_rvm1n")]
 script = ExtResource("2_57r0j")
+stop_at = 40
+attack_at = 50
+attack_duration = 250
+attack_cooldown = 2000
 
 [node name="Animation" parent="." index="1"]
 position = Vector2(3, -1)
