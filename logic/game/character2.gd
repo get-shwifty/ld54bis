@@ -22,6 +22,7 @@ var kick_start_time = 0
 # dash
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_start_time = -1e6
+var after_images_pos = []
 @export var DASH_TIME_MS = 200
 @export var DASH_FORCE = 1000
 @export var DASH_MAX_SPEED = 10
@@ -59,9 +60,9 @@ func _physics_process(delta):
 		STATE.MOVE:
 			velocity = get_move_velocity()
 			if velocity == Vector2.ZERO:
-				$AnimatedSprite2D.play("iddle")
+				$SpritePersonnage.play("iddle")
 			else:
-				$AnimatedSprite2D.play("walk")
+				$SpritePersonnage.play("walk")
 			check_next_state()
 			match next_state:
 				STATE.KICK:
@@ -79,6 +80,11 @@ func _physics_process(delta):
 	
 	elastic_movement()
 	move_and_slide()
+#	print(after_images_pos)
+	for i in range(len(after_images_pos)):
+		var child = $AfterImages.get_children()[i]
+		child.global_position = after_images_pos[i]
+		child.self_modulate.a *= 0.8
 	
 func hit(dmg):
 	hp -= dmg
@@ -108,10 +114,10 @@ func update_move_intention():
 
 	if Input.is_action_pressed("game_right"):
 		move_intention.x += 1
-		$AnimatedSprite2D.flip_h = true
+		$SpritePersonnage.flip_h = true
 	if Input.is_action_pressed("game_left"):
 		move_intention.x -= 1
-		$AnimatedSprite2D.flip_h = false
+		$SpritePersonnage.flip_h = false
 	if Input.is_action_pressed("game_down"):
 		move_intention.y += 1
 	if Input.is_action_pressed("game_up"):
@@ -158,12 +164,22 @@ func dash_state(delta):
 	if velocity.length() > (DASH_MAX_SPEED / delta):
 		velocity = velocity.normalized() * (DASH_MAX_SPEED / delta)
 
+
 func dash():
 	if state == STATE.MOVE:
 		state = STATE.DASH
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
+		after_images_pos.clear()
+		for after_image in $AfterImages.get_children():
+			after_image.visible = true
+			after_image.global_position = global_position
+			after_image.self_modulate.a = 0.8
+			after_images_pos.append(global_position)
+			await get_tree().create_timer(0.05).timeout
+		var children = $AfterImages.get_children()
 
+		
 func end_pull():
 	if is_pulling:
 		pass
@@ -187,14 +203,14 @@ func elastic_movement():
 			is_pulling = true
 			var velocity_counter = -velocity * resistance
 			var elastic_counter = elastic_vector.normalized() * m_speed
-			elastic_velocity = (1-q_res)*velocity_counter + q_res*elastic_counter
+			elastic_velocity = (1 - q_res) * velocity_counter + q_res * elastic_counter
 		else:
 #			print('go out')
 			mark_as_out = true
 			var min_speedup = max(resistance, 0.5)
 			var old_elastic_vel = elastic_velocity
 			elastic_velocity += elastic_vector * elastic_power * (min_speedup)
-			var n_dot = (velocity+elastic_velocity).dot(old_vel)
+			var n_dot = (velocity + elastic_velocity).dot(old_vel)
 #			print(n_dot)
 #				end_pull()
 		
@@ -204,10 +220,10 @@ func elastic_movement():
 #			print('rebounce drag')
 			mark_as_out = false
 			is_pulling = true
-			elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length()-elastic_drag, 0))
+			elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length() - elastic_drag, 0))
 	else:
 #		print('empty drag')
-		elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length()-elastic_drag, 0))
+		elastic_velocity = elastic_velocity.normalized() * (max(elastic_velocity.length() - elastic_drag, 0))
 	
 	if mark_as_out:
 		end_pull()
