@@ -6,6 +6,8 @@ var state: STATE = STATE.MOVE
 var next_state: STATE = STATE.MOVE
 @export var NEXT_STATE_TIMING_MS = 100
 
+var action_idx = 0
+
 # move
 var move_intention: Vector2 = Vector2.ZERO
 var orientation: Vector2 = Vector2.ZERO
@@ -79,7 +81,7 @@ func _physics_process(delta):
 			kick_state(delta)
 		STATE.DASH:
 			dash_state(delta)
-	
+
 	elastic_movement()
 	move_and_slide()
 #	print(after_images_pos)
@@ -133,6 +135,13 @@ func update_move_intention():
 		$SpritePersonnage.flip_h = true
 #	move_intention = move_intention.normalized()
 
+func check_kick():
+	var enemies_to_kick = $kick/KickArea.get_overlapping_bodies()
+	for enemy in enemies_to_kick:
+		enemy = enemy as BaseEnemy
+		enemy.receive_kick(action_idx, orientation * kick_force)
+	
+
 func kick_state(delta):
 	var delta_time_kick = Time.get_ticks_msec() - kick_start_time
 	$kick/Explosion.visible = true
@@ -151,13 +160,11 @@ func kick_state(delta):
 func kick():
 	if state == STATE.MOVE:
 		state = STATE.KICK
+		action_idx += 1
 		$KickSoundPlayer.play(0.0)
 		kick_direction = orientation
 		kick_start_time = Time.get_ticks_msec()
-		var enemies_to_kick = $kick/KickArea.get_overlapping_bodies()
-		for enemy in enemies_to_kick:
-			enemy = enemy as BaseEnemy
-			enemy.receive_kick(orientation * kick_force)
+		check_kick()
 
 func dash_state(delta):
 	var delta_time_dash = Time.get_ticks_msec() - dash_start_time
@@ -172,11 +179,13 @@ func dash_state(delta):
 	velocity = dash_direction * coeff * DASH_FORCE
 	if velocity.length() > (DASH_MAX_SPEED / delta):
 		velocity = velocity.normalized() * (DASH_MAX_SPEED / delta)
+	check_kick()
 
 
 func dash():
 	if state == STATE.MOVE:
 		state = STATE.DASH
+		action_idx += 1
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
 		after_images_pos.clear()

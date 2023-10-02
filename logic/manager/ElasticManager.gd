@@ -4,7 +4,6 @@ class_name Elastic
 @export var player: CharacterBody2D = null
 @export var light: Node2D = null
 @export var posts: Node2D = null
-@onready var line = $Line2D
 
 @export var min_vel_for_sound_trigger = 300;
 
