@@ -29,7 +29,7 @@ var after_images_pos = []
 @export var DASH_FORCE = 1000
 @export var DASH_MAX_SPEED = 10
 @export var DASH_COEFF = 0.2
-@export var DASH_COOLDOWN_MS = 300
+@export var DASH_COOLDOWN_MS = 200
 
 # elastic
 @export var max_total_speed = 2000
@@ -273,7 +273,8 @@ func elastic_movement():
 	
 	if velocity.length() > elastic_kick_speed and elastic_velocity.length() != 0:
 		$SpritePersonnage.modulate = Color.BLUE_VIOLET
-		check_kick()
+		if state != STATE.DASH:
+			check_kick()
 		$HitBox.monitorable = false
 	else:
 		$SpritePersonnage.modulate = Color.WHITE
