@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dy18i0ox87pdp"]
+[gd_scene load_steps=11 format=3 uid="uid://37lmsbs50fj5"]
 
 [ext_resource type="PackedScene" uid="uid://b6yw267l65fnk" path="res://logic/game/enemy/base_enemy.tscn" id="1_cg62b"]
 [ext_resource type="Script" path="res://logic/game/enemy/fantom.gd" id="2_jgiik"]
