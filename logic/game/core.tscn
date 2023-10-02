@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyqt8l38l2lks"]
+[gd_scene load_steps=12 format=3 uid="uid://cyqt8l38l2lks"]
 
 [ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="1_1kwoj"]
 [ext_resource type="Texture2D" uid="uid://crxavcqfiprb6" path="res://art/game/core.png" id="1_ku4c5"]
@@ -14,6 +14,14 @@ region = Rect2(0, 0, 56, 60)
 atlas = ExtResource("1_ku4c5")
 region = Rect2(56, 0, 56, 60)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hv2b"]
+atlas = ExtResource("1_ku4c5")
+region = Rect2(0, 0, 56, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e23py"]
+atlas = ExtResource("1_ku4c5")
+region = Rect2(56, 0, 56, 60)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_5b4ge"]
 animations = [{
 "frames": [{
@@ -24,7 +32,23 @@ animations = [{
 "texture": SubResource("AtlasTexture_mgv55")
 }],
 "loop": true,
-"name": &"default",
+"name": &"blink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hv2b")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e23py")
+}],
+"loop": true,
+"name": &"on",
 "speed": 5.0
 }]
 
@@ -47,7 +71,7 @@ texture = ExtResource("3_ww4qa")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("1_1kwoj")
 sprite_frames = SubResource("SpriteFrames_5b4ge")
-frame = 1
+animation = &"off"
 
 [node name="LightEmitionPosition" type="Node2D" parent="."]
 position = Vector2(0, 18)

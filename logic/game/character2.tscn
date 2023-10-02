@@ -1,14 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://vperkf507vv0"]
+[gd_scene load_steps=29 format=3 uid="uid://vperkf507vv0"]
 
 [ext_resource type="Script" path="res://logic/game/character2.gd" id="1_nk1li"]
 [ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="2_4m6gt"]
+[ext_resource type="Material" uid="uid://qnuosh47sabh" path="res://art/shaders/shadow_shader.tres" id="2_kg7hu"]
 [ext_resource type="Texture2D" uid="uid://b5qyli4c0oq30" path="res://art/game/hero.png" id="2_t6a16"]
 [ext_resource type="Texture2D" uid="uid://bden8vcmkla2a" path="res://art/game/boule.png" id="4_a3kc6"]
 [ext_resource type="Texture2D" uid="uid://dd5ke42dstfm6" path="res://art/game/explosion.png" id="5_21bu8"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="5_o61uw"]
 [ext_resource type="Texture2D" uid="uid://bav14l4wrhv1s" path="res://art/game/perso2.png" id="5_sgjgt"]
-[ext_resource type="AudioStream" uid="uid://b652220be3kw4" path="res://audio/player_hit.ogg" id="8_tqgq4"]
-[ext_resource type="AudioStream" uid="uid://c8isg5yquuw8u" path="res://audio/kick_player.ogg" id="9_dktxm"]
+[ext_resource type="AudioStream" uid="uid://mwg2ads5i0n0" path="res://audio/player_hit.ogg" id="8_tqgq4"]
+[ext_resource type="AudioStream" uid="uid://djqkij26yj5px" path="res://audio/kick_player.ogg" id="9_dktxm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qr6jb"]
 
@@ -135,6 +136,13 @@ collision_layer = 257
 motion_mode = 1
 script = ExtResource("1_nk1li")
 
+[node name="ombre" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.247059)
+material = ExtResource("2_kg7hu")
+position = Vector2(-1, 17)
+scale = Vector2(0.630435, 0.673077)
+texture = ExtResource("5_o61uw")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1
@@ -143,11 +151,6 @@ texture = ExtResource("2_t6a16")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qr6jb")
-
-[node name="ombre" type="Sprite2D" parent="."]
-position = Vector2(-1, 17)
-scale = Vector2(0.630435, 0.673077)
-texture = ExtResource("5_o61uw")
 
 [node name="kick" type="Node2D" parent="."]
 position = Vector2(60, 2.08165e-12)

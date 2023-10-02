@@ -6,7 +6,9 @@ const DEBUG_UNLIMITED_MONEY = true;
 var elastic: Elastic
 var player
 var level_manager
+var core
 var score_holder
+var camera
 var score_bonus_scene = preload("res://ui/bonus_points.tscn")
 
 var is_game_over = false
@@ -67,6 +69,7 @@ func restart():
 	can_restart = false
 	is_game_over = false
 	is_loading = false
+	score = 0
 	get_tree().change_scene_to_file("res://logic/level/world_alexis.tscn")
 	
 func add_score(source: Node2D, bonus_score):

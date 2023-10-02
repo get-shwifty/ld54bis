@@ -9,7 +9,7 @@ uniform int elastic_current_points_number;
 uniform float current_elastic_tension = 1.0;
 uniform float current_elastic_tension_boost = 0.0;
 
-uniform float common_max_elastic_thickness = 20;
+uniform float common_max_elastic_thickness = 12;
 uniform float common_min_elastic_thickness = 1;
 uniform float common_elastic_sdf_offset = 12.0;
 

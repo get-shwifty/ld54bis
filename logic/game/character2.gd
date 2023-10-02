@@ -54,6 +54,7 @@ const move_base_coef = 50
 #hp
 @export var max_hp = 100
 @onready var hp = max_hp
+var hit_ratio = 0
 
 func _ready():
 	GameManager.player = self;
@@ -62,6 +63,8 @@ func _ready():
 func _physics_process(delta):
 	update_move_intention()
 	process_orientation(delta)
+	
+	hit_ratio -= max(0, 2 * delta)
 	
 	match state:
 		STATE.MOVE:
@@ -98,6 +101,7 @@ func _physics_process(delta):
 
 func hit(dmg):
 	if state != STATE.DASH:
+		hit_ratio = 1
 		hp -= dmg
 		$HitSoundPlayer.play(0.0);
 		if hp <= 0:
@@ -273,14 +277,14 @@ func elastic_movement():
 
 
 func drop_post(drop_position):
-	if post_nb > 0:
+	if post_nb > 0 and not GameManager.core.is_off:
 		GameManager.level_manager.drop_post(drop_position)
 		post_nb -= 1
 		if $PostTimer.is_stopped():
 			$PostTimer.start()
 
 func get_shader_materials():
-	return [$Sprite2D.get_material()];
+	return [$Sprite2D.get_material(), $ombre.get_material()];
 
 func get_reference_velocity():
 	return velocity;
