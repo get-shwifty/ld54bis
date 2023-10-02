@@ -30,7 +30,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if len(object_inside) < 3:
+	if len(object_inside) < 2:
 		return
 	
 	var positions = PackedVector2Array()
@@ -64,7 +64,7 @@ func _process(delta):
 #	print(len(convex))
 #	print(convex)
 	
-	if len(convex) < 4 or size < 100:
+	if len(convex) < 3 or size < 100:
 		for obj in object_inside:
 			obj.elastic_vector = Vector2.ZERO
 		GameManager.crush_game_over()
