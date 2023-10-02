@@ -75,7 +75,7 @@ script = ExtResource("2_pcatx")
 LIFETIME_DURATION = 30
 
 [node name="LifetimeTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 5.0
 one_shot = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]

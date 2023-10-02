@@ -8,6 +8,7 @@ var player
 var level_manager
 var core
 var score_holder
+var camera
 var score_bonus_scene = preload("res://ui/bonus_points.tscn")
 
 var is_game_over = false
