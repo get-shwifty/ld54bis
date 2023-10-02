@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy18i0ox87pdp"]
+
+[ext_resource type="PackedScene" uid="uid://b6yw267l65fnk" path="res://logic/game/enemy/base_enemy.tscn" id="1_cg62b"]
+[ext_resource type="Script" path="res://logic/game/enemy/fantom.gd" id="2_jgiik"]
+[ext_resource type="Texture2D" uid="uid://c8i7kuuyam76v" path="res://art/game/ennemi1.png" id="3_ik0p0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpw1u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ik0p0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_welxl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ik0p0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qg35u"]
+radius = 54.0
+
+[node name="Fantom" instance=ExtResource("1_cg62b")]
+script = ExtResource("2_jgiik")
+stop_at = 40
+attack_at = 50
+attack_duration = 250
+attack_cooldown = 2000
+dodge_duration = 150
+dodge_cooldown = 3000
+dodge_impulse = 800
+
+[node name="Animation" parent="." index="1"]
+position = Vector2(3, -1)
+sprite_frames = SubResource("SpriteFrames_bpw1u")
+speed_scale = 1.0
+
+[node name="InShadowAnimation" parent="." index="8"]
+sprite_frames = SubResource("SpriteFrames_welxl")
+
+[node name="PlayerDodge" type="Area2D" parent="." index="9"]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDodge" index="0"]
+shape = SubResource("CircleShape2D_qg35u")
+
+[connection signal="body_entered" from="PlayerDodge" to="." method="_on_player_dodge_body_entered"]

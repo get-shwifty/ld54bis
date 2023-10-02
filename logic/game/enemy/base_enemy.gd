@@ -61,6 +61,10 @@ func receive_kick(action_idx, kick_force):
 	
 	linear_velocity = Vector2.ZERO
 	apply_impulse(kick_force)
+	hook_stun()
+
+func hook_stun():
+	pass
 
 func die():
 	GameManager.add_score(self, 500)
