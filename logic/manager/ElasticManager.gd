@@ -6,6 +6,7 @@ class_name Elastic
 @export var posts: Node2D = null
 @onready var line = $Line2D
 
+@export var min_vel_for_sound_trigger = 300;
 
 var max_tension = 6000
 var start_tension = 1000
@@ -19,15 +20,14 @@ var last_know_convex_hull = [];
 func add(obj):
 	object_inside.append(obj)
 
+func remove(obj):
+	object_inside.remove_at(object_inside.find(obj))
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.elastic = self
 	add(player)
 #	add(light)
-	for c in posts.get_children():
-		object_inside.append(c)
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -61,28 +61,35 @@ func _process(delta):
 	
 #	print(len(convex))
 #	print(convex[-2])
-	line.clear_points()
-	for p in convex:
-		line.add_point(p)
 		
 	for obj in object_inside:
+		var was_in_elastic = obj.elastic_vector != Vector2.ZERO;
+		
 		var obj_pos = obj.global_position
 		var index = convex.find(obj_pos)
 		if index < 0:
 			obj.elastic_vector = Vector2.ZERO
-			continue
-		var p1 = Vector2.ZERO
-		var p2 = Vector2.ZERO
-		if index == 0:
-			p1 = convex[-2] # ignore last elem as it is the same as the first
-			p2 = convex[1]
 		else:
-			p1 = convex[index-1]
-			p2 = convex[index+1]
+			var p1 = Vector2.ZERO
+			var p2 = Vector2.ZERO
+			if index == 0:
+				p1 = convex[-2] # ignore last elem as it is the same as the first
+				p2 = convex[1]
+			else:
+				p1 = convex[index-1]
+				p2 = convex[index+1]
+				
+			var direction = (p1-obj_pos).normalized() + (p2 - obj_pos).normalized()
+			obj.elastic_vector = direction
 			
-		var direction = (p1-obj_pos).normalized() + (p2 - obj_pos).normalized()
-		obj.elastic_vector = direction
-		
+		var is_in_elastic = obj.elastic_vector != Vector2.ZERO;
+		if was_in_elastic != is_in_elastic:
+			if was_in_elastic:
+				print("out")
+				$OutSoundPlayer.play(0.0);
+			elif obj.get_reference_velocity().length() > min_vel_for_sound_trigger:  
+				print("in")
+				$InSoundPlayer.play(0.0);
 		
 		
 		
