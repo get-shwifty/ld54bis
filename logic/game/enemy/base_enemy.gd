@@ -50,6 +50,7 @@ func receive_kick(action_idx, kick_force):
 		return
 
 	state = STATE.STUN
+	$DamageBox.monitoring = false
 	stun_timer.start()
 	
 	$Animation.self_modulate = Color.WEB_GREEN
@@ -102,6 +103,7 @@ func _on_stun_timer_timeout():
 	state = STATE.MOVE
 	$Animation.self_modulate = Color.WHITE
 	GameManager.elastic.remove(self)
+	$DamageBox.monitoring = true
 
 func get_reference_velocity():
 	return linear_velocity

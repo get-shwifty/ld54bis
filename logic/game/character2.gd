@@ -47,6 +47,8 @@ const move_base_coef = 50
 @export var kick_force : float = 1000
 
 @export var drop_post_offset: float = 1
+@export var post_bag_size = 3
+@onready var post_nb = post_bag_size
 
 #hp
 @export var max_hp = 100
@@ -76,7 +78,7 @@ func _physics_process(delta):
 			next_state = STATE.MOVE # reset next_state
 
 			if Input.is_action_just_pressed("game_drop_post"):
-				GameManager.try_drop_post(position + orientation * drop_post_offset)
+				drop_post(position + orientation * drop_post_offset)
 		STATE.KICK:
 			kick_state(delta)
 		STATE.DASH:
@@ -89,7 +91,7 @@ func _physics_process(delta):
 		var child = $AfterImages.get_children()[i]
 		child.global_position = after_images_pos[i]
 		child.self_modulate.a *= 0.8
-	
+
 func hit(dmg):
 	hp -= dmg
 	$HitSoundPlayer.play(0.0);
@@ -106,7 +108,8 @@ func check_next_state():
 
 func process_orientation(delta):
 #	var mouse_pos : Vector2 = get_global_mouse_position()
-	orientation = move_intention
+	if move_intention != Vector2.ZERO:
+		orientation = move_intention
 	var angle = orientation.angle()
 	kick_node.position = kick_node_pos.rotated(angle)
 	kick_node.rotation = angle
@@ -260,6 +263,14 @@ func elastic_movement():
 	if velocity.length() > max_total_speed:
 		velocity = velocity.normalized() * max_total_speed
 
+
+func drop_post(drop_position):
+	if post_nb > 0:
+		GameManager.level_manager.drop_post(drop_position)
+		post_nb -= 1
+		if $PostTimer.is_stopped():
+			$PostTimer.start()
+
 func get_shader_material():
 	return $Sprite2D.get_material();
 
@@ -268,3 +279,8 @@ func get_reference_velocity():
 
 func _on_hit_box_area_entered(area):
 	hit(100)
+
+func _on_post_timer_timeout():
+	post_nb += 1
+	if post_nb < post_bag_size:
+		$PostTimer.start()
