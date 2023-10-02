@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode blend_mix;
+//render_mode blend_mix;
 
 varying vec2 world_position;
 
@@ -11,9 +11,11 @@ uniform float current_elastic_tension_boost = 0.0;
 
 uniform float common_max_elastic_thickness = 20;
 uniform float common_min_elastic_thickness = 1;
-uniform float common_elastic_sdf_offset = 45.0;
+uniform float common_elastic_sdf_offset = 12.0;
 
 uniform bool enable_chromatic_distortion = false;
+
+uniform float waistline = 0.5;
 
 void vertex(){
     world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
@@ -80,7 +82,6 @@ void fragment() {
 		final_color = chromatic_distortion(TEXTURE,UV);
 	}
 	
-	float waistline = 0.5;
 	if (UV.y > waistline)
 	{
 		if (elastic_distance > 0.0 && elastic_distance < get_current_elastic_thickness())
