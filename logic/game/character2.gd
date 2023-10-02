@@ -30,11 +30,13 @@ var after_images_pos = []
 @export var DASH_COOLDOWN_MS = 100
 
 # elastic
+@export var max_total_speed = 2000
 var elastic_vector = Vector2.ZERO
 var elastic_velocity = Vector2.ZERO
 var elastic_drag = 200
 var elastic_power = 300
 var is_pulling = false
+var dash_bounce_vector = Vector2.ZERO
 
 const move_base_coef = 50
 @export var move_max_speed : float = 4
@@ -207,6 +209,10 @@ func elastic_movement():
 
 		if velocity != Vector2.ZERO && dot < 0:
 #			print('manual pull')
+			if state == STATE.DASH and dash_bounce_vector == Vector2.ZERO:
+				var delta_time_dash = Time.get_ticks_msec() - dash_start_time
+				var coeff = float(delta_time_dash) / DASH_TIME_MS
+				dash_bounce_vector = -velocity * (1-coeff)
 			is_pulling = true
 			var velocity_counter = -velocity * resistance
 			var elastic_counter = elastic_vector.normalized() * m_speed
@@ -217,7 +223,13 @@ func elastic_movement():
 			var min_speedup = max(resistance, 0.5)
 			var old_elastic_vel = elastic_velocity
 			elastic_velocity += elastic_vector * elastic_power * (min_speedup)
-			var n_dot = (velocity + elastic_velocity).dot(old_vel)
+			if dash_bounce_vector != Vector2.ZERO:
+				print('add force')
+#				elastic_velocity *= 5
+				elastic_velocity += dash_bounce_vector * 3
+				dash_bounce_vector = Vector2.ZERO
+				state = STATE.MOVE
+			var n_dot = (velocity+elastic_velocity).dot(old_vel)
 #			print(n_dot)
 #				end_pull()
 		
@@ -236,6 +248,8 @@ func elastic_movement():
 		end_pull()
 
 	velocity += elastic_velocity
+	if velocity.length() > max_total_speed:
+		velocity = velocity.normalized() * max_total_speed
 
 func get_shader_material():
 	return $Sprite2D.get_material();

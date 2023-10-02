@@ -8,8 +8,8 @@ class_name Elastic
 
 @export var min_vel_for_sound_trigger = 300;
 
-var max_tension = 6000
-var start_tension = 1000
+var max_tension = 2000
+var start_tension = 500
 
 var object_inside = []
 var size = 0
@@ -61,6 +61,15 @@ func _process(delta):
 	
 #	print(len(convex))
 #	print(convex[-2])
+
+#	print(len(convex))
+#	print(convex)
+	
+	if len(convex) < 4 or size < 100:
+		for obj in object_inside:
+			obj.elastic_vector = Vector2.ZERO
+		GameManager.crush_game_over()
+		return
 		
 	for obj in object_inside:
 		var was_in_elastic = obj.elastic_vector != Vector2.ZERO;
@@ -78,7 +87,8 @@ func _process(delta):
 			else:
 				p1 = convex[index-1]
 				p2 = convex[index+1]
-				
+			
+#			if not (p1.distance_to(obj_pos) < 10 && 'mobile' in obj and obj.mobile):
 			var direction = (p1-obj_pos).normalized() + (p2 - obj_pos).normalized()
 			obj.elastic_vector = direction
 			
@@ -90,9 +100,6 @@ func _process(delta):
 			elif obj.get_reference_velocity().length() > min_vel_for_sound_trigger:  
 				print("in")
 				$InSoundPlayer.play(0.0);
-		
-		
-		
 		
 		
 		
