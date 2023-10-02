@@ -23,15 +23,12 @@ player = NodePath("../CharacterBody2D")
 
 [node name="Post" parent="Elastic/Post" instance=ExtResource("3_vc8xg")]
 position = Vector2(130, 69)
-LIFETIME_DURATION = 5
 
 [node name="Post2" parent="Elastic/Post" instance=ExtResource("3_vc8xg")]
 position = Vector2(602, 678)
-LIFETIME_DURATION = 5
 
 [node name="Post3" parent="Elastic/Post" instance=ExtResource("3_vc8xg")]
 position = Vector2(1423, 329)
-LIFETIME_DURATION = 5
 
 [node name="Line2D" type="Line2D" parent="Elastic"]
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)

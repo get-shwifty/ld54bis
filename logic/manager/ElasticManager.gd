@@ -64,7 +64,8 @@ func _process(delta):
 
 #	print(len(convex))
 #	print(convex)
-	if len(convex) < 4:
+	
+	if len(convex) < 4 or size < 100:
 		for obj in object_inside:
 			obj.elastic_vector = Vector2.ZERO
 		GameManager.crush_game_over()

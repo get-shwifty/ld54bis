@@ -23,6 +23,7 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Score" type="RichTextLabel" parent="Control"]
+layout_mode = 0
 offset_left = 865.0
 offset_top = 145.0
 offset_right = 1180.0
