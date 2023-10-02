@@ -8,7 +8,7 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 uniform sampler2D gradient_inside;
 uniform sampler2D gradient_outside;
 
-const float MAX_CORE_DISTANCE = 1000.0;
+const float MAX_CORE_DISTANCE = 600.0;
 uniform vec2 core_position = vec2(400.0);
 
 const int ELASTIC_MAX_POINTS = 30;

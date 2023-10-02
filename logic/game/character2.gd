@@ -50,6 +50,7 @@ const kick_force_base_coef = 50
 func _ready():
 	GameManager.player = self;
 
+
 func _physics_process(delta):
 	update_move_intention()
 	process_orientation(delta)
@@ -57,7 +58,10 @@ func _physics_process(delta):
 	match state:
 		STATE.MOVE:
 			velocity = get_move_velocity()
-
+			if velocity == Vector2.ZERO:
+				$AnimatedSprite2D.play("iddle")
+			else:
+				$AnimatedSprite2D.play("walk")
 			check_next_state()
 			match next_state:
 				STATE.KICK:
@@ -104,8 +108,10 @@ func update_move_intention():
 
 	if Input.is_action_pressed("game_right"):
 		move_intention.x += 1
+		$AnimatedSprite2D.flip_h = true
 	if Input.is_action_pressed("game_left"):
 		move_intention.x -= 1
+		$AnimatedSprite2D.flip_h = false
 	if Input.is_action_pressed("game_down"):
 		move_intention.y += 1
 	if Input.is_action_pressed("game_up"):

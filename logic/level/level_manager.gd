@@ -51,6 +51,7 @@ func update_shaders():
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_current_points_number", elastic_points_count);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_points", elastic_points);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_thickness", elastic_thickness);
+	$BackgroundShaderRenderer.get_material().set_shader_parameter("core_position",$Camera2D.get_screen_center_position());
 	
 	var entities = []
 	entities.append_array($Entities/Posts.get_children());

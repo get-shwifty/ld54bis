@@ -6,7 +6,7 @@
 
 [resource]
 shader = ExtResource("1_0fwyv")
-shader_parameter/elastic_points = [Vector2(-549, 547), Vector2(-57, 649), Vector2(703, 847), Vector2(1115, 431), Vector2(712, 161), Vector2(734, -1), Vector2(604, 138), Vector2(262, 0), Vector2(-227, 256), Vector2(-204, 590)]
+shader_parameter/elastic_points = [Vector2(-549, 547), Vector2(-57, 649), Vector2(703, 847), Vector2(998, 245), Vector2(712, 161), Vector2(734, -1), Vector2(604, 138), Vector2(262, 0), Vector2(-227, 256), Vector2(-204, 590)]
 shader_parameter/elastic_current_points_number = 10
 shader_parameter/elastic_thickness = 10.0
 shader_parameter/common_elastic_sdf_offset = 12.0
