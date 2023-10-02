@@ -76,7 +76,7 @@ vec3 get_base_color_from_distance(float d)
 	}
 	else if (d > elastic_thickness)
 	{
-		col = texture(gradient_outside, vec2(0.25)).rgb;
+		col = texture(gradient_outside, vec2(0.0)).rgb;
 	}
 	return col;
 }
