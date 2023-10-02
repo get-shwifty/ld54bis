@@ -15,7 +15,7 @@ const int ELASTIC_MAX_POINTS = 30;
 uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
 uniform float current_elastic_tension = 1.0;
-uniform float current_elastic_tension_boost = 0.0;
+uniform float current_elastic_distortion = 0.0;
 
 uniform float common_max_elastic_thickness = 20;
 uniform float common_min_elastic_thickness = 1.0;
@@ -96,10 +96,15 @@ vec3 get_base_color_from_position(vec2 position)
 }
 
 //code inspired by https://gist.github.com/uheartbeast/312a7ea761b8712c448b31c30c0d8f1f
-vec3 chroma_distortion(float distance_to_elastic, float distort_potency)
+vec3 chroma_distortion(float distance_to_elastic)
 {
+	//replace current_elastic_tension by current_elastic_distortion once gameplay code is ready
+	float elastic_distortion = current_elastic_tension;
+	
 	float distortion_ratio = 1.0;
-	float adjusted_amount = distortion_ratio * distort_potency * sin(TIME * 5.0)* 2.0 * sin(TIME * sin(TIME * 4.0) * 15.0);
+	float distort_potency = 5.0 * max(elastic_distortion, 0.2);
+	float distort_speed = 10.0 * max(elastic_distortion, 0.1);
+	float adjusted_amount = distortion_ratio * distort_potency * sin(TIME * distort_speed/2.0)* 2.0 * sin(TIME * sin(TIME * distort_speed) * 15.0);
 	vec3 color = vec3(1.0);
 	
 	color.r = get_base_color_from_distance(distance_to_elastic - adjusted_amount).r;
@@ -114,7 +119,7 @@ void fragment() {
     vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
 	
 	float distance_elastic = get_distance_from_position(world_position);
-	vec3 col = chroma_distortion(distance_elastic, 5.0);
+	vec3 col = chroma_distortion(distance_elastic);
 	
     COLOR.rgb = mix(col, c, 0.1);
 }
