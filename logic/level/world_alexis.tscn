@@ -4,14 +4,14 @@
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_asanh"]
 [ext_resource type="Script" path="res://logic/level/shader_test_tool.gd" id="3_mp2rg"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
-[ext_resource type="PackedScene" path="res://logic/game/elastic.tscn" id="4_5veg0"]
+[ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_5veg0"]
 [ext_resource type="Script" path="res://logic/game/Camera.gd" id="4_71srl"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_hpc0q"]
 [ext_resource type="Script" path="res://ui/ScoreBonusHolder.gd" id="7_qf5y7"]
 [ext_resource type="PackedScene" uid="uid://cyqt8l38l2lks" path="res://logic/game/core.tscn" id="10_jytk7"]
-[ext_resource type="AudioStream" uid="uid://dhgenkj85eime" path="res://audio/music_125bpm.ogg" id="12_n13qg"]
+[ext_resource type="AudioStream" uid="uid://bqvd56g2hv2xf" path="res://audio/music_125bpm.ogg" id="12_n13qg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 

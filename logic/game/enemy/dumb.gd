@@ -8,6 +8,16 @@ extends "./base_enemy.gd"
 var last_time_attack = 0
 var attacking = false
 
+func _ready():
+	if randf() < 0.4:
+		target =  GameManager.core;
+		stop_at += 25
+		attack_at += 25
+		$DamageBox.collision_mask = 512
+	else:
+		target = GameManager.player
+	$Animation.play("default")
+
 func move_process(delta):
 	var now = Time.get_ticks_msec()
 	

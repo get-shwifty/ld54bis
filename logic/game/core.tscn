@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cyqt8l38l2lks"]
+[gd_scene load_steps=13 format=3 uid="uid://cyqt8l38l2lks"]
 
 [ext_resource type="Material" uid="uid://byy3chjt7uksd" path="res://art/shaders/enity_shader.tres" id="1_1kwoj"]
 [ext_resource type="Texture2D" uid="uid://crxavcqfiprb6" path="res://art/game/core.png" id="1_ku4c5"]
@@ -56,6 +56,9 @@ animations = [{
 radius = 12.0
 height = 52.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q31jk"]
+radius = 33.0
+
 [node name="core" type="StaticBody2D"]
 collision_layer = 3
 collision_mask = 3
@@ -80,3 +83,11 @@ position = Vector2(0, 18)
 position = Vector2(0, 14)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4q2lb")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_q31jk")
