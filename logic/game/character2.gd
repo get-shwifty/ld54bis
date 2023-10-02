@@ -280,7 +280,7 @@ func drop_post(drop_position):
 			$PostTimer.start()
 
 func get_shader_materials():
-	return [$Sprite2D.get_material()];
+	return [$Sprite2D.get_material(), $ombre.get_material()];
 
 func get_reference_velocity():
 	return velocity;

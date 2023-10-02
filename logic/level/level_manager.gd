@@ -11,7 +11,7 @@ const SCENE_COIN = preload('res://logic/game/coin.tscn');
 func _ready():
 	GameManager.level_manager = self;
 	
-	GameManager.elastic.add($Character2)
+	GameManager.elastic.add($Entities/Character2)
 	GameManager.elastic.add($Entities/Core)
 	for c in $Entities/Posts.get_children():
 		GameManager.elastic.add(c)
@@ -57,7 +57,7 @@ func update_shaders():
 	var entities = []
 	entities.append_array($Entities/Posts.get_children());
 	entities.append_array($Entities/Enemies.get_children());
-	entities.append($Character2);
+	entities.append($Entities/Character2);
 	entities.append($Entities/Core);
 	
 	for c in entities:

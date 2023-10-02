@@ -40,10 +40,6 @@ zoom = Vector2(2, 2)
 
 [node name="Elastic" parent="." instance=ExtResource("4_5veg0")]
 
-[node name="Character2" parent="." instance=ExtResource("4_wvo76")]
-y_sort_enabled = true
-position = Vector2(241, 201)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("6_hpc0q")]
@@ -67,6 +63,10 @@ position = Vector2(303, 92)
 
 [node name="Entities" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Character2" parent="Entities" instance=ExtResource("4_wvo76")]
+y_sort_enabled = true
+position = Vector2(241, 201)
 
 [node name="Enemies" type="Node2D" parent="Entities"]
 y_sort_enabled = true
