@@ -30,11 +30,19 @@ var going_out = false
 var elastic_decel = 50
 var elastic_accel = 100
 
+var cur_action_index = -1
+
 func _ready():
 	target = GameManager.player
 
-func receive_kick(kick_force):
+func receive_kick(action_idx, kick_force):
+	if cur_action_index == action_idx:
+		return
+	else:
+		cur_action_index = action_idx
+
 	if state == STATE.STUN:
+		apply_impulse(kick_force/2)
 		die()
 		return
 
