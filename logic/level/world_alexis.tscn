@@ -144,7 +144,7 @@ y_sort_enabled = true
 
 [node name="Character2" parent="Entities" instance=ExtResource("4_wvo76")]
 y_sort_enabled = true
-position = Vector2(241, 201)
+position = Vector2(487, 253)
 
 [node name="Enemies" type="Node2D" parent="Entities"]
 y_sort_enabled = true
@@ -153,14 +153,14 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Post" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(153, 151)
+position = Vector2(243, 157)
 
 [node name="Post2" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(284, 350)
+position = Vector2(503, 561)
 LIFETIME_DURATION = 35
 
 [node name="Post3" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(455, 182)
+position = Vector2(735, 159)
 LIFETIME_DURATION = 25
 
 [node name="Coins" type="Node2D" parent="Entities"]
