@@ -7,7 +7,7 @@
 [resource]
 shader = ExtResource("1_mu2gq")
 shader_parameter/core_position = Vector2(5, 5)
-shader_parameter/elastic_points = [Vector2(148, 155), Vector2(284, 350), Vector2(455, 182)]
+shader_parameter/elastic_points = [Vector2(153, 151), Vector2(284, 350), Vector2(455, 182)]
 shader_parameter/elastic_current_points_number = 3
 shader_parameter/elastic_thickness = 10.0
 shader_parameter/common_elastic_sdf_offset = 12.0
