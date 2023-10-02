@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_asanh"]
 [ext_resource type="Script" path="res://logic/level/shader_test_tool.gd" id="3_mp2rg"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
-[ext_resource type="PackedScene" path="res://logic/game/elastic.tscn" id="4_5veg0"]
+[ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_5veg0"]
 [ext_resource type="Script" path="res://logic/game/Camera.gd" id="4_71srl"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
@@ -55,7 +55,6 @@ script = ExtResource("7_qf5y7")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("6_fdeo5")
-ennemy1_weight = 9
 ennemy2_weight = 3
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
