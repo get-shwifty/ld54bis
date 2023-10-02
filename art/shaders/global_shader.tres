@@ -6,7 +6,9 @@
 
 [resource]
 shader = ExtResource("1_mu2gq")
-shader_parameter/core_position = Vector2(5, 5)
+shader_parameter/core_position = Vector2(400, 400)
+shader_parameter/hit_position = Vector2(0, 0)
+shader_parameter/hit_ratio = 0.0
 shader_parameter/elastic_points = [Vector2(153, 151), Vector2(284, 350), Vector2(455, 182)]
 shader_parameter/elastic_current_points_number = 3
 shader_parameter/current_elastic_tension = 1.0

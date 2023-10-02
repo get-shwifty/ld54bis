@@ -11,10 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://cr5dttaeduat" path="res://logic/game/enemy/dumb.tscn" id="7_kwkrj"]
 [ext_resource type="Script" path="res://ui/ScoreBonusHolder.gd" id="7_qf5y7"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3qtac"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yji7m"]
-noise = SubResource("FastNoiseLite_08r7k")
+noise = SubResource("FastNoiseLite_3qtac")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m07kj"]
 size = Vector2(20, 647)

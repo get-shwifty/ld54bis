@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://by1hp7nptigps"]
+
+[ext_resource type="Script" path="res://logic/game/EndGamePath.gd" id="1_bscy0"]
+[ext_resource type="Material" uid="uid://b1e7bs6nc5dy0" path="res://art/shaders/monster_shader.tres" id="2_xw18d"]
+[ext_resource type="Texture2D" uid="uid://ccobrsv7re5kj" path="res://art/game/ennemi2_shadow.png" id="3_njkj0"]
+
+[sub_resource type="Curve2D" id="Curve2D_5wbwf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -109.5, -49, 0, 0, 0, 0, 92.5, 24.5, 0, 0, 0, 0, 275, 53, 0, 0, 0, 0, 416, -19.5, 0, 0, 0, 0, 600, 6.5, 0, 0, 0, 0, 896.5, 68.5)
+}
+point_count = 6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7on6"]
+atlas = ExtResource("3_njkj0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2h61u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7on6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Path2D" type="Path2D"]
+position = Vector2(-811, -93)
+scale = Vector2(2, 2)
+curve = SubResource("Curve2D_5wbwf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(-109.5, -49)
+rotation = 0.517287
+rotates = false
+script = ExtResource("1_bscy0")
+
+[node name="InShadowAnimation" type="AnimatedSprite2D" parent="PathFollow2D"]
+material = ExtResource("2_xw18d")
+rotation = -0.517287
+sprite_frames = SubResource("SpriteFrames_2h61u")
+
+[node name="_Timer_100477" type="Timer" parent="PathFollow2D"]
+wait_time = 0.2
+one_shot = true
