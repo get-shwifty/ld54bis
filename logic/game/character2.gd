@@ -239,7 +239,6 @@ func elastic_movement():
 			var old_elastic_vel = elastic_velocity
 			elastic_velocity += elastic_vector * elastic_power * (min_speedup)
 			if dash_bounce_vector != Vector2.ZERO:
-				print('add force')
 #				elastic_velocity *= 5
 				elastic_velocity += dash_bounce_vector * 3
 				dash_bounce_vector = Vector2.ZERO
@@ -279,9 +278,6 @@ func get_shader_materials():
 
 func get_reference_velocity():
 	return velocity;
-
-func _on_hit_box_area_entered(area):
-	hit(100)
 
 func _on_post_timer_timeout():
 	post_nb += 1

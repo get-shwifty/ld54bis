@@ -1,14 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0m0xh38p6b7f"]
+[gd_scene load_steps=15 format=3 uid="uid://c0m0xh38p6b7f"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_dfdfb"]
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_asanh"]
 [ext_resource type="Script" path="res://logic/level/shader_test_tool.gd" id="3_mp2rg"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
-[ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_5veg0"]
+[ext_resource type="PackedScene" path="res://logic/game/elastic.tscn" id="4_5veg0"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_hpc0q"]
 [ext_resource type="PackedScene" uid="uid://cr5dttaeduat" path="res://logic/game/enemy/dumb.tscn" id="7_kwkrj"]
+[ext_resource type="Script" path="res://ui/ScoreBonusHolder.gd" id="7_qf5y7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
@@ -44,6 +45,13 @@ position = Vector2(241, 201)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="CanvasLayer" instance=ExtResource("6_hpc0q")]
+
+[node name="ScoreBonusHolder" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_qf5y7")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("6_fdeo5")

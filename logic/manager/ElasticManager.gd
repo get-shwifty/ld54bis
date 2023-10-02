@@ -100,10 +100,8 @@ func _process(delta):
 		var is_in_elastic = obj.elastic_vector != Vector2.ZERO;
 		if was_in_elastic != is_in_elastic:
 			if was_in_elastic:
-				print("out")
 				$OutSoundPlayer.play(0.0);
 			elif obj.get_reference_velocity().length() > min_vel_for_sound_trigger:  
-				print("in")
 				$InSoundPlayer.play(0.0);
 		
 		
