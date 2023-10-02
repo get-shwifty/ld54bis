@@ -196,6 +196,7 @@ func dash_state(delta):
 func dash():
 	if state == STATE.MOVE:
 		set_state(STATE.DASH)
+		$DashPlayer.play()
 		dash_direction = orientation
 		dash_start_time = Time.get_ticks_msec()
 		after_images_pos.clear()
@@ -206,6 +207,7 @@ func dash():
 			after_images_pos.append(global_position)
 			await get_tree().create_timer(0.05).timeout
 		var children = $AfterImages.get_children()
+
 
 		
 func end_pull():

@@ -1,16 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://c0m0xh38p6b7f"]
+[gd_scene load_steps=17 format=3 uid="uid://c0m0xh38p6b7f"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_dfdfb"]
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_asanh"]
 [ext_resource type="Script" path="res://logic/level/shader_test_tool.gd" id="3_mp2rg"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
-[ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_5veg0"]
+[ext_resource type="PackedScene" path="res://logic/game/elastic.tscn" id="4_5veg0"]
 [ext_resource type="Script" path="res://logic/game/Camera.gd" id="4_71srl"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_hpc0q"]
 [ext_resource type="Script" path="res://ui/ScoreBonusHolder.gd" id="7_qf5y7"]
 [ext_resource type="PackedScene" uid="uid://cyqt8l38l2lks" path="res://logic/game/core.tscn" id="10_jytk7"]
+[ext_resource type="AudioStream" uid="uid://dhgenkj85eime" path="res://audio/music_125bpm.ogg" id="12_n13qg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
@@ -58,7 +59,7 @@ script = ExtResource("6_fdeo5")
 ennemy2_weight = 3
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
-wait_time = 2.0
+wait_time = 4.0
 autostart = true
 
 [node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
@@ -143,7 +144,7 @@ y_sort_enabled = true
 
 [node name="Character2" parent="Entities" instance=ExtResource("4_wvo76")]
 y_sort_enabled = true
-position = Vector2(241, 201)
+position = Vector2(487, 253)
 
 [node name="Enemies" type="Node2D" parent="Entities"]
 y_sort_enabled = true
@@ -152,14 +153,14 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Post" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(153, 151)
+position = Vector2(243, 157)
 
 [node name="Post2" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(284, 350)
+position = Vector2(503, 561)
 LIFETIME_DURATION = 35
 
 [node name="Post3" parent="Entities/Posts" instance=ExtResource("3_txh4p")]
-position = Vector2(455, 182)
+position = Vector2(735, 159)
 LIFETIME_DURATION = 25
 
 [node name="Coins" type="Node2D" parent="Entities"]
@@ -211,5 +212,10 @@ freeze = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D4"]
 position = Vector2(-11.5, 313.5)
 shape = SubResource("RectangleShape2D_44ipn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_n13qg")
+volume_db = 1.0
+autoplay = true
 
 [connection signal="timeout" from="EnemySpawner/EnemySpawnTimer" to="EnemySpawner" method="_on_enemy_spawn_timer_timeout"]
