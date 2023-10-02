@@ -111,9 +111,9 @@ func _on_death_timer_timeout():
 
 func _on_stun_timer_timeout():
 	state = STATE.MOVE
+	$DamageBox.monitoring = true
 	$Animation.self_modulate = Color.WHITE
 	GameManager.elastic.remove(self)
-	$DamageBox.monitoring = true
 
 func get_reference_velocity():
 	return linear_velocity
