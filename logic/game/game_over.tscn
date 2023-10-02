@@ -35,6 +35,7 @@ autowrap_mode = 0
 
 [node name="Restart" type="RichTextLabel" parent="Control"]
 visible = false
+layout_mode = 0
 offset_left = 847.0
 offset_top = 887.0
 offset_right = 1162.0
