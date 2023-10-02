@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="6_kym3s"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_undaf"]
 [ext_resource type="PackedScene" uid="uid://c80j56khijrsj" path="res://logic/game/coin.tscn" id="9_7qrob"]
-[ext_resource type="PackedScene" path="res://logic/game/borders.tscn" id="10_gm0rg"]
+[ext_resource type="PackedScene" uid="uid://dv2rasry2pocb" path="res://logic/game/borders.tscn" id="10_gm0rg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
