@@ -15,7 +15,7 @@ func get_core_position():
 	return $LightEmitionPosition.global_position;
 
 func get_shader_materials():
-	return [$AnimatedSprite2D.get_material()];
+	return [$AnimatedSprite2D.get_material(), $Sprite2D.get_material()];
 
 func get_reference_velocity():
 	return Vector2.ZERO;
