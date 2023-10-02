@@ -40,7 +40,7 @@ func _ready():
 	$Animation.play("default")
 
 func receive_kick(action_idx, kick_force):
-	if cur_action_index == action_idx:
+	if is_dead or cur_action_index == action_idx:
 		return
 	else:
 		cur_action_index = action_idx
