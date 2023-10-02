@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0m0xh38p6b7f"]
+[gd_scene load_steps=13 format=3 uid="uid://c0m0xh38p6b7f"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_dfdfb"]
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_asanh"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
 [ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_hpc0q"]
-[ext_resource type="PackedScene" uid="uid://cr5dttaeduat" path="res://logic/game/enemy/dumb.tscn" id="7_kwkrj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
 
@@ -73,11 +72,6 @@ position = Vector2(455, 182)
 LIFETIME_DURATION = 25
 
 [node name="Coins" type="Node2D" parent="Entities"]
-
-[node name="Dumb" parent="." instance=ExtResource("7_kwkrj")]
-position = Vector2(340, 263)
-collision_layer = 2
-collision_mask = 2
 
 [node name="Borders" type="Node2D" parent="."]
 

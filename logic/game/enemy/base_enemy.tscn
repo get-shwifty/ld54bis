@@ -1,44 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6yw267l65fnk"]
+[gd_scene load_steps=6 format=3 uid="uid://b6yw267l65fnk"]
 
 [ext_resource type="Script" path="res://logic/game/enemy/base_enemy.gd" id="1_hubbq"]
-[ext_resource type="Texture2D" uid="uid://b2jab8dxmfrrw" path="res://art/game/ennemi2.png" id="2_05yir"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="2_tk2nc"]
 [ext_resource type="Material" uid="uid://b1e7bs6nc5dy0" path="res://art/shaders/monster_shader.tres" id="3_aeard"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cuywa"]
-atlas = ExtResource("2_05yir")
-region = Rect2(0, 0, 42, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x5t2q"]
-atlas = ExtResource("2_05yir")
-region = Rect2(42, 0, 42, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uxds1"]
-atlas = ExtResource("2_05yir")
-region = Rect2(84, 0, 42, 36)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ll31j"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cuywa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x5t2q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uxds1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x5t2q")
-}],
-"loop": true,
-"name": &"default",
-"speed": 6.0
-}]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wxan"]
-radius = 14.0
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7k1j"]
 radius = 8.24621
@@ -58,12 +25,9 @@ texture = ExtResource("2_tk2nc")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 material = ExtResource("3_aeard")
-sprite_frames = SubResource("SpriteFrames_ll31j")
-frame_progress = 0.659873
 speed_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 2)
 shape = SubResource("CircleShape2D_5wxan")
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -89,7 +53,6 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageBox"]
-position = Vector2(-5, 2)
 shape = SubResource("CircleShape2D_a7k1j")
 
 [node name="InShadowAnimation" type="AnimatedSprite2D" parent="."]

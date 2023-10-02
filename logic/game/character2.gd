@@ -241,7 +241,7 @@ func elastic_movement():
 			var old_elastic_vel = elastic_velocity
 			elastic_velocity += elastic_vector * elastic_power * (min_speedup)
 			if dash_bounce_vector != Vector2.ZERO:
-				print('add force')
+#				print('add force')
 #				elastic_velocity *= 5
 				elastic_velocity += dash_bounce_vector * 3
 				dash_bounce_vector = Vector2.ZERO
