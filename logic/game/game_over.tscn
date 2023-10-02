@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://vaqtiy23j8nt"]
+[gd_scene load_steps=2 format=3 uid="uid://vaqtiy23j8nt"]
+
+[ext_resource type="Script" path="res://logic/game/GameOverMessage.gd" id="1_ieno2"]
 
 [node name="game_over" type="Node2D"]
 
@@ -7,13 +9,25 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_ieno2")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+[node name="Reason" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 250.0
-offset_top = 212.0
-offset_right = 565.0
-offset_bottom = 267.0
+offset_left = 800.0
+offset_top = 468.0
+offset_right = 1115.0
+offset_bottom = 523.0
+theme_override_font_sizes/normal_font_size = 40
+text = "YOU LOST HAHA"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Score" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 145.0
+offset_right = 1180.0
+offset_bottom = 200.0
 theme_override_font_sizes/normal_font_size = 40
 text = "YOU LOST HAHA"
 fit_content = true

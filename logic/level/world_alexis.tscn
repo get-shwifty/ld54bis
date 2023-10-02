@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0m0xh38p6b7f"]
+[gd_scene load_steps=14 format=3 uid="uid://c0m0xh38p6b7f"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_dfdfb"]
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_asanh"]
 [ext_resource type="Script" path="res://logic/level/shader_test_tool.gd" id="3_mp2rg"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
-[ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_5veg0"]
+[ext_resource type="PackedScene" path="res://logic/game/elastic.tscn" id="4_5veg0"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://ui/ElasticSize.gd" id="5_r2ufr"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
@@ -14,6 +14,12 @@
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yji7m"]
 noise = SubResource("FastNoiseLite_08r7k")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m07kj"]
+size = Vector2(20, 647)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44ipn"]
+size = Vector2(981, 19)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_dfdfb")
@@ -28,6 +34,7 @@ elastic_thickness = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+zoom = Vector2(2, 2)
 
 [node name="Elastic" parent="." instance=ExtResource("4_5veg0")]
 
@@ -83,5 +90,46 @@ LIFETIME_DURATION = 25
 
 [node name="Dumb" parent="." instance=ExtResource("7_kwkrj")]
 position = Vector2(340, 263)
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Borders"]
+collision_mask = 0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D"]
+position = Vector2(0, 313.5)
+shape = SubResource("RectangleShape2D_m07kj")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="Borders"]
+position = Vector2(964, 4)
+collision_mask = 0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D2"]
+position = Vector2(0, 313.5)
+shape = SubResource("RectangleShape2D_m07kj")
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="Borders"]
+position = Vector2(500, 324)
+collision_mask = 0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D3"]
+position = Vector2(-11.5, 313.5)
+shape = SubResource("RectangleShape2D_44ipn")
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="Borders"]
+position = Vector2(503, -313)
+collision_mask = 0
+lock_rotation = true
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/RigidBody2D4"]
+position = Vector2(-11.5, 313.5)
+shape = SubResource("RectangleShape2D_44ipn")
 
 [connection signal="timeout" from="EnemySpawner/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
