@@ -17,8 +17,8 @@ var orientation: Vector2 = Vector2.ZERO
 @onready var kick_node_pos = kick_node.position
 var kick_direction: Vector2 = Vector2.ZERO
 var kick_start_time = 0
-@export var KICK_TIME_MS = 60
-@export var KICK_FORCE = 300
+@export var KICK_TIME_MS = 45
+@export var KICK_FORCE = -300
 @export var KICK_COEFF = 0.3
 
 # dash
@@ -148,7 +148,6 @@ func check_kick():
 	for enemy in enemies_to_kick:
 		enemy = enemy as BaseEnemy
 		enemy.receive_kick(action_idx, orientation * kick_force)
-	
 
 func kick_state(delta):
 	var delta_time_kick = Time.get_ticks_msec() - kick_start_time
@@ -264,8 +263,10 @@ func elastic_movement():
 
 	velocity += elastic_velocity
 	velocity = velocity.limit_length(max_total_speed)
+	
+	
 	if velocity.length() > elastic_kick_speed and elastic_velocity.length() != 0:
-		$SpritePersonnage.modulate = Color.ORANGE_RED
+		$SpritePersonnage.modulate = Color.BLUE_VIOLET
 		check_kick()
 	else:
 		$SpritePersonnage.modulate = Color.WHITE

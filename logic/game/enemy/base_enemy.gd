@@ -50,6 +50,7 @@ func receive_kick(action_idx, kick_force):
 		return
 
 	state = STATE.STUN
+	collision_layer = 4
 	$DamageBox.monitoring = false
 	stun_timer.start()
 	
@@ -104,6 +105,7 @@ func _on_death_timer_timeout():
 
 func _on_stun_timer_timeout():
 	state = STATE.MOVE
+	collision_layer = 6
 	$Animation.self_modulate = Color.WHITE
 	GameManager.elastic.remove(self)
 	$DamageBox.monitoring = true

@@ -50,6 +50,7 @@ script = ExtResource("6_fdeo5")
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
 wait_time = 2.0
+autostart = true
 
 [node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
 position = Vector2(303, 92)
@@ -75,6 +76,8 @@ LIFETIME_DURATION = 25
 
 [node name="Dumb" parent="." instance=ExtResource("7_kwkrj")]
 position = Vector2(340, 263)
+collision_layer = 2
+collision_mask = 2
 
 [node name="Borders" type="Node2D" parent="."]
 
