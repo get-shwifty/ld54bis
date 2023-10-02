@@ -1,7 +1,11 @@
 extends Node
 class_name Elastic
 
+@export var player: CharacterBody2D = null
+@export var light: Node2D = null
+@export var posts: Node2D = null
 @onready var line = $Line2D
+
 
 var max_tension = 6000
 var start_tension = 1000
@@ -18,6 +22,12 @@ func add(obj):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GameManager.elastic = self
+	add(player)
+#	add(light)
+	for c in posts.get_children():
+		object_inside.append(c)
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

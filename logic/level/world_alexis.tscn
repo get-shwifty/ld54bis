@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0m0xh38p6b7f"]
+[gd_scene load_steps=7 format=3 uid="uid://10rv48b3qaxl"]
 
 [ext_resource type="Script" path="res://logic/level/level_manager.gd" id="1_dfdfb"]
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="2_fd1xy"]
