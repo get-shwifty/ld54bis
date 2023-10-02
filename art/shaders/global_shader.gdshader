@@ -22,7 +22,7 @@ uniform float current_elastic_distortion = 0.0;
 
 uniform float common_max_elastic_thickness = 20;
 uniform float common_min_elastic_thickness = 1.0;
-uniform float common_elastic_sdf_offset = 45.0;
+uniform float common_elastic_sdf_offset = 12.0;
 
 void vertex(){
     world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
