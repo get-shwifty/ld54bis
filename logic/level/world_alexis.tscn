@@ -84,6 +84,7 @@ LIFETIME_DURATION = 25
 [node name="Coins" type="Node2D" parent="Entities"]
 
 [node name="Core" parent="Entities" instance=ExtResource("10_prcpu")]
+position = Vector2(310, 217)
 
 [node name="Dumb" parent="." instance=ExtResource("7_kwkrj")]
 position = Vector2(340, 263)
