@@ -1,0 +1,131 @@
+[gd_scene load_steps=18 format=3 uid="uid://1tai0p1llqhp"]
+
+[ext_resource type="PackedScene" uid="uid://b6yw267l65fnk" path="res://logic/game/enemy/base_enemy.tscn" id="1_2jyqe"]
+[ext_resource type="Script" path="res://logic/game/enemy/charger.gd" id="2_ica1r"]
+[ext_resource type="Texture2D" uid="uid://tohuotc36xpq" path="res://art/game/ennemi3.png" id="3_e58pw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca1vi"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(0, 110, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsbvv"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(52, 110, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb3yq"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(104, 110, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_un16n"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(156, 110, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w34ox"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(0, 0, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypd2u"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(52, 0, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxr6p"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(104, 0, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sitgj"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(156, 0, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw4oq"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(0, 55, 52, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b8mo"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(52, 55, 52, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpw1u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca1vi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsbvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pb3yq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_un16n")
+}],
+"loop": true,
+"name": &"charge",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w34ox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypd2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxr6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sitgj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xw4oq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b8mo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3g8ix"]
+atlas = ExtResource("3_e58pw")
+region = Rect2(52, 55, 52, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_welxl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3g8ix")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qg35u"]
+radius = 54.0
+
+[node name="Charger" instance=ExtResource("1_2jyqe")]
+script = ExtResource("2_ica1r")
+stop_at = 130
+attack_at = 100
+attack_duration = 1250
+attack_cooldown = 5000
+
+[node name="Animation" parent="." index="1"]
+position = Vector2(3, -1)
+sprite_frames = SubResource("SpriteFrames_bpw1u")
+speed_scale = 1.0
+
+[node name="InShadowAnimation" parent="." index="8"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_welxl")
+
+[node name="PlayerDodge" type="Area2D" parent="." index="9"]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDodge" index="0"]
+shape = SubResource("CircleShape2D_qg35u")
+
+[connection signal="body_entered" from="PlayerDodge" to="." method="_on_player_dodge_body_entered"]
