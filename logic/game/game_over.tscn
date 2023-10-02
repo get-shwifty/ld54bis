@@ -402,7 +402,7 @@ offset_left = -500.0
 offset_top = -569.0
 offset_right = 500.0
 offset_bottom = -514.0
-theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[center]YOU LOST REASON[/center]
 "
@@ -427,23 +427,24 @@ autowrap_mode = 0
 [node name="Score" type="RichTextLabel" parent="Control"]
 custom_minimum_size = Vector2(1000, 2.08165e-12)
 layout_mode = 0
-offset_left = -499.0
-offset_top = -86.0
-offset_right = 501.0
-offset_bottom = 79.0
-theme_override_font_sizes/normal_font_size = 120
+offset_left = -492.0
+offset_top = -117.0
+offset_right = 508.0
+offset_bottom = 82.0
+theme_override_font_sizes/normal_font_size = 250
 bbcode_enabled = true
 text = "[center]0[/center]"
 fit_content = true
 autowrap_mode = 0
 
 [node name="Restart" type="RichTextLabel" parent="Control"]
+custom_minimum_size = Vector2(1000, 2.08165e-12)
 layout_mode = 0
-offset_left = -203.0
-offset_top = 495.0
-offset_right = 204.0
-offset_bottom = 550.0
-theme_override_font_sizes/normal_font_size = 40
+offset_left = -497.0
+offset_top = 468.0
+offset_right = 503.0
+offset_bottom = 523.0
+theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "[center]Press Enter to restart[/center]"
 fit_content = true
