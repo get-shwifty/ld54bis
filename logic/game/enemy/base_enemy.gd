@@ -15,6 +15,7 @@ var state: STATE = STATE.MOVE
 @onready var death_timer : Timer = $DeathTimer
 
 @export var damage = 10
+var can_damage = true
 
 # target
 var target
@@ -75,6 +76,7 @@ func _physics_process(delta):
 			motion_intention = motion_intention.normalized()
 			var err = max(0, MAX_SPEED - vspeed)
 			apply_force(motion_intention * err * FORCE_SPEED)
+			try_damage_player()
 		STATE.STUN:
 			# going in/out
 			if elastic_vector != Vector2.ZERO:
@@ -114,12 +116,18 @@ func get_reference_velocity():
 func get_shader_material():
 	return $Animation.get_material()
 	
-func _on_damage_box_area_entered(area):
-	var player = area.get_parent()
-	player.hit(damage)
-	$DamageBox.monitoring = false
-	$DamageTimer.start()
+func try_damage_player():
+	if not can_damage and $DamageTimer.is_stopped():
+		$DamageTimer.start()
+		
+	if not can_damage:
+		return
+	
+	var areas = $DamageBox.get_overlapping_areas()
+	for area in areas:
+		var player = area.get_parent()
+		player.hit(damage)
+		can_damage = false
 
 func _on_damage_timer_timeout():
-	if state == STATE.MOVE:
-		$DamageBox.monitoring = true
+	can_damage = true

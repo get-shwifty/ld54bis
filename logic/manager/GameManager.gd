@@ -9,6 +9,7 @@ var level_manager
 
 var is_game_over = false
 var is_loading = false
+var can_restart = false
 var game_over_message = ''
 
 var coins : int = 0;
@@ -21,6 +22,10 @@ func _ready():
 	pass # Replace with function body.
 	
 func _process(delta):
+	
+	if is_game_over and can_restart and Input.is_action_just_pressed("ui_accept"):
+		restart()
+	
 	if is_game_over and not is_loading and is_instance_valid(elastic):
 		is_loading = true
 		await get_tree().create_timer(0.2).timeout
@@ -60,3 +65,7 @@ func no_hp_game_over():
 		
 	game_over_message = 'Crushed by Ennemies'
 	game_over()
+	
+func restart():
+	can_restart = false
+	get_tree().change_scene_to_file("res://logic/level/world_alexis.tscn")

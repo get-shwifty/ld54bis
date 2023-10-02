@@ -34,8 +34,6 @@ func _physics_process(delta):
 		$Line2D.rotation = -rotation
 
 
-
-
 func process_orientation(delta):
 	var mouse_pos : Vector2 = get_global_mouse_position();
 	var orientation = mouse_pos - position;
