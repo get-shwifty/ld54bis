@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="3_ln5d4"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_vc8xg"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_ng1sg"]
-[ext_resource type="Script" path="res://ui/ElasticSize.gd" id="6_aqe0t"]
+[ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="5_8prcj"]
 [ext_resource type="PackedScene" uid="uid://bsnw1876o6rqh" path="res://logic/game/enemy_spawner.tscn" id="7_n1ntf"]
-[ext_resource type="PackedScene" uid="uid://c80j56khijrsj" path="res://logic/game/coin.tscn" id="7_xj51s"]
+[ext_resource type="PackedScene" uid="uid://rtndthojsjf3" path="res://logic/game/god_light.tscn" id="8_upk5m"]
 
 [node name="Node2D2" type="Node2D"]
 script = ExtResource("1_6yde8")
@@ -34,29 +34,17 @@ position = Vector2(1423, 329)
 points = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_ng1sg")]
+position = Vector2(399, 230)
+DASH_COOLDOWN_MS = 100
+move_max_speed = 20.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 21.0
-offset_right = 61.0
-offset_bottom = 40.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_font_sizes/normal_font_size = 30
-fit_content = true
-autowrap_mode = 0
-script = ExtResource("6_aqe0t")
+[node name="Control" parent="CanvasLayer" instance=ExtResource("5_8prcj")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("7_n1ntf")]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
 
 [node name="Entities" type="Node2D" parent="."]
 
@@ -66,6 +54,7 @@ wait_time = 5.0
 
 [node name="Coins" type="Node2D" parent="Entities"]
 
-[node name="coin" parent="Entities/Coins" instance=ExtResource("7_xj51s")]
+[node name="RigidBody2D" parent="." instance=ExtResource("8_upk5m")]
+position = Vector2(845, 315)
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
