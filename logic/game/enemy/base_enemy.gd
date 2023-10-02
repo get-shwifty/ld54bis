@@ -106,7 +106,9 @@ func _on_stun_timer_timeout():
 func get_reference_velocity():
 	return linear_velocity
 
-
+func get_shader_material():
+	return $Animation.get_material()
+	
 func _on_damage_box_area_entered(area):
 	var player = area.get_parent()
 	player.hit(damage)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6yw267l65fnk"]
+[gd_scene load_steps=11 format=3 uid="uid://b6yw267l65fnk"]
 
 [ext_resource type="Script" path="res://logic/game/enemy/base_enemy.gd" id="1_hubbq"]
 [ext_resource type="Texture2D" uid="uid://b2jab8dxmfrrw" path="res://art/game/ennemi2.png" id="2_05yir"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="2_tk2nc"]
+[ext_resource type="Material" uid="uid://b1e7bs6nc5dy0" path="res://art/shaders/monster_shader.tres" id="3_aeard"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cuywa"]
 atlas = ExtResource("2_05yir")
@@ -56,6 +57,7 @@ scale = Vector2(0.684783, 0.942308)
 texture = ExtResource("2_tk2nc")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
+material = ExtResource("3_aeard")
 sprite_frames = SubResource("SpriteFrames_ll31j")
 frame_progress = 0.659873
 speed_scale = 0.5
