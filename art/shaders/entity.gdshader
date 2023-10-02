@@ -3,16 +3,17 @@ render_mode blend_mix;
 
 varying vec2 world_position;
 
-uniform sampler2D gradient_inside;
-uniform sampler2D gradient_outside;
-
 const int ELASTIC_MAX_POINTS = 30;
 uniform vec2 elastic_points[ELASTIC_MAX_POINTS];
 uniform int elastic_current_points_number;
-uniform float elastic_thickness = 10;
+uniform float current_elastic_tension = 1.0;
+uniform float current_elastic_tension_boost = 0.0;
 
+uniform float common_max_elastic_thickness = 20;
+uniform float common_min_elastic_thickness = 1;
 uniform float common_elastic_sdf_offset = 45.0;
 
+uniform bool enable_chromatic_distortion = false;
 
 void vertex(){
     world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
@@ -42,25 +43,53 @@ float opRound(in float d, in float r)
   return d - r;
 }
 
+vec4 chromatic_distortion (sampler2D txture, vec2 uv)
+{
+	vec4 final_color;
+	vec4 texture_color = texture(txture, uv);
+	float distortion_power = 1.0-uv.y;
+	
+	float distortion_offset = 0.05 * distortion_power * sin(TIME*25.0) * cos(TIME*2.0)*2.0;
+	
+	vec4 right_texture = texture(txture, uv-vec2(distortion_offset,(sin(TIME*35.0)+1.0)*0.01));
+	vec4 left_texture = texture(txture, uv+vec2(distortion_offset,(sin(TIME*35.0)+1.0)*0.01));
+	final_color.r = right_texture.r;
+	final_color.g = final_color.g;
+	final_color.b = left_texture.b;
+	
+	final_color.a = max(texture_color.a, max(right_texture.a, left_texture.a));
+	
+	return final_color;
+}
+
+float get_current_elastic_thickness()
+{
+	float tension = clamp(current_elastic_tension, 0.0, 1.0);
+	return mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+}
+
 void fragment() {
 	float elastic_distance = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
-	
-	vec3 base_inside_color = texture(gradient_inside, vec2(0.50)).rgb;
-	vec3 base_outside_color = texture(gradient_outside, vec2(0.25)).rgb;
+
 	vec3 base_elastic_color = vec3(1.0);
 	
-	vec3 final_color = COLOR.rgb;
+	vec4 final_color = COLOR.rgba;
+	
+	if (elastic_distance > 0.0 && enable_chromatic_distortion)
+	{
+		final_color = chromatic_distortion(TEXTURE,UV);
+	}
 	
 	float waistline = 0.5;
 	if (UV.y > waistline)
 	{
-		if (elastic_distance > - elastic_thickness && elastic_distance < elastic_thickness)
+		if (elastic_distance > 0.0 && elastic_distance < get_current_elastic_thickness())
 		{
-			final_color = base_elastic_color;
+			final_color.rgb = base_elastic_color;
 		}
 	}
 	
-    COLOR.rgb = final_color;
+    COLOR = final_color;
 }
 
    

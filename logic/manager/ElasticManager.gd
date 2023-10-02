@@ -21,6 +21,12 @@ func add(obj):
 
 func remove(obj):
 	object_inside.remove_at(object_inside.find(obj))
+	
+func is_inside(pos) -> bool:
+	var inflated = Geometry2D.offset_polygon(last_know_convex_hull, 20)
+	if len(inflated) > 0:
+		inflated = inflated[0]
+	return Geometry2D.is_point_in_polygon(pos, inflated)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,7 +36,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if len(object_inside) < 3:
+	if len(object_inside) < 2:
 		return
 	
 	var positions = PackedVector2Array()
@@ -64,7 +70,7 @@ func _process(delta):
 #	print(len(convex))
 #	print(convex)
 	
-	if len(convex) < 4 or size < 100:
+	if len(convex) < 3 or size < 100:
 		for obj in object_inside:
 			obj.elastic_vector = Vector2.ZERO
 		GameManager.crush_game_over()

@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
 [ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_5veg0"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
-[ext_resource type="Script" path="res://ui/ElasticSize.gd" id="5_r2ufr"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
+[ext_resource type="PackedScene" uid="uid://duwjeots111m1" path="res://ui/ui.tscn" id="6_hpc0q"]
 [ext_resource type="PackedScene" uid="uid://cr5dttaeduat" path="res://logic/game/enemy/dumb.tscn" id="7_kwkrj"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_08r7k"]
@@ -43,28 +43,13 @@ position = Vector2(241, 201)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 21.0
-offset_right = 61.0
-offset_bottom = 40.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_font_sizes/normal_font_size = 30
-fit_content = true
-autowrap_mode = 0
-script = ExtResource("5_r2ufr")
+[node name="Control" parent="CanvasLayer" instance=ExtResource("6_hpc0q")]
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("6_fdeo5")
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
 wait_time = 2.0
-autostart = true
 
 [node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
 position = Vector2(303, 92)
