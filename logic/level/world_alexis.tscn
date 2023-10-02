@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="2_asanh"]
 [ext_resource type="Script" path="res://logic/level/shader_test_tool.gd" id="3_mp2rg"]
 [ext_resource type="PackedScene" uid="uid://b3idupd13qhq4" path="res://logic/game/post.tscn" id="3_txh4p"]
-[ext_resource type="PackedScene" uid="uid://ywlmyrdwxhm1" path="res://logic/game/elastic.tscn" id="4_5veg0"]
+[ext_resource type="PackedScene" path="res://logic/game/elastic.tscn" id="4_5veg0"]
 [ext_resource type="Script" path="res://logic/game/Camera.gd" id="4_71srl"]
 [ext_resource type="PackedScene" uid="uid://vperkf507vv0" path="res://logic/game/character2.tscn" id="4_wvo76"]
 [ext_resource type="Script" path="res://logic/level/EnemySpawner.gd" id="6_fdeo5"]
@@ -55,13 +55,89 @@ script = ExtResource("7_qf5y7")
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("6_fdeo5")
+ennemy1_weight = 9
+ennemy2_weight = 3
 
 [node name="EnemySpawnTimer" type="Timer" parent="EnemySpawner"]
 wait_time = 2.0
 autostart = true
 
 [node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(303, 92)
+position = Vector2(270, -94)
+
+[node name="SpawnPositions" type="Node" parent="EnemySpawner"]
+
+[node name="spawn" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-57, -71)
+
+[node name="spawn2" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(122, -70)
+
+[node name="spawn3" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(276, -72)
+
+[node name="spawn4" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(436, -68)
+
+[node name="spawn5" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(599, -78)
+
+[node name="spawn6" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(748, -74)
+
+[node name="spawn7" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(886, -76)
+
+[node name="spawn8" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(1038, -71)
+
+[node name="spawn10" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(1040, 224)
+
+[node name="spawn11" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(1049, 385)
+
+[node name="spawn12" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(1049, 542)
+
+[node name="spawn13" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(1043, 710)
+
+[node name="spawn16" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-81, 709)
+
+[node name="spawn22" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(101, 724)
+
+[node name="spawn23" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(280, 722)
+
+[node name="spawn24" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(430, 721)
+
+[node name="spawn25" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(591, 723)
+
+[node name="spawn26" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(752, 718)
+
+[node name="spawn27" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(909, 724)
+
+[node name="spawn9" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(1045, 64)
+
+[node name="spawn14" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-118, 52)
+
+[node name="spawn15" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-111, 225)
+
+[node name="spawn17" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-111, 417)
+
+[node name="spawn18" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-116, 596)
 
 [node name="Entities" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -95,6 +171,7 @@ position = Vector2(496, 326)
 [node name="Borders" type="Node2D" parent="."]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Borders"]
+collision_layer = 16
 collision_mask = 0
 lock_rotation = true
 freeze = true
@@ -105,6 +182,7 @@ shape = SubResource("RectangleShape2D_m07kj")
 
 [node name="RigidBody2D2" type="RigidBody2D" parent="Borders"]
 position = Vector2(964, 4)
+collision_layer = 16
 collision_mask = 0
 lock_rotation = true
 freeze = true
@@ -115,6 +193,7 @@ shape = SubResource("RectangleShape2D_m07kj")
 
 [node name="RigidBody2D3" type="RigidBody2D" parent="Borders"]
 position = Vector2(500, 324)
+collision_layer = 16
 collision_mask = 0
 lock_rotation = true
 freeze = true
@@ -125,6 +204,7 @@ shape = SubResource("RectangleShape2D_44ipn")
 
 [node name="RigidBody2D4" type="RigidBody2D" parent="Borders"]
 position = Vector2(503, -313)
+collision_layer = 16
 collision_mask = 0
 lock_rotation = true
 freeze = true
@@ -133,4 +213,4 @@ freeze = true
 position = Vector2(-11.5, 313.5)
 shape = SubResource("RectangleShape2D_44ipn")
 
-[connection signal="timeout" from="EnemySpawner/EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="EnemySpawner/EnemySpawnTimer" to="EnemySpawner" method="_on_enemy_spawn_timer_timeout"]
