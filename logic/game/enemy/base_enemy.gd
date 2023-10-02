@@ -44,7 +44,9 @@ func receive_kick(action_idx, kick_force):
 		return
 	else:
 		cur_action_index = action_idx
-
+	
+	GameManager.camera.shake_on_hit()
+	
 	if state == STATE.STUN:
 		apply_impulse(kick_force/2)
 		die()

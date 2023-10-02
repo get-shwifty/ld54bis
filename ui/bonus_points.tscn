@@ -5,9 +5,9 @@
 [node name="RichTextLabel" type="RichTextLabel"]
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.745098)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/normal_font_size = 25
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 50
 text = "lalal"
 fit_content = true
 autowrap_mode = 0
