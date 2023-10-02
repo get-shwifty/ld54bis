@@ -7,14 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://dd5ke42dstfm6" path="res://art/game/explosion.png" id="5_21bu8"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="5_o61uw"]
 [ext_resource type="Texture2D" uid="uid://bav14l4wrhv1s" path="res://art/game/perso2.png" id="5_sgjgt"]
-[ext_resource type="AudioStream" uid="uid://b652220be3kw4" path="res://audio/player_hit.ogg" id="8_tqgq4"]
-[ext_resource type="AudioStream" uid="uid://c8isg5yquuw8u" path="res://audio/kick_player.ogg" id="9_dktxm"]
+[ext_resource type="AudioStream" uid="uid://mwg2ads5i0n0" path="res://audio/player_hit.ogg" id="8_tqgq4"]
+[ext_resource type="AudioStream" uid="uid://djqkij26yj5px" path="res://audio/kick_player.ogg" id="9_dktxm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qr6jb"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nqnxx"]
-radius = 22.0
-height = 60.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_encfy"]
+size = Vector2(31, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rp6rd"]
 atlas = ExtResource("5_21bu8")
@@ -131,7 +130,6 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_nk1li")
 
@@ -165,15 +163,14 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="kick/KickArea"]
-position = Vector2(-3.00009, -26)
-shape = SubResource("CapsuleShape2D_nqnxx")
+position = Vector2(-8.69036e-05, -24)
+shape = SubResource("RectangleShape2D_encfy")
 
 [node name="Explosion" type="AnimatedSprite2D" parent="kick"]
 visible = false
 position = Vector2(-26, -5)
 rotation = 2.0944
 sprite_frames = SubResource("SpriteFrames_xkyhx")
-frame = 6
 speed_scale = 3.5
 
 [node name="CoinHitbox" type="Area2D" parent="."]

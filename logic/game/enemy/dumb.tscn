@@ -1,11 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr5dttaeduat"]
+[gd_scene load_steps=3 format=3 uid="uid://cr5dttaeduat"]
 
 [ext_resource type="PackedScene" uid="uid://b6yw267l65fnk" path="res://logic/game/enemy/base_enemy.tscn" id="1_rvm1n"]
 [ext_resource type="Script" path="res://logic/game/enemy/dumb.gd" id="2_57r0j"]
-[ext_resource type="Texture2D" uid="uid://b2jab8dxmfrrw" path="res://art/game/ennemi2.png" id="2_utn1j"]
 
 [node name="Dumb" instance=ExtResource("1_rvm1n")]
 script = ExtResource("2_57r0j")
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_utn1j")
+[node name="Sprite2D" parent="." index="1"]
+frame_progress = 0.770802
