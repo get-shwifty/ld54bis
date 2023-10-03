@@ -42,4 +42,4 @@ func turn_off():
 
 func hit(damage):
 	damage /= 10;
-	GameManager.player.hit(damage);
+	GameManager.player.hit_internal(damage, true);

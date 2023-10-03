@@ -87,7 +87,7 @@ vec3 get_base_color_from_distance(float d)
 	{
 		float distance_to_core = get_core_varying_distance();
 		float distance_to_hit = distance(world_position, hit_position);
-		distance_to_hit = min(distance_to_hit, distance_to_core);
+		//distance_to_hit = min(distance_to_hit, distance_to_core);
 		
 		float core_distance_ratio = distance_to_core/MAX_CORE_DISTANCE;
 		
