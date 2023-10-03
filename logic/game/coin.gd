@@ -12,7 +12,10 @@ func _process(delta):
 
 func get_collected():
 	GameManager.add_score(self, 10000)
-	queue_free();
+	GameManager.player.hp += 3
+	if GameManager.player.hp > 100:
+		GameManager.player.hp = 100
+	queue_free()
 
 
 func _on_collect_zone_area_entered(area):

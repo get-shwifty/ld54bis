@@ -9,7 +9,7 @@ var last_time_attack = 0
 var attacking = false
 
 func _ready():
-	if randf() < 0.4:
+	if randf() < 0.5:
 		target =  GameManager.core;
 		stop_at += 25
 		attack_at += 25

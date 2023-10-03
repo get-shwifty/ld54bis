@@ -29,7 +29,7 @@ var after_images_pos = []
 @export var DASH_FORCE = 1000
 @export var DASH_MAX_SPEED = 10
 @export var DASH_COEFF = 0.2
-@export var DASH_COOLDOWN_MS = 200
+@export var DASH_COOLDOWN_MS = 400
 
 # elastic
 @export var max_total_speed = 2000
