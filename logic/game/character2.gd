@@ -59,6 +59,8 @@ var hit_ratio = 0
 func _ready():
 	GameManager.player = self;
 
+func _process(delta):
+	queue_redraw()
 
 func _physics_process(delta):
 	update_move_intention()
@@ -98,6 +100,7 @@ func _physics_process(delta):
 		var child = $AfterImages.get_children()[i]
 		child.global_position = after_images_pos[i]
 		child.self_modulate.a *= 0.8
+	
 
 func hit(dmg):
 	if state != STATE.DASH:
@@ -192,7 +195,10 @@ func dash_state(delta):
 	coeff = pow(coeff, DASH_COEFF)
 	velocity = dash_direction * coeff * DASH_FORCE
 	velocity = velocity.limit_length(DASH_MAX_SPEED / delta)
-
+	
+func _draw():
+	draw_dashed_line(Vector2.ZERO, elastic_vector * 150, Color("ff5c5c", 0.5), 4, 10)
+	
 func dash():
 	if state == STATE.MOVE:
 		set_state(STATE.DASH)

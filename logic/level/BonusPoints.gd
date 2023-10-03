@@ -4,7 +4,7 @@ var up_speed = -150
 
 func init(target: Node2D, points):
 	if points > 1000:
-		add_theme_font_size_override("normal_font_size", 90)
+		add_theme_font_size_override("normal_font_size", 45)
 	position = target.get_global_transform_with_canvas().get_origin()
 	text = ' '+ str(points) + ' '
 
