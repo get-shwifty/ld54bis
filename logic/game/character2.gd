@@ -55,6 +55,7 @@ const move_base_coef = 50
 @export var max_hp = 100
 @onready var hp = max_hp
 var hit_ratio = 0
+var hit_position = Vector2(0.0,0.0);
 
 func _ready():
 	GameManager.player = self;
@@ -99,13 +100,17 @@ func _physics_process(delta):
 		child.global_position = after_images_pos[i]
 		child.self_modulate.a *= 0.8
 
-func hit(dmg):
+func hit_internal(dmg, is_hit_from_core):
 	if state != STATE.DASH:
 		hit_ratio = 1
+		hit_position = GameManager.core.global_position if is_hit_from_core else global_position
 		hp -= dmg
 		$HitSoundPlayer.play(0.0);
 		if hp <= 0:
 			GameManager.no_hp_game_over()
+
+func hit(dmg):
+	hit_internal(dmg, false);
 
 func set_state(new_state):
 	state = new_state
