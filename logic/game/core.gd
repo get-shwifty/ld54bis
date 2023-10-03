@@ -39,3 +39,7 @@ func turn_off():
 		GameManager.elastic.remove(self)
 	else:
 		is_turning_off = false
+
+func hit(damage):
+	damage /= 10;
+	GameManager.player.hit_internal(damage, true);

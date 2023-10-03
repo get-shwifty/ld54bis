@@ -52,7 +52,7 @@ func update_shaders():
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("elastic_points", elastic_points);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("current_elastic_tension", elastic_tension);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("core_position",$Entities/Core.get_core_position());
-	$BackgroundShaderRenderer.get_material().set_shader_parameter("hit_position", GameManager.player.global_position);
+	$BackgroundShaderRenderer.get_material().set_shader_parameter("hit_position", GameManager.player.hit_position);
 	$BackgroundShaderRenderer.get_material().set_shader_parameter("hit_ratio", GameManager.player.hit_ratio);
 	var entities = []
 	entities.append_array($Entities/Posts.get_children());

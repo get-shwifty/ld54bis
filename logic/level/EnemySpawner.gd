@@ -3,7 +3,7 @@ class_name EnemySpawner
 
 @export var max_difficulty_time = 600
 
-@export var max_concurent_spawns = 4
+@export var max_concurent_spawns = 2
 @export var ennemy1_weight = 9
 @export var ennemy2_weight = 6
 @export var ennemy3_weight = 3
