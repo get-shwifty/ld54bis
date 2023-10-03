@@ -11,17 +11,21 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var pv_to_display = GameManager.player.hp;
+	
 	if GameManager.elastic.post_count == 0:
 		turn_off()
+		$EmptyCore/LightCore.get_material().set_shader_parameter("pv", pv_to_display);
 	elif not is_off:
 		$AnimatedSprite2D.play("on")
 		is_turning_off = false
+		$EmptyCore/LightCore.get_material().set_shader_parameter("pv", pv_to_display);
 
 func get_core_position():
 	return $LightEmitionPosition.global_position;
 
 func get_shader_materials():
-	return [$AnimatedSprite2D.get_material(), $Sprite2D.get_material()];
+	return [$AnimatedSprite2D.get_material(), $Sprite2D.get_material(), $EmptyCore.get_material(), $EmptyCore/LightCore.get_material()];
 
 func get_reference_velocity():
 	return Vector2.ZERO;
