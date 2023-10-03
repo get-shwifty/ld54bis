@@ -51,7 +51,7 @@ vec4 chromatic_distortion (sampler2D txture, vec2 uv)
 	vec4 texture_color = texture(txture, uv);
 	float distortion_power = 1.0-uv.y;
 	
-	float distortion_offset = 0.05 * distortion_power * sin(TIME*25.0) * cos(TIME*2.0)*2.0;
+	float distortion_offset = 0.025 * distortion_power * sin(TIME*25.0) * cos(TIME*2.0)*2.0;
 	
 	vec4 right_texture = texture(txture, uv-vec2(distortion_offset,(sin(TIME*35.0)+1.0)*0.01));
 	vec4 left_texture = texture(txture, uv+vec2(distortion_offset,(sin(TIME*35.0)+1.0)*0.01));

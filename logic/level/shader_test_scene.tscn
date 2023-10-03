@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d4ba4s4c7rj85"]
+[gd_scene load_steps=13 format=3 uid="uid://d4ba4s4c7rj85"]
 
 [ext_resource type="Material" uid="uid://csfsrsihpx01h" path="res://art/shaders/global_shader.tres" id="1_8oqq4"]
 [ext_resource type="Script" path="res://logic/level/shader_test_scene.gd" id="1_i4w0n"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cyy5gqgbp76nj" path="res://art/game/pièce.png" id="4_eh1wv"]
 [ext_resource type="Texture2D" uid="uid://dbr31c30d2sr2" path="res://art/game/pilone.png" id="5_mihfp"]
 [ext_resource type="Texture2D" uid="uid://b2jab8dxmfrrw" path="res://art/game/ennemi2.png" id="6_l5o2a"]
+[ext_resource type="Material" uid="uid://b1e7bs6nc5dy0" path="res://art/shaders/monster_shader.tres" id="8_e6oa2"]
 [ext_resource type="Texture2D" uid="uid://c8i7kuuyam76v" path="res://art/game/ennemi1.png" id="8_mt232"]
 [ext_resource type="Texture2D" uid="uid://tohuotc36xpq" path="res://art/game/ennemi3.png" id="9_agxo1"]
 
@@ -67,8 +68,8 @@ texture = ExtResource("4_5rg36")
 
 [node name="Sprite2D2" type="Sprite2D" parent="points"]
 texture_filter = 1
-material = ExtResource("3_dgee0")
-position = Vector2(712, 161)
+material = ExtResource("8_e6oa2")
+position = Vector2(-103, -35)
 scale = Vector2(4, 4)
 texture = ExtResource("8_mt232")
 
@@ -91,6 +92,6 @@ position = Vector2(-227, 256)
 [node name="Sprite2D4" type="Sprite2D" parent="points"]
 texture_filter = 1
 material = ExtResource("3_dgee0")
-position = Vector2(-204, 590)
+position = Vector2(34, 636)
 scale = Vector2(4, 4)
 texture = ExtResource("9_agxo1")

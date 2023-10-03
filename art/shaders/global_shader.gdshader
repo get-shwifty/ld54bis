@@ -124,7 +124,7 @@ vec3 chroma_distortion(float distance_to_elastic)
 	float elastic_distortion = current_elastic_tension;
 	
 	float distortion_ratio = 1.0;
-	float distort_potency = 5.0 * max(elastic_distortion, 0.2);
+	float distort_potency = 2.5 * max(elastic_distortion, 0.2);
 	float distort_speed = 10.0 * max(elastic_distortion, 0.1);
 	float adjusted_amount = distortion_ratio * distort_potency * sin(TIME * distort_speed/2.0)* 2.0 * sin(TIME * sin(TIME * distort_speed) * 15.0);
 	vec3 color = vec3(1.0);
