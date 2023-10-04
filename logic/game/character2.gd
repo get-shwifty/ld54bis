@@ -109,21 +109,18 @@ func hit_internal(dmg, is_hit_from_core):
 		hit_position = GameManager.core.global_position if is_hit_from_core else global_position
 		hp -= dmg
 		$HitSoundPlayer.play(0.0);
-		blink($SpritePersonnage)
-		blink($kick/boule)
 		if hp <= 0:
 			GameManager.no_hp_game_over()
 			
-func blink(sprite):
-	sprite.self_modulate = Color(100,100,100,100)
-	await get_tree().create_timer(0.05).timeout
-	sprite.self_modulate = Color(1,1,1,1)
-	await get_tree().create_timer(0.03).timeout
-	sprite.self_modulate = Color(100,100,100,100)
-	await get_tree().create_timer(0.05).timeout
-	sprite.self_modulate = Color(1,1,1,1)
+func blink():
+	modulate = Color(100,100,100,100)
+	Engine.time_scale = 0.1
+	await get_tree().create_timer(0.035).timeout
+	modulate = Color(1,1,1,1)
+	Engine.time_scale = 1
 		
 func hit(dmg):
+	blink()
 	hit_internal(dmg, false);
 
 func set_state(new_state):
