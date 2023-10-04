@@ -1,14 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://ywlmyrdwxhm1"]
 
 [ext_resource type="Script" path="res://logic/manager/ElasticManager.gd" id="1_grulw"]
-[ext_resource type="AudioStream" uid="uid://b6kxxfsy4fhy0" path="res://audio/elastic_in_impact_2.ogg" id="2_mh6t6"]
+[ext_resource type="AudioStream" uid="uid://bq1m22t80we3n" path="res://audio/elastic2.wav" id="2_ce3ki"]
 [ext_resource type="AudioStream" uid="uid://8dkjukybyh0l" path="res://audio/elastic_out_impact.ogg" id="3_rrj7v"]
 
 [node name="Elastic" type="Node2D"]
 script = ExtResource("1_grulw")
 
 [node name="OutSoundPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_mh6t6")
+stream = ExtResource("2_ce3ki")
+volume_db = 1.0
+pitch_scale = 1.2
 
 [node name="InSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_rrj7v")
