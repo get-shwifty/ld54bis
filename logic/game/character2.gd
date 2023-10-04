@@ -111,8 +111,16 @@ func hit_internal(dmg, is_hit_from_core):
 		$HitSoundPlayer.play(0.0);
 		if hp <= 0:
 			GameManager.no_hp_game_over()
-
+			
+func blink():
+	modulate = Color(100,100,100,100)
+	Engine.time_scale = 0.1
+	await get_tree().create_timer(0.035).timeout
+	modulate = Color(1,1,1,1)
+	Engine.time_scale = 1
+		
 func hit(dmg):
+	blink()
 	hit_internal(dmg, false);
 
 func set_state(new_state):

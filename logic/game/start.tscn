@@ -70,7 +70,7 @@ text = "Keyboard
 Movement: Z,Q,S,D
 Hit: Space / U
 Dash: Shift / I
-Securise Elastic: O
+Create Generator: O
 "
 fit_content = true
 autowrap_mode = 0
@@ -84,11 +84,11 @@ offset_right = 1213.0
 offset_bottom = 327.0
 theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
-text = "Gamecontroller
-Movement: Left Joystick
+text = "Controller
+Move: Left Joystick
 Hit: X
-Dash: RT
-Securise Elastic: LT / B"
+Dash: A
+Create Generator: B"
 fit_content = true
 autowrap_mode = 0
 
