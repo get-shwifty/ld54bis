@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://c80j56khijrsj"]
+[gd_scene load_steps=21 format=3 uid="uid://c80j56khijrsj"]
 
 [ext_resource type="Script" path="res://logic/game/coin.gd" id="1_fadlc"]
 [ext_resource type="Texture2D" uid="uid://cjniofxu5s23d" path="res://art/game/soul.png" id="2_e4eef"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="2_so4cj"]
+[ext_resource type="AudioStream" uid="uid://cymilajnu0vjd" path="res://audio/coin.wav" id="4_53n2d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mwu44"]
 atlas = ExtResource("2_e4eef")
@@ -138,5 +139,10 @@ collision_mask = 2048
 
 [node name="CollectShape" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("CapsuleShape2D_ue15c")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_53n2d")
+volume_db = -8.0
+pitch_scale = 1.1
 
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_zone_area_entered"]

@@ -15,6 +15,9 @@ func get_collected():
 	GameManager.player.hp += 3
 	if GameManager.player.hp > 100:
 		GameManager.player.hp = 100
+	$AudioStreamPlayer.play(0.0)
+	$Animation.visible = false
+	await $AudioStreamPlayer.finished
 	queue_free()
 
 

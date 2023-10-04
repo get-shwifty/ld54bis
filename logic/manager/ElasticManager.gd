@@ -86,7 +86,7 @@ func _process(delta):
 		
 	for obj in object_inside:
 		var was_in_elastic = obj.elastic_vector != Vector2.ZERO;
-		
+		var old_vector = obj.elastic_vector
 		var obj_pos = obj.global_position
 		var index = convex.find(obj_pos)
 		if index < 0:
@@ -106,8 +106,11 @@ func _process(delta):
 			obj.elastic_vector = direction
 			
 		var is_in_elastic = obj.elastic_vector != Vector2.ZERO;
-		if was_in_elastic != is_in_elastic:
+		if is_instance_of(obj, CharacterBody2D) and was_in_elastic != is_in_elastic:
 			if was_in_elastic:
+				var volume = lerp(-10, 5, old_vector.length() + 0.3)
+				print(volume)
+				$OutSoundPlayer.volume_db = volume
 				$OutSoundPlayer.play(0.0);
 			elif obj.get_reference_velocity().length() > min_vel_for_sound_trigger:  
 				$InSoundPlayer.play(0.0);
