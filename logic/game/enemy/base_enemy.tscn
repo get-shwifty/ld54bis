@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6yw267l65fnk"]
+[gd_scene load_steps=7 format=3 uid="uid://b6yw267l65fnk"]
 
 [ext_resource type="Script" path="res://logic/game/enemy/base_enemy.gd" id="1_hubbq"]
 [ext_resource type="Texture2D" uid="uid://bftjt7wde2yg7" path="res://art/game/ombre.png" id="2_tk2nc"]
 [ext_resource type="Material" uid="uid://b1e7bs6nc5dy0" path="res://art/shaders/monster_shader.tres" id="3_aeard"]
+[ext_resource type="AudioStream" uid="uid://by5sqs5pj0iyf" path="res://audio/death_enemy.ogg" id="4_jimih"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5wxan"]
 radius = 7.0
@@ -57,6 +58,9 @@ shape = SubResource("CircleShape2D_a7k1j")
 
 [node name="InShadowAnimation" type="AnimatedSprite2D" parent="."]
 material = ExtResource("3_aeard")
+
+[node name="DeathPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jimih")
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]

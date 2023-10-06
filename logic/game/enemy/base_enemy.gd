@@ -40,6 +40,7 @@ func _ready():
 	$Animation.play("default")
 
 func receive_kick(action_idx, kick_force):
+	state = STATE.STUN
 	if is_dead or cur_action_index == action_idx:
 		return
 	else:
@@ -71,6 +72,7 @@ func hook_stun():
 func die():
 	GameManager.add_score(self, 500)
 	is_dead = true
+	$DeathPlayer.play(0.0)
 	death_timer.start()
 	
 func _physics_process(delta):
