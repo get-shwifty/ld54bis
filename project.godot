@@ -100,3 +100,18 @@ game_dash={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+max_elastic_thickness={
+"type": "float",
+"value": 12.0
+}
+min_elastic_thickness={
+"type": "float",
+"value": 1.0
+}
+elastic_sdf_offset={
+"type": "float",
+"value": 12.0
+}

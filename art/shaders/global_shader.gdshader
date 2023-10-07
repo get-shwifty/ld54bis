@@ -20,9 +20,9 @@ uniform int elastic_current_points_number;
 uniform float current_elastic_tension = 1.0;
 uniform float current_elastic_distortion = 0.0;
 
-uniform float common_max_elastic_thickness = 12;
-uniform float common_min_elastic_thickness = 1.0;
-uniform float common_elastic_sdf_offset = 12.0;
+global uniform float max_elastic_thickness;
+global uniform float min_elastic_thickness;
+global uniform float elastic_sdf_offset;
 
 void vertex(){
     world_position = (MODEL_MATRIX * vec4(VERTEX,0.0,1.0)).xy;
@@ -62,14 +62,14 @@ float opRound(in float d, in float r)
 
 float get_distance_from_position(vec2 position)
 {
-	return opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
+	return opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), elastic_sdf_offset);
 }
 
 float get_current_elastic_thickness()
 {
 	float tension = clamp(current_elastic_tension, 0.0, 1.0);
-	float thickness =  mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
-	float thickness_max_delta = common_max_elastic_thickness - common_min_elastic_thickness;
+	float thickness =  mix(max_elastic_thickness, min_elastic_thickness, tension);
+	float thickness_max_delta = max_elastic_thickness - min_elastic_thickness;
 	return thickness + sin(TIME*3.5) * thickness_max_delta * 0.1;
 }
 

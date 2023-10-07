@@ -9,9 +9,9 @@ uniform int elastic_current_points_number;
 uniform float current_elastic_tension = 1.0;
 uniform float current_elastic_tension_boost = 0.0;
 
-uniform float common_max_elastic_thickness = 12;
-uniform float common_min_elastic_thickness = 1;
-uniform float common_elastic_sdf_offset = 12.0;
+global uniform float max_elastic_thickness;
+global uniform float min_elastic_thickness;
+global uniform float elastic_sdf_offset;
 
 uniform bool enable_chromatic_distortion = false;
 
@@ -67,11 +67,11 @@ vec4 chromatic_distortion (sampler2D txture, vec2 uv)
 float get_current_elastic_thickness()
 {
 	float tension = clamp(current_elastic_tension, 0.0, 1.0);
-	return mix(common_max_elastic_thickness, common_min_elastic_thickness, tension);
+	return mix(max_elastic_thickness, min_elastic_thickness, tension);
 }
 
 void fragment() {
-	float elastic_distance = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), common_elastic_sdf_offset);
+	float elastic_distance = opRound(sdPolygon(elastic_points, elastic_current_points_number, world_position), elastic_sdf_offset);
 
 	vec3 base_elastic_color = vec3(1.0);
 	
