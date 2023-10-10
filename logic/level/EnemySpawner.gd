@@ -19,6 +19,10 @@ class_name EnemySpawner
 
 @onready var DumbEnemy = preload("res://logic/game/enemy/dumb.tscn")
 
+
+var change_location_counter = 0
+var spawn_location = 0
+
 func select_random_enemy():
 	var total_weight = ennemy1_weight + ennemy2_weight + ennemy3_weight
 	var random = randi_range(1, total_weight)
@@ -54,11 +58,24 @@ func get_random_diff(time):
 	return ceil(diff)
 
 
+func select_spawners():
+	if change_location_counter <= 0:
+		spawn_location = randi_range(0, len(spawners)-1)
+		change_location_counter = 4
+	else:
+		change_location_counter -= 1
+	
+	var res = []
+	for i in range(4):
+		res.append(spawners[(i+spawn_location)%len(spawners)])
+	return res
+
 func _on_enemy_spawn_timer_timeout():
 	var time = GameManager.time
 	var diff = get_random_diff(time)
 	
+	var current_spwaners = select_spawners()
 	for i in range(diff):
 		var enemy = select_random_enemy()
-		var spawn_pos = spawners.pick_random()
+		var spawn_pos = current_spwaners.pick_random()
 		spawn_enemy2(spawn_pos, enemy)

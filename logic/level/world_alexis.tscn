@@ -61,9 +61,6 @@ script = ExtResource("6_fdeo5")
 wait_time = 5.0
 autostart = true
 
-[node name="SpawnPos" type="Marker2D" parent="EnemySpawner"]
-position = Vector2(270, -94)
-
 [node name="SpawnPositions" type="Node" parent="EnemySpawner"]
 
 [node name="spawn" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
@@ -90,6 +87,9 @@ position = Vector2(886, -76)
 [node name="spawn8" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
 position = Vector2(1038, -71)
 
+[node name="spawn9" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(1045, 64)
+
 [node name="spawn10" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
 position = Vector2(1040, 224)
 
@@ -102,41 +102,38 @@ position = Vector2(1049, 542)
 [node name="spawn13" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
 position = Vector2(1043, 710)
 
-[node name="spawn16" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(-81, 709)
-
-[node name="spawn22" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(101, 724)
-
-[node name="spawn23" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(280, 722)
-
-[node name="spawn24" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(430, 721)
-
-[node name="spawn25" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(591, 723)
+[node name="spawn27" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(909, 724)
 
 [node name="spawn26" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
 position = Vector2(752, 718)
 
-[node name="spawn27" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(909, 724)
+[node name="spawn25" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(591, 723)
 
-[node name="spawn9" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(1045, 64)
+[node name="spawn24" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(430, 721)
 
-[node name="spawn14" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(-118, 52)
+[node name="spawn23" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(280, 722)
 
-[node name="spawn15" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(-111, 225)
+[node name="spawn22" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(101, 724)
+
+[node name="spawn16" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-81, 709)
+
+[node name="spawn18" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-116, 596)
 
 [node name="spawn17" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
 position = Vector2(-111, 417)
 
-[node name="spawn18" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
-position = Vector2(-116, 596)
+[node name="spawn15" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-111, 225)
+
+[node name="spawn14" type="Marker2D" parent="EnemySpawner/SpawnPositions"]
+position = Vector2(-118, 52)
 
 [node name="Entities" type="Node2D" parent="."]
 y_sort_enabled = true
